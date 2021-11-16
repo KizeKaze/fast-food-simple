@@ -6,6 +6,13 @@ require 'vendor/autoload.php';
 // Display simple form for user
 require 'form.php';
 
+$menu = new \App\Classes\Menu();
+$result = $menu->getItems();
+
+echo "<pre>";
+print_r($result);
+echo "</pre>";
+
 if ($_POST) {
     $drink = new \App\Classes\Drink();
     

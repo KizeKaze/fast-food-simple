@@ -6,8 +6,8 @@ use PDO;
 
 abstract class Database
 {
-    public function getInstance(): PDO
+    public static function getInstance(): PDO
     {
-        return new \PDO('mysql:host=localhost;dbname=test', 'root', '');
+        return new \PDO('mysql:host=localhost;dbname=fast-food', 'root', '');
     }
 }
