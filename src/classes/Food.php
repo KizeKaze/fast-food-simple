@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Food;
+namespace App\Classes;
 
 /*
  * Base class that will hold various information about our menu
  */
-abstract class Food
+class Food
 {
-    // TODO flesh out
+    private string $name;
+    private float $cost;
+    
+    public function __construct() { }
 }
