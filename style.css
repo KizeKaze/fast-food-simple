@@ -1,0 +1,18 @@
+body {
+    background-color: darkslategrey;
+}
+
+.container {
+    width: 400px;
+    margin: 0 auto;
+    background-color: gainsboro;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+form > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
