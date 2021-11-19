@@ -27,7 +27,21 @@ if ($_POST) {
     if (is_numeric($_POST['cost'])) {
         $drink->setCost($_POST['cost']);
     }
-    
+
+
+    $name = $drink->getName();
+    $description = $drink->getDescription();
+    $money = $drink->getCost();
+
+    $param = [
+        'name' => $name,
+        'description' => $description,
+        'cashMONEY' => $money
+    ];
+
+    $menu->addRows($param);
+
+
     echo "<h1>Drink details</h1>";
     echo "<br>Name: " . $drink->getName();
     echo "<br>Description: " . $drink->getDescription();
