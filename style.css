@@ -11,8 +11,16 @@ body {
     padding: 15px;
 }
 
-form > div {
+.form_index > div {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+}
+.menu_result_div {
+    color: darkslategrey;
+    background-color:#97979778;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 10px;
+    margin-top: 5px;
 }

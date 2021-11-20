@@ -6,7 +6,7 @@
 <body>
     <div class="container">
         <h3>Add an item to the menu</h3>
-        <form action="submit" method="post">
+        <form action="submit" method="post" class="form_index">
             <div>
                 <div>
                     <label for="name">Name</label>
@@ -28,6 +28,9 @@
 
             <br>
             <button>Submit</button>
+        </form>
+        <form action="menu_list.php" method="post">
+            <input type="submit" name="submit" value="Menu List">
         </form>
     </div>
 </body>

@@ -19,9 +19,9 @@ class Menu
     
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function addRows($param) {
+    public function addRows($param)
+    {
         $db = Database::getInstance();
-        $type = "drink";
 
         $name = $param['name'];
         $description = $param['description'];
