@@ -12,26 +12,22 @@ $result = $menu->getItems();
 if ($_POST) {
     $drink = new \App\Classes\Drink();
 
-    $placeholder = 'http://localhost:8001';
     
-    if (empty($_POST['name']))  {
-        header($placeholder);
+    if (empty(trim($_POST['name'])))  {
             echo "Name field is empty";
             die();
     }else {
         $drink->setName($_POST['name']);
     }
-    
-    if (empty($_POST['description'])) {
-        header($placeholder);
+
+    if (empty(trim($_POST['description']))) {
         echo "Description field is empty";
         die();
     } else {
         $drink->setDescription($_POST['description']);
     }
     
-    if (empty($_POST['cost'])) {
-        header($placeholder);
+    if (empty($_POST['cost']) || $_POST['cost'] < 0){
         echo "Cost field is empty";
         die();
     } else {
