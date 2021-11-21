@@ -40,12 +40,12 @@ if ($_POST) {
 
     $name = $drink->getName();
     $description = $drink->getDescription();
-    $money = $drink->getCost();
+    $cost = $drink->getCost();
 
     $param = [
         'name' => $name,
         'description' => $description,
-        'cashMONEY' => $money
+        'cost' => $cost
     ];
     $menu->addRows($param);
 
