@@ -32,7 +32,7 @@ if ($_POST) {
     $param = [
         'name' => $name,
         'description' => $description,
-        'cashMONEY' => $money
+        'cost' => $cost
     ];
 
     $menu->addRows($param);
