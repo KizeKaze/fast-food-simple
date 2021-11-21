@@ -11,19 +11,32 @@ $result = $menu->getItems();
 
 if ($_POST) {
     $drink = new \App\Classes\Drink();
+
+    $placeholder = 'http://localhost:8001';
     
-    if (is_string($_POST['name'])) {
+    if (empty($_POST['name']))  {
+        header($placeholder);
+            echo "Name field is empty";
+            die();
+    }else {
         $drink->setName($_POST['name']);
     }
     
-    if (is_string($_POST['description'])) {
+    if (empty($_POST['description'])) {
+        header($placeholder);
+        echo "Description field is empty";
+        die();
+    } else {
         $drink->setDescription($_POST['description']);
     }
     
-    if (is_numeric($_POST['cost'])) {
+    if (empty($_POST['cost'])) {
+        header($placeholder);
+        echo "Cost field is empty";
+        die();
+    } else {
         $drink->setCost($_POST['cost']);
     }
-
 
     $name = $drink->getName();
     $description = $drink->getDescription();
@@ -34,7 +47,6 @@ if ($_POST) {
         'description' => $description,
         'cashMONEY' => $money
     ];
-
     $menu->addRows($param);
 
 
