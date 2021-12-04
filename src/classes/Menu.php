@@ -25,12 +25,12 @@ class Menu
 
         $name = $param['name'];
         $description = $param['description'];
-        $money = $param['cashMONEY'];
+        $cost = $param['cost'];
 
         $stmt = $db->prepare("INSERT INTO item (name, description, cost, type_id) VALUES (:name, :description, :money, 1)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':money', $money);
+        $stmt->bindParam(':money', $cost);
         $stmt->execute();
 
 
