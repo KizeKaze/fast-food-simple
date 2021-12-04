@@ -10,30 +10,36 @@ $menu = new \App\Classes\Menu();
 $result = $menu->getItems();
 
 if ($_POST) {
+    $errors = [];
     $drink = new \App\Classes\Drink();
 
     
     if (empty(trim($_POST['name'])))  {
-            echo "Name field is empty";
-            die();
+            $errors[] = "Name field is empty";
     }else {
         $drink->setName($_POST['name']);
     }
 
     if (empty(trim($_POST['description']))) {
-        echo "Description field is empty";
-        die();
+        $errors[] = "Description field is empty";
+
     } else {
         $drink->setDescription($_POST['description']);
     }
     
     if (empty($_POST['cost']) || $_POST['cost'] < 0){
-        echo "Cost field is empty";
-        die();
+        $errors[] = "Cost field is empty";
     } else {
         $drink->setCost($_POST['cost']);
     }
-
+        foreach($errors as $error) {
+            echo "<div class='container'>";
+            print_r($error);
+            echo "</div>";
+        }
+    if($errors) {
+            die();
+    }
     $name = $drink->getName();
     $description = $drink->getDescription();
     $cost = $drink->getCost();
