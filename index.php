@@ -26,8 +26,7 @@ if ($_POST) {
     } else {
         $drink->setDescription($_POST['description']);
     }
-    
-    if (empty($_POST['cost']) || $_POST['cost'] < 0){
+    if (empty($_POST['cost']) || $_POST['cost'] < 0 || is_string($_POST['cost'])){
         echo "Cost field is empty";
         die();
     } else {
