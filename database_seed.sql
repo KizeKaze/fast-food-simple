@@ -1,19 +1,22 @@
-create table item
+CREATE DATABASE IF NOT EXISTS fast_food;
+USE fast_food;
+
+CREATE TABLE item
 (
-    id int auto_increment,
-    name varchar(255) not null,
-    description text null,
-    cost decimal(11,2) null,
-    type_id int not null,
-    constraint item_pk
-        primary key (id)
+    id          int AUTO_INCREMENT,
+    name        varchar(255)   NOT NULL,
+    description text           NULL,
+    cost        decimal(11, 2) NULL,
+    type_id     int            NOT NULL,
+    CONSTRAINT item_pk
+        PRIMARY KEY (id)
 );
 
-create table type
+CREATE TABLE type
 (
-    type_id int auto_increment,
-    type varchar(255) null,
-    constraint type_pk
-        primary key (type_id)
+    type_id int AUTO_INCREMENT,
+    type    varchar(255) NULL,
+    CONSTRAINT type_pk
+        PRIMARY KEY (type_id)
 );
 
