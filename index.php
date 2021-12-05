@@ -13,33 +13,31 @@ if ($_POST) {
     $errors = [];
     $drink = new \App\Classes\Drink();
 
-    
-    if (empty(trim($_POST['name'])))  {
-            $errors[] = "Name field is empty";
-    }else {
-        $drink->setName($_POST['name']);
-    }
 
+    if (empty(trim($_POST['name']))) {
+        $errors[] = "Name invalid";
+    }
     if (empty(trim($_POST['description']))) {
-        $errors[] = "Description field is empty";
+        $errors[] = "Description invalid";
+    }
+    $cost = floatval($_POST['cost']);
+    var_dump($cost);
+    if (empty($_POST['cost']) || $_POST['cost'] < 0 || is_string($_POST['cost'])) {
+        $errors[] = "Cost invalid";
+    }
+    foreach ($errors as $error) {
+        echo "<div class='container'>";
+        echo $error;
+        echo "</div>";
+    }
+    if ($errors) {
+        var_dump($cost);
+        die();
+    }
+    $drink->setName($_POST['name']);
+    $drink->setDescription($_POST['description']);
+    $drink->setCost($cost);
 
-    } else {
-        $drink->setDescription($_POST['description']);
-    }
-    
-    if (empty($_POST['cost']) || $_POST['cost'] < 0|| is_string($_POST['cost'])){
-        $errors[] = "Cost field is empty";
-    } else {
-        $drink->setCost($_POST['cost']);
-    }
-        foreach($errors as $error) {
-            echo "<div class='container'>";
-            print_r($error);
-            echo "</div>";
-        }
-    if($errors) {
-            die();
-    }
     $name = $drink->getName();
     $description = $drink->getDescription();
     $cost = $drink->getCost();
