@@ -10,28 +10,32 @@ $menu = new \App\Classes\Menu();
 $result = $menu->getItems();
 
 if ($_POST) {
+    $errors = [];
     $drink = new \App\Classes\Drink();
 
-    
-    if (empty(trim($_POST['name'])))  {
-            echo "Name field is empty";
-            die();
-    }else {
-        $drink->setName($_POST['name']);
+    if (empty(trim($_POST['name']))) {
+        $errors[] = "Name invalid";
+    }
+    if (empty(trim($_POST['description']))) {
+        $errors[] = "Description invalid";
+    }
+    $cost = floatval($_POST['cost']);
+
+    if ($cost <= 0) {
+        $errors[] = "Cost invalid";
+    }
+    foreach ($errors as $error) {
+        echo "<div class='container'>";
+        echo $error;
+        echo "</div>";
+    }
+    if ($errors) {
+        die();
     }
 
-    if (empty(trim($_POST['description']))) {
-        echo "Description field is empty";
-        die();
-    } else {
-        $drink->setDescription($_POST['description']);
-    }
-    if (empty($_POST['cost']) || $_POST['cost'] < 0 || is_string($_POST['cost'])){
-        echo "Cost field is empty";
-        die();
-    } else {
-        $drink->setCost($_POST['cost']);
-    }
+    $drink->setName($_POST['name']);
+    $drink->setDescription($_POST['description']);
+    $drink->setCost($cost);
 
     $name = $drink->getName();
     $description = $drink->getDescription();
@@ -42,8 +46,8 @@ if ($_POST) {
         'description' => $description,
         'cost' => $cost
     ];
-    $menu->addRows($param);
 
+    $menu->addRows($param);
 
     echo "<h1>Drink details</h1>";
     echo "<br>Name: " . $drink->getName();
