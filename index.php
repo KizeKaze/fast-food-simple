@@ -13,27 +13,41 @@ if ($_POST) {
     $errors = [];
     $drink = new \App\Classes\Drink();
 
-
     if (empty(trim($_POST['name']))) {
         $errors[] = "Name invalid";
     }
+    
     if (empty(trim($_POST['description']))) {
         $errors[] = "Description invalid";
     }
+    
     $cost = floatval($_POST['cost']);
+    
+    echo "<pre>";
+    
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    
     var_dump($cost);
-    if (empty($_POST['cost']) || $_POST['cost'] < 0 || is_string($_POST['cost'])) {
+    
+    if ($cost <= 0) {
         $errors[] = "Cost invalid";
     }
+    
     foreach ($errors as $error) {
         echo "<div class='container'>";
         echo $error;
         echo "</div>";
     }
+    
     if ($errors) {
         var_dump($cost);
         die();
     }
+    
+    echo "</pre>";
+    
     $drink->setName($_POST['name']);
     $drink->setDescription($_POST['description']);
     $drink->setCost($cost);
