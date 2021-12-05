@@ -20,3 +20,8 @@ CREATE TABLE type
         PRIMARY KEY (type_id)
 );
 
+INSERT INTO fast_food.type (type)
+VALUES ('Food');
+
+INSERT INTO fast_food.type (type)
+VALUES ('Drink');
