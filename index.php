@@ -16,38 +16,23 @@ if ($_POST) {
     if (empty(trim($_POST['name']))) {
         $errors[] = "Name invalid";
     }
-    
     if (empty(trim($_POST['description']))) {
         $errors[] = "Description invalid";
     }
-    
     $cost = floatval($_POST['cost']);
-    
-    echo "<pre>";
-    
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    
-    var_dump($cost);
-    
+
     if ($cost <= 0) {
         $errors[] = "Cost invalid";
     }
-    
     foreach ($errors as $error) {
         echo "<div class='container'>";
         echo $error;
         echo "</div>";
     }
-    
     if ($errors) {
-        var_dump($cost);
         die();
     }
-    
-    echo "</pre>";
-    
+
     $drink->setName($_POST['name']);
     $drink->setDescription($_POST['description']);
     $drink->setCost($cost);
@@ -61,8 +46,8 @@ if ($_POST) {
         'description' => $description,
         'cost' => $cost
     ];
-    $menu->addRows($param);
 
+    $menu->addRows($param);
 
     echo "<h1>Drink details</h1>";
     echo "<br>Name: " . $drink->getName();
