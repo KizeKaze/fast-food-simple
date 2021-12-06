@@ -23,9 +23,14 @@ if ($_POST) {
     if ($cost <= 0) {
         $errors[] = "Cost invalid";
     }
-    if(isset($_POST['value'])) {
-        $boolean = 0;
-        $menu->checkType($boolean);
+    if (isset($_POST['value'])) {
+        $values = $menu->checkType();
+        $verified_type = in_array($_POST['value'], $values);
+        if ($verified_type) {
+            $drink->setType($_POST['value']);
+        } else {
+            $errors[] = "Invalid Type";
+        }
     }
 
     foreach ($errors as $error) {
@@ -44,11 +49,13 @@ if ($_POST) {
     $name = $drink->getName();
     $description = $drink->getDescription();
     $cost = $drink->getCost();
+    $type = $drink->getType();
 
     $param = [
         'name' => $name,
         'description' => $description,
-        'cost' => $cost
+        'cost' => $cost,
+        'type' => $type
     ];
 
     $menu->addRows($param);
@@ -57,4 +64,5 @@ if ($_POST) {
     echo "<br>Name: " . $drink->getName();
     echo "<br>Description: " . $drink->getDescription();
     echo "<br>Cost: " . $drink->getCost();
+    echo "<br>Type: " . $drink->getType();
 }
