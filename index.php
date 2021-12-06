@@ -1,5 +1,4 @@
 <?php
-
 // Includes our namespaces
 require 'vendor/autoload.php';
 
@@ -24,6 +23,11 @@ if ($_POST) {
     if ($cost <= 0) {
         $errors[] = "Cost invalid";
     }
+    if(isset($_POST['value'])) {
+        $boolean = 0;
+        $menu->checkType($boolean);
+    }
+
     foreach ($errors as $error) {
         echo "<div class='container'>";
         echo $error;
