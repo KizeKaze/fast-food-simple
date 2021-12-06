@@ -27,11 +27,13 @@ class Menu
         $name = $param['name'];
         $description = $param['description'];
         $cost = $param['cost'];
+        $type = $param['type'];
 
-        $stmt = $db->prepare("INSERT INTO item (name, description, cost, type_id) VALUES (:name, :description, :money, 1)");
+        $stmt = $db->prepare("INSERT INTO item (name, description, cost, type_id) VALUES (:name, :description, :money, :type)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':money', $cost);
+        $stmt->bindParam(':type', $type);
         $stmt->execute();
 
 
@@ -41,8 +43,6 @@ class Menu
     {
         $db = Database::getInstance();
 
-        $types = [];
-
         $sql = "SELECT type_id, type FROM type";
 
         $stmt = $db->prepare($sql);
@@ -51,18 +51,15 @@ class Menu
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function checkType($boolean)
+    public function checkType()
     {
         $db = Database::getInstance();
 
-        $sql = "SELECT type_id, type FROM type";
+        $sql = "SELECT type_id FROM type";
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-        $value = $stmt->fetchAll();
-        echo "<pre>";
-        var_dump($value);
-        echo "</pre>";
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
 
 
     }
