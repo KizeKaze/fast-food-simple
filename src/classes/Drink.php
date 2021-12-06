@@ -10,6 +10,7 @@ class Drink
     private string $name = '';
     private string $description = '';
     private float $cost = 0;
+    private int $type =  0;
     
     public function __construct() {}
     
@@ -42,5 +43,14 @@ class Drink
     {
         $this->cost = $cost;
     }
-    
+
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): void
+    {
+        $this->type = $type;
+    }
 }
