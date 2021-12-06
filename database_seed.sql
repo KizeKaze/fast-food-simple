@@ -25,3 +25,6 @@ VALUES ('Food');
 
 INSERT INTO fast_food.type (type)
 VALUES ('Drink');
+
+INSERT INTO fast_food.type (type)
+VALUES ('Dessert');
