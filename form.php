@@ -1,4 +1,4 @@
-<?php $menu = new \App\Classes\Menu() ?>
+<?php $menu = new \App\Classes\Menu(); ?>
 <html lang="en">
 <head>
     <title>Fast Food</title>
@@ -43,9 +43,7 @@
         <br>
         <button>Submit</button>
     </form>
-    <form action="menu_list.php" method="post">
-        <input type="submit" name="submit" value="Menu List">
-    </form>
+    <a href="menu_list.php" class="button">Menu List</a>
 </div>
 </body>
 </html>
