@@ -13,7 +13,7 @@ class Menu
 
         $sql = "SELECT * FROM item i 
                     INNER JOIN type t ON i.type_id = t.type_id WHERE 1 = 1";
-//        INNER JOIN type t ON i.type_id = t.type_id WHERE name LIKE '$search%' AND t.type_id = '$type'";
+
         if ($search) {
             $sql.= " AND name like '$search%'";
         }
