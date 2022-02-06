@@ -15,12 +15,18 @@ $menu = new \App\Classes\Menu();
     <div class="topnav">
         <a href="index.php">Home</a>
         <a class="active" href="menu_list.php">Menu List</a>
-        <div class="search-container">
-            <form action="menu_list.php" method="post">
+    </div>
+    <div class="search-container">
+        <form action="menu_list.php" method="post">
+            <select name="type">
+                <option value="0">All</option>
+                <option value="1">Food</option>
+                <option value="2">Drink</option>
+                <option value="3">Dessert</option>
+            </select>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="submit" name="submit">
             </form>
-        </div>
     </div>
 </div>
 <div class="container">
@@ -28,11 +34,10 @@ $menu = new \App\Classes\Menu();
 
         <?php
 
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit']) || isset($_POST['type'])) {
+            $type = trim(htmlspecialchars($_POST['type']));
             $search = trim(htmlspecialchars($_POST['search']));
-
-            $result = $menu->getSearch($search);
-
+            $result = $menu->getSearch($search, $type);
             if(!($result)) {
                 echo "No search result found";
             } else {

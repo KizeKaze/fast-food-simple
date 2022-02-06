@@ -6,12 +6,20 @@ use PDO;
 
 class Menu
 {
-    public function getSearch($search): array
+    public function getSearch($search, $type): array
     {
+
         $db = Database::getInstance();
 
         $sql = "SELECT * FROM item i 
-                    INNER JOIN type t ON i.type_id = t.type_id WHERE name LIKE '$search%'";
+                    INNER JOIN type t ON i.type_id = t.type_id WHERE 1 = 1";
+//        INNER JOIN type t ON i.type_id = t.type_id WHERE name LIKE '$search%' AND t.type_id = '$type'";
+        if ($search) {
+            $sql.= " AND name like '$search%'";
+        }
+        if ($type > 0){
+            $sql.= " AND t.type_id = '$type'";
+        }
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
