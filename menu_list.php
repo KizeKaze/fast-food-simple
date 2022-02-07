@@ -20,9 +20,11 @@ $menu = new \App\Classes\Menu();
         <form action="menu_list.php" method="post">
             <select name="type">
                 <option value="0">All</option>
-                <option value="1">Food</option>
-                <option value="2">Drink</option>
-                <option value="3">Dessert</option>
+                <?php $results = $menu->getType() ?>
+               <?php foreach ($results as $row) {
+                   echo "<option value=". $row['type_id'] . ">" . $row['type'] . "</option>";
+               } ?>
+
             </select>
                 <input type="text" name="search" placeholder="Search...">
                 <input type="submit" name="submit">
