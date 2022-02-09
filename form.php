@@ -37,7 +37,7 @@
 
                 <div>
                     <label for="type" class="input-group-text">Type</label>
-                    <select class="custom-select" name="value" id="type">
+                    <select class="form-select" name="value" id="type">
                         <?php
 
                         $types = $menu->getType();

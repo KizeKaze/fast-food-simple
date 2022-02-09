@@ -22,6 +22,7 @@ class Menu
         }
 
         $stmt = $db->prepare($sql);
+
         if ($search){
             $stmt->bindValue(':search', $search);
         }
