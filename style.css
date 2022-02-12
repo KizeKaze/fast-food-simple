@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    width: 550px;
+    width: 545px;
     margin: 0 auto;
     background-color: gainsboro;
     border: 2px solid black;
@@ -30,11 +30,3 @@ body {
     background-color: gainsboro;
 }
 
-.button {
-    text-decoration:none;
-    color: silver;
-    padding: 8px;
-    background: black;
-    font-size: 15px;
-    border-radius: 10px;
-}
