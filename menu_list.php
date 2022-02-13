@@ -1,46 +1,31 @@
-<?php
-require 'vendor/autoload.php';
-$menu = new \App\Classes\Menu();
-
-
-?>
-
-<html>
-<head>
-    <title>Menu List</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<?php include "includes/header.php"; ?>
+<?php include "includes/nav.php" ?>
 <div class="container">
-    <div class="topnav">
-        <a href="index.php">Home</a>
-        <a class="active" href="menu_list.php">Menu List</a>
-    </div>
     <div class="search-container">
         <form action="menu_list.php" method="post">
             <select name="type">
                 <option value="0">All</option>
                 <?php $results = $menu->getType() ?>
-               <?php foreach ($results as $row) {
-                   echo "<option value=". $row['type_id'] . ">" . $row['type'] . "</option>";
-               } ?>
+                <?php foreach ($results as $row) {
+                    echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
+
+                } ?>
 
             </select>
-                <input type="text" name="search" placeholder="Search...">
-                <input type="submit" name="submit">
-            </form>
+            <input type="text" name="search" placeholder="Search...">
+            <input type="submit" name="submit">
+        </form>
     </div>
 </div>
 <div class="container">
     <div>
 
         <?php
-
         if (isset($_POST['submit']) || isset($_POST['type'])) {
             $type = trim(htmlspecialchars($_POST['type']));
             $search = trim(htmlspecialchars($_POST['search']));
             $result = $menu->getSearch($search, $type);
-            if(!($result)) {
+            if (!($result)) {
                 echo "No search result found";
             } else {
                 foreach ($result as $row) {
@@ -78,7 +63,6 @@ $menu = new \App\Classes\Menu();
                 <label>Description: <?= $description ?></label><br>
                 <label>Cost: <?= $cost ?></label><br>
                 <label>Type: <?= $type ?></label>
-
                 <?php
                 echo "</div>";
             }
@@ -87,5 +71,4 @@ $menu = new \App\Classes\Menu();
         ?>
     </div>
 </div>
-</body>
-</html>
+<?php include "includes/footer.php"; ?>
