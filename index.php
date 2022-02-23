@@ -1,16 +1,24 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Includes our namespaces
 require 'vendor/autoload.php';
 
-// Display simple form for user
-require 'form.php';
+
 
 $menu = new \App\Classes\Menu();
 $result = $menu->getItems();
 
+
+// Display simple form for user
+require 'form.php';
+
 if ($_POST) {
     $errors = [];
     $drink = new \App\Classes\Drink();
+
+
 
     if (empty(trim($_POST['name']))) {
         $errors[] = "Name invalid";
@@ -33,14 +41,6 @@ if ($_POST) {
         }
     }
 
-    foreach ($errors as $error) {
-        echo "<div class='container'>";
-        echo $error;
-        echo "</div>";
-    }
-    if ($errors) {
-        die();
-    }
 
     $drink->setName($_POST['name']);
     $drink->setDescription($_POST['description']);

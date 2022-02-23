@@ -1,6 +1,20 @@
 <?php include "includes/header.php" ?>
 <?php include "includes/nav.php" ?>
 
+<?php
+
+if(isset($errors)) {
+    foreach ($errors as $error) {
+        echo "<div class='alert alert-danger mb-2'>";
+        echo $error;
+        echo "</div>";
+    }
+    if ($errors) {
+        echo "SHIEESH";
+    }
+}
+?>
+
 <div class="container">
     <div class="card" style="width: 32rem;">
         <div class="card-body">
