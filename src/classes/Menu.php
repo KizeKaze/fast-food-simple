@@ -45,6 +45,18 @@ class Menu
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function updateItem($id, $name, $description, $cost, $type): void
+    {
+    $db = Database::getInstance();
+
+    $sql = "UPDATE item SET name = '$name', description = '$description', cost = '$cost', type_id = '$type' WHERE id = $id";
+
+    $stmt = $db->prepare($sql);
+
+    $stmt->execute();
+
+    }
+
     public function getItems(): array
     {
         $database = Database::getInstance();

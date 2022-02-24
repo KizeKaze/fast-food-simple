@@ -20,13 +20,6 @@
         </form>
     </div>
 </div>
-<?php
-// redirect to a new page instead of current set up when we come back to this, RAY
-if(isset($_POST['edit'])) {
-    $item_id = $_POST['edit'];
-    include "includes/edit_menu_item.php";
-}
-?>
 <div class="container">
     <div>
 
@@ -73,7 +66,7 @@ if(isset($_POST['edit'])) {
                 <label>Description: <?= $description ?></label><br>
                 <label>Cost: <?= $cost ?></label><br>
                 <label>Type: <?= $type ?></label><br>
-                <form action="" method="post">
+                <form action="edit_menu_item.php" method="get">
                     <button type="submit" class="btn btn-primary" name="edit" value=<?=$id?>>Edit</button>
                 </form>
                 <?php
