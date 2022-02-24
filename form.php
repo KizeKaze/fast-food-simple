@@ -16,7 +16,7 @@ if(isset($errors)) {
 ?>
 
 <div class="container">
-    <div class="card" style="width: 32rem;">
+    <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center align-middle">Add an item to the menu</h5>
             <hr>
