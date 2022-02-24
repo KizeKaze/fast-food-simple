@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php require 'vendor/autoload.php'; ?>
 <?php $menu = new \App\Classes\Menu(); ?>
 <html lang="en">

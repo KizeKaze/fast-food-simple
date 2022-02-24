@@ -1,5 +1,8 @@
 <?php include "includes/header.php"; ?>
 <?php include "includes/nav.php" ?>
+
+
+
 <div class="container">
     <div class="search-container">
         <form action="menu_list.php" method="post">
@@ -17,6 +20,13 @@
         </form>
     </div>
 </div>
+<?php
+// redirect to a new page instead of current set up when we come back to this, RAY
+if(isset($_POST['edit'])) {
+    $item_id = $_POST['edit'];
+    include "includes/edit_menu_item.php";
+}
+?>
 <div class="container">
     <div>
 
@@ -62,7 +72,10 @@
                 <label>Name: <?= $name ?></label><br>
                 <label>Description: <?= $description ?></label><br>
                 <label>Cost: <?= $cost ?></label><br>
-                <label>Type: <?= $type ?></label>
+                <label>Type: <?= $type ?></label><br>
+                <form action="" method="post">
+                    <button type="submit" class="btn btn-primary" name="edit" value=<?=$id?>>Edit</button>
+                </form>
                 <?php
                 echo "</div>";
             }
