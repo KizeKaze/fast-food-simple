@@ -1,12 +1,26 @@
 <?php include "includes/header.php" ?>
 <?php include "includes/nav.php" ?>
 
+<?php
+
+if (isset($errors)) {
+    echo "<div class='error-container'>";
+    foreach ($errors as $error) {
+        echo "<div class='error'>";
+            echo $error;
+        echo "</div>";
+    }
+    echo "</div>";
+}
+
+?>
+
 <div class="container">
-    <div class="card" style="width: 32rem;">
+    <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center align-middle">Add an item to the menu</h5>
             <hr>
-            <form action="submit" method="post" class="form_index">
+            <form action="" method="post" class="form_index">
                 <div>
                     <label class="input-group-addon" for="name"></label>
                     <div class="input-group">
