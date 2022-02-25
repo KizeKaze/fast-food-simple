@@ -70,8 +70,6 @@
                                 <?php    if ($type['type_id'] == $currentType) { ?>
                                         <option <?=$select?> value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
                                 <?php    } else { ?>
-                                        <?php //prints id of each type print_r($type['type_id']); ?>
-                                        <?php //prints actual word of the current type of item print_r($currentType); ?>
                                         <option value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
                                 <?php     } ?>
                                 <?php } ?>
