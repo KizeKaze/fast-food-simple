@@ -6,8 +6,11 @@ use PDO;
 
 class Menu
 {
-    public function getSearch($search, $type): array
+    public function getItems($params): array
     {
+        $search = $params['search'];
+        $type = $params['type'];
+
         $db = Database::getInstance();
 
         $sql = "SELECT * FROM item i 
@@ -55,20 +58,6 @@ class Menu
 
     $stmt->execute();
 
-    }
-
-    public function getItems(): array
-    {
-        $database = Database::getInstance();
-
-        $sql = "SELECT * FROM item i
-                    INNER JOIN type t ON i.type_id = t.type_id";
-
-        $statement = $database->prepare($sql);
-        $statement->execute();
-
-
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function addRows($param)
