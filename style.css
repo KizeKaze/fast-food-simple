@@ -3,17 +3,13 @@ body {
 }
 
 .container {
-    width: 545px;
-    margin: 0 auto;
-    background-color: gainsboro;
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 15px;
+    max-width: 545px;
+    margin: auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .form_index > div {
-    display: flex;
-    justify-content: space-between;
     padding: 10px;
 }
 
@@ -30,3 +26,19 @@ body {
     background-color: gainsboro;
 }
 
+.error-container {
+    max-width: 545px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.error {
+    background-color: indianred;
+    border: 2px solid black;
+    border-radius: 1em;
+    padding: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+    text-align: center;
+}
