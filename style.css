@@ -26,13 +26,6 @@ body {
     background-color: gainsboro;
 }
 
-.error-container {
-    max-width: 545px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .error {
     background-color: indianred;
     border: 2px solid black;
