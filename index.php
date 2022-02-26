@@ -1,24 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 // Includes our namespaces
 require 'vendor/autoload.php';
-
-
 
 $menu = new \App\Classes\Menu();
 $result = $menu->getItems();
 
-
-// Display simple form for user
-require 'form.php';
-
 if ($_POST) {
     $errors = [];
     $drink = new \App\Classes\Drink();
-
-
 
     if (empty(trim($_POST['name']))) {
         $errors[] = "Name invalid";
@@ -42,27 +31,32 @@ if ($_POST) {
     }
 
 
-    $drink->setName($_POST['name']);
-    $drink->setDescription($_POST['description']);
-    $drink->setCost($cost);
+    if (!count($errors)) {
+        $drink->setName($_POST['name']);
+        $drink->setDescription($_POST['description']);
+        $drink->setCost($cost);
 
-    $name = $drink->getName();
-    $description = $drink->getDescription();
-    $cost = $drink->getCost();
-    $type = $drink->getType();
+        $name = $drink->getName();
+        $description = $drink->getDescription();
+        $cost = $drink->getCost();
+        $type = $drink->getType();
 
-    $param = [
-        'name' => $name,
-        'description' => $description,
-        'cost' => $cost,
-        'type' => $type
-    ];
+        $param = [
+            'name' => $name,
+            'description' => $description,
+            'cost' => $cost,
+            'type' => $type
+        ];
 
-    $menu->addRows($param);
+        $menu->addRows($param);
 
-    echo "<h1>Drink details</h1>";
-    echo "<br>Name: " . $drink->getName();
-    echo "<br>Description: " . $drink->getDescription();
-    echo "<br>Cost: " . $drink->getCost();
-    echo "<br>Type: " . $drink->getType();
+        echo "<h1>Drink details</h1>";
+        echo "<br>Name: " . $drink->getName();
+        echo "<br>Description: " . $drink->getDescription();
+        echo "<br>Cost: " . $drink->getCost();
+        echo "<br>Type: " . $drink->getType();
+    }
 }
+
+// Display simple form for user
+require 'form.php';
