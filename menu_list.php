@@ -1,7 +1,6 @@
 <?php include "includes/header.php"; ?>
 <?php include "includes/nav.php" ?>
 
-
     <div class="container">
         <div class="card">
             <div class="card-body">
@@ -19,7 +18,6 @@
             </div>
         </div>
     </div>
-
     <div class="container">
 <?php
 if (isset($_POST['submit']) || isset($_POST['type'])) {
@@ -31,42 +29,39 @@ if (!($result)) {
 } else { ?>
 
     <div class='container'>
-    <table class="table table-light table-bordered table-hover table-responsive">
-    <thead>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Cost</th>
-    <th>Type</th>
-    <th>Options</th>
-    </thead>
-    <tbody>
-    <tr>
-        <?php foreach ($result
+        <table class="table table-light table-bordered table-hover table-responsive">
+            <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Type</th>
+            <th>Options</th>
+            </thead>
+                <tbody>
+                    <tr>
 
-        as $row) {
+                        <?php foreach ($result as $row) {
 
-        $id = $row['id'];
-        $name = $row['name'];
-        $description = $row['description'];
-        $cost = $row['cost'];
-        $type = $row['type'];
-        ?>
-        <td><?= $id ?></td>
-        <td><?= $name ?></td>
-        <td><?= $description ?></td>
-        <td><?= $cost ?></td>
-        <td><?= $type ?></td>
-        <form action="edit_menu_item.php" method="get">
-            <td>
-                <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
-            </td>
-        </form>
-    </tr>
-    <?php
-
-}?>
-    </tbody>
+                        $id = $row['id'];
+                        $name = $row['name'];
+                        $description = $row['description'];
+                        $cost = $row['cost'];
+                        $type = $row['type'];
+                        ?>
+                        <td><?= $id ?></td>
+                        <td><?= $name ?></td>
+                        <td><?= $description ?></td>
+                        <td><?= $cost ?></td>
+                        <td><?= $type ?></td>
+                        <form action="edit_menu_item.php" method="get">
+                            <td>
+                                <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
+                            </td>
+                        </form>
+                     </tr>
+                    <?php }?>
+                </tbody>
         </table>
     </div>
 <?php }
@@ -83,38 +78,33 @@ if (!($result)) {
             <th>Type</th>
             <th>Options</th>
             </thead>
-            <tbody>
-            <tr>
+                <tbody>
+                    <tr>
 
-                <?php foreach ($result
+                        <?php foreach ($result as $row) {
 
-                as $row) {
+                        $id = $row['id'];
+                        $name = $row['name'];
+                        $description = $row['description'];
+                        $cost = $row['cost'];
+                        $type = $row['type'];
 
-                $id = $row['id'];
-                $name = $row['name'];
-                $description = $row['description'];
-                $cost = $row['cost'];
-                $type = $row['type'];
-
-                ?>
-                <td><?= $id ?></td>
-                <td><?= $name ?></td>
-                <td><?= $description ?></td>
-                <td><?= $cost ?></td>
-                <td><?= $type ?></td>
-                <form action="edit_menu_item.php" method="get">
-                    <td>
-                        <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
-                    </td>
-                </form>
-            </tr>
-            <?php } ?>
-            </tbody>
+                        ?>
+                        <td><?= $id ?></td>
+                        <td><?= $name ?></td>
+                        <td><?= $description ?></td>
+                        <td><?= $cost ?></td>
+                        <td><?= $type ?></td>
+                        <form action="edit_menu_item.php" method="get">
+                            <td>
+                                <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
+                            </td>
+                        </form>
+                    </tr>
+                    <?php } ?>
+                </tbody>
         </table>
     </div>
 <?php } ?>
-
-    ?>
-
 
 <?php include "includes/footer.php"; ?>
