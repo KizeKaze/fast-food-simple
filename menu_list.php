@@ -22,26 +22,26 @@
     }
 ?>
 
-    <div class="container">
+    <div class="container lg">
         <div class="card">
             <div class="card-body">
                 <form action="menu_list.php" method="post">
-                    <select name="type">
+                    <select name="type" class="form-select mb-1">
                         <option value="0">All</option>
                         <?php $results = $menu->getType() ?>
                         <?php foreach ($results as $row) {
                             echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
                         } ?>
                     </select>
-                    <input type="text" name="search" placeholder="Search...">
-                    <input type="submit" name="submit">
+                    <input class="form-text" type="text" name="search" placeholder="Search...">
+                    <input type="submit" name="submit" class="btn btn-primary btn-sm">
                 </form>
             </div>
         </div>
     </div>
 <?php
 if (isset($errors)) {
-    echo "<div class='container'>";
+    echo "<div class='container lg'>";
         echo "<div class='error-container'>";
             foreach ($errors as $error) {
                 echo "<div class='error'>";
