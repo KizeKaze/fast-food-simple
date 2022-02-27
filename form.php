@@ -12,6 +12,13 @@ if (isset($errors)) {
     }
     echo "</div>";
 }
+if (isset($item_added)) {
+    echo "<div class='success-container'>";
+        echo "<div class='item_added'>";
+            echo "Item Added!";
+        echo "</div>";
+    echo "</div>";
+    }
 
 ?>
 
