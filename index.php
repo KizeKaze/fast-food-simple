@@ -3,14 +3,6 @@
 require 'vendor/autoload.php';
 
 $menu = new \App\Classes\Menu();
-// janky
-$search = null;
-$type = null;
-$params = [
-    'search' => $search,
-    'type' => $type
-];
-$result = $menu->getItems($params);
 
 if ($_POST) {
     $errors = [];

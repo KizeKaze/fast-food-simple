@@ -2,25 +2,24 @@
 <?php include "includes/nav.php" ?>
 
 <?php
-$search = null;
-$type = null;
-if (isset($_POST['submit']) || isset($_POST['type'])) {
-    $type = trim(htmlspecialchars($_POST['type']));
-    $search = trim(htmlspecialchars($_POST['search']));
+    $search = null;
+    $type = null;
+
+    if (isset($_POST['submit']) || isset($_POST['type'])) {
+        $type = trim(htmlspecialchars($_POST['type']));
+        $search = trim(htmlspecialchars($_POST['search']));
+    }
+
     $params = [
         'search' => $search,
         'type' => $type
     ];
+
     $result = $menu->getItems($params);
+
     if (empty($result)) {
         $errors[] = "<h4>Nothing matched!</h4>";
     }
-}
-$params = [
-    'search' => $search,
-    'type' => $type
-];
-$result = $menu->getItems($params);
 ?>
 
     <div class="container">
