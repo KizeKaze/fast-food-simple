@@ -3,7 +3,6 @@
 require 'vendor/autoload.php';
 
 $menu = new \App\Classes\Menu();
-$result = $menu->getItems();
 
 if ($_POST) {
     $errors = [];
