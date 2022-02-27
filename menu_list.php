@@ -28,8 +28,8 @@ if (!($result)) {
     echo "No search result found";
 } else { ?>
 
-    <div class='container'>
-        <table class="table table-light table-bordered table-hover table-responsive">
+    <div class='table-responsive'>
+        <table class="table table-light table-bordered table-hover">
             <thead>
             <th>ID</th>
             <th>Name</th>
@@ -51,7 +51,7 @@ if (!($result)) {
                         ?>
                         <td><?= $id ?></td>
                         <td><?= $name ?></td>
-                        <td><?= $description ?></td>
+                        <td><textarea class="form-control" readonly><?=$description ?></textarea></>
                         <td><?= $cost ?></td>
                         <td><?= $type ?></td>
                         <form action="edit_menu_item.php" method="get">
@@ -69,6 +69,7 @@ if (!($result)) {
     $result = $menu->getItems();
     ?>
     <div class='container'>
+        <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
             <th>ID</th>
@@ -92,7 +93,7 @@ if (!($result)) {
                         ?>
                         <td><?= $id ?></td>
                         <td><?= $name ?></td>
-                        <td><?= $description ?></td>
+                        <td><textarea class="form-control" readonly><?=$description ?></textarea></>
                         <td><?= $cost ?></td>
                         <td><?= $type ?></td>
                         <form action="edit_menu_item.php" method="get">
@@ -104,6 +105,7 @@ if (!($result)) {
                     <?php } ?>
                 </tbody>
         </table>
+        </div>
     </div>
 <?php } ?>
 
