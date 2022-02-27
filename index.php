@@ -49,11 +49,12 @@ if ($_POST) {
 
         $menu->addRows($param);
 
-        echo "<h1>Drink details</h1>";
-        echo "<br>Name: " . $drink->getName();
-        echo "<br>Description: " . $drink->getDescription();
-        echo "<br>Cost: " . $drink->getCost();
-        echo "<br>Type: " . $drink->getType();
+        $item_added = [
+            'name' => $drink->getName(),
+            'description' => $drink->getDescription(),
+            'cost' => $drink->getCost(),
+            'type' => $drink->getType()
+        ];
     }
 }
 
