@@ -1,4 +1,4 @@
-~~~To start any issue~~~
+To start any issue
 
 git checkout master
 
@@ -8,7 +8,7 @@ git checkout -b (New branch name here)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-~~~what to do when youre waiting for a merge~~~
+what to do when youre waiting for a merge
 
 push work out into git hub anyways
 
@@ -16,7 +16,7 @@ repeat "To start any issue"
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-~~~coding_style~~~
+coding_style
 
 
 Variables / properties should be declared using snake_case
