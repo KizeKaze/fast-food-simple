@@ -32,6 +32,7 @@ class Menu
         if($type > 0) {
             $stmt->bindParam(':type', $type);
         }
+
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -41,9 +42,12 @@ class Menu
         $db = Database::getInstance();
 
         $sql = "SELECT * FROM item i 
-                    INNER JOIN type t ON i.type_id = t.type_id WHERE id = $item_id";
+                    INNER JOIN type t ON i.type_id = t.type_id WHERE id = :item_id";
 
         $stmt = $db->prepare($sql);
+
+        $stmt->bindParam(':item_id', $item_id);
+
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -52,9 +56,15 @@ class Menu
     {
     $db = Database::getInstance();
 
-    $sql = "UPDATE item SET name = '$name', description = '$description', cost = '$cost', type_id = '$type' WHERE id = $id";
+    $sql = "UPDATE item SET name = :name, description = :description, cost = :cost, type_id = :type_id WHERE id = :id";
 
     $stmt = $db->prepare($sql);
+
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':cost', $cost);
+    $stmt->bindParam(':type_id', $type);
+    $stmt->bindParam(':id', $id);
 
     $stmt->execute();
 
