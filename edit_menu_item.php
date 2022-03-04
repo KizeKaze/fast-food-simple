@@ -24,7 +24,7 @@
             $cost = $_POST['cost'];
             $type_id = $_POST['type'];
             $menu->updateItem($id, $name, $description, $cost, $type_id);
-
+            header("Location: edit_menu_item.php");
         }
 
         ?>
