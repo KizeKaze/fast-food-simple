@@ -4,13 +4,7 @@
 <?php
 
 if (isset($errors)) {
-    echo "<div class='error-container'>";
-    foreach ($errors as $error) {
-        echo "<div class='error'>";
-            echo $error;
-        echo "</div>";
-    }
-    echo "</div>";
+    include "includes/errors.php";
 }
 if (isset($item_added)) {
     echo "<div class='success-container'>";
