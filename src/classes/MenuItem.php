@@ -3,9 +3,9 @@
 namespace App\Classes;
 
 /*
- * Base class that will hold various information about our drink menu
+ * Base class that will hold various information about our Item menu
  */
-class Drink
+class MenuItem
 {
     private string $name = '';
     private string $description = '';
