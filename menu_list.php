@@ -41,15 +41,7 @@
     </div>
 <?php
 if (isset($errors)) {
-    echo "<div class='container lg'>";
-        echo "<div class='error-container'>";
-            foreach ($errors as $error) {
-                echo "<div class='error'>";
-                echo $error;
-                echo "</div>";
-            }
-        echo "</div>";
-    echo "</div>";
+    include "includes/errors.php";
 } else { ?>
 
     <div class='container'>

@@ -6,7 +6,7 @@ $menu = new \App\Classes\Menu();
 
 if ($_POST) {
     $errors = [];
-    $drink = new \App\Classes\Drink();
+    $Item = new \App\Classes\MenuItem();
 
     if (empty(trim($_POST['name']))) {
         $errors[] = "Name invalid";
@@ -23,7 +23,7 @@ if ($_POST) {
         $values = $menu->checkType();
         $verified_type = in_array($_POST['value'], $values);
         if ($verified_type) {
-            $drink->setType($_POST['value']);
+            $Item->setType($_POST['value']);
         } else {
             $errors[] = "Invalid Type";
         }
@@ -31,14 +31,14 @@ if ($_POST) {
 
 
     if (!count($errors)) {
-        $drink->setName($_POST['name']);
-        $drink->setDescription($_POST['description']);
-        $drink->setCost($cost);
+        $Item->setName($_POST['name']);
+        $Item->setDescription($_POST['description']);
+        $Item->setCost($cost);
 
-        $name = $drink->getName();
-        $description = $drink->getDescription();
-        $cost = $drink->getCost();
-        $type = $drink->getType();
+        $name = $Item->getName();
+        $description = $Item->getDescription();
+        $cost = $Item->getCost();
+        $type = $Item->getType();
 
         $param = [
             'name' => $name,
@@ -50,10 +50,10 @@ if ($_POST) {
         $menu->addRows($param);
 
         $item_added = [
-            'name' => $drink->getName(),
-            'description' => $drink->getDescription(),
-            'cost' => $drink->getCost(),
-            'type' => $drink->getType()
+            'name' => $Item->getName(),
+            'description' => $Item->getDescription(),
+            'cost' => $Item->getCost(),
+            'type' => $Item->getType()
         ];
     }
 }
