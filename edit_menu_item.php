@@ -20,13 +20,25 @@
                 $id = $_POST['update'];
                 $name = trim($_POST['name']);
                 $description = $_POST['description'];
-                $cost = $_POST['cost'];
+                $cost = floatval($_POST['cost']);
                 $type_id = $_POST['type'];
-            if(!empty($name) && !empty($description) && !empty($cost) && $cost >= 0) {
+
+                if (empty($name)) {
+                    $errors[] = "Invalid Name";
+                }
+
+                if (empty($description)) {
+                    $errors[] = "Invalid Description";
+                }
+
+                if ($cost <= 0) {
+                    $errors[] = "Invalid Cost";
+                }
+
+            if(empty($errors)) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id);
                 header("Location: edit_menu_item.php");
             } else {
-                $errors[] = "Invalid Fields";
                 include "includes/errors.php";
             }
         }
