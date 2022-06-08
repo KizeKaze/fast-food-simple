@@ -53,8 +53,7 @@
                             <label class="input-group-addon" for="name"></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon-description">Name</span>
-                                <input type="text" class="form-control" name="name"
-                                       value='<?= $name ?>'>
+                                <input type="text" class="form-control" name="name" value='<?= $name ?>'>
                             </div>
                         </div>
 
@@ -62,8 +61,7 @@
                             <label class="input-group-addon" for="description"></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon-description">Description</span>
-                                <input id="description" name="description" type="text" class="form-control"
-                                       value="<?= $description ?>">
+                                <input id="description" name="description" type="text" class="form-control" value="<?= $description ?>">
                             </div>
                         </div>
 
@@ -71,7 +69,12 @@
                             <label class="input-group-addon" for="cost"></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon-cost">$</span>
-                                <input id="cost" name="cost" type="text" class="form-control" value="<?= $cost ?>">
+                                <input id="cost" name="cost" type="text" class="form-control"
+                                    <?php if ($cost == 0) : ?>
+                                        value="0.50"
+                                    <?php else : ?>
+                                       value="<?= $cost ?>">
+                                    <?php endif; ?>
                             </div>
                         </div>
                         <div>
