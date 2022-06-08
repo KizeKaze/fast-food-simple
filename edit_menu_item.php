@@ -1,8 +1,7 @@
 <?php include "includes/header.php"; ?>
-<?php include "includes/nav.php" ?>
+<?php include "includes/nav.php";
 
 
-        <?php
 
         if (!$_GET['edit']) {
             header('Location: menu_list.php');
@@ -17,19 +16,19 @@
         $type_id = $result[0]['type_id'];
 
         if(isset($_POST['update']) && $_POST['update']) {
+
                 $id = $_POST['update'];
                 $name = trim($_POST['name']);
                 $description = $_POST['description'];
                 $cost = $_POST['cost'];
                 $type_id = $_POST['type'];
-            if(!empty($name) && !empty($description) && !empty($cost)) {
+            if(!empty($name) && !empty($description) && !empty($cost) && $cost >= 0) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id);
                 header("Location: edit_menu_item.php");
-            } else { ?>
-                    <div class="invalid_fields">
-                        <p>Fields cannot be empty</p>
-                    </div>
-           <?php }
+            } else {
+                $errors[] = "Invalid Fields";
+                include "includes/errors.php";
+            }
         }
         ?>
     <div class="container">
