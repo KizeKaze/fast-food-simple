@@ -69,12 +69,7 @@
                             <label class="input-group-addon" for="cost"></label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon-cost">$</span>
-                                <input id="cost" name="cost" type="text" class="form-control"
-                                    <?php if ($cost == 0) : ?>
-                                        value="0.50"
-                                    <?php else : ?>
-                                       value="<?= $cost ?>">
-                                    <?php endif; ?>
+                                <input id="cost" name="cost" type="text" class="form-control" value="<?= $cost ?>">
                             </div>
                         </div>
                         <div>
