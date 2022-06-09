@@ -44,7 +44,6 @@
         }
         ?>
     <div class="container">
-        <div class='menu_result_div'>
             <div class="card">
                 <div class="card-body">
                     <form action="" method="POST" class="form_index">
