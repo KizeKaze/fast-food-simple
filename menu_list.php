@@ -18,7 +18,7 @@
     $result = $menu->getItems($params);
 
     if (empty($result)) {
-        $errors[] = "<h4>Nothing matched!</h4>";
+        $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
     }
 ?>
 
@@ -26,15 +26,29 @@
         <div class="card">
             <div class="card-body">
                 <form action="menu_list.php" method="post">
-                    <select name="type" class="form-select mb-1">
-                        <option value="0">All</option>
-                        <?php $results = $menu->getType() ?>
-                        <?php foreach ($results as $row) {
-                            echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
-                        } ?>
-                    </select>
-                    <input class="form-text" type="text" name="search" placeholder="Search...">
-                    <input type="submit" name="submit" class="btn btn-primary btn-sm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mb-2">
+                                    <input class="form-control" type="text" name="search" placeholder="Search...">
+                                    <input type="submit" name="submit" class="btn btn-primary btn-sm">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Search By Type</span>
+                                    <select name="type" class="form-select form-select">
+                                        <option value="0">All</option>
+                                        <?php $results = $menu->getType() ?>
+                                        <?php foreach ($results as $row) {
+                                            echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
+                                        } ?>
+                                    </select>
+                                    <input type="submit" name="submit" class="btn btn-primary btn-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
