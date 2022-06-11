@@ -25,3 +25,8 @@ function dd($array, $verbose = false): void
     dump($array, $verbose);
     die;
 }
+
+function sanitize($data)
+{
+ return $data = htmlspecialchars((trim($data)));
+}

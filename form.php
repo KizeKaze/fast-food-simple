@@ -7,6 +7,7 @@ if (isset($errors)) {
     include "includes/errors.php";
 }
 if (isset($item_added)) {
+    $item_added = 'Item added!';
     include "includes/success.php";
 }
 ?>
