@@ -12,7 +12,6 @@ class Query
         $db = Database::getInstance();
 
         $sql = ($data);
-
         try {
             $stmt = $db->prepare($sql);
             $stmt->execute();

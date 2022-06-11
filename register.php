@@ -37,8 +37,7 @@ if($_POST) {
         include "includes/errors.php";
     } else {
 
-        $new_password = password_hash($password, CRYPT_BLOWFISH);
-
+        $new_password = password_hash($password, PASSWORD_DEFAULT);
 
         $User = new \App\Classes\User();
 
@@ -62,11 +61,7 @@ if($_POST) {
     }
 
 }
-
-
-
 ?>
-
     <div class="container">
         <div class="card">
             <div class="card-body">
