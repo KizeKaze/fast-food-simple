@@ -1,5 +1,8 @@
-<?php require 'vendor/autoload.php'; ?>
-<?php $menu = new \App\Classes\Menu(); ?>
+<?php
+session_start();
+require 'vendor/autoload.php'; ?>
+<?php
+$menu = new \App\Classes\Menu(); ?>
 <html lang="en">
 <head>
     <title>Fast Food</title>
