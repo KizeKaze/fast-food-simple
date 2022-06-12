@@ -2,7 +2,6 @@
 <?php include "includes/nav.php" ?>
 
 <?php
-
 if (isset($errors)) {
     include "includes/errors.php";
 }
