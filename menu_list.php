@@ -2,6 +2,7 @@
 <?php include "includes/nav.php" ?>
 
 <?php
+
     $search = null;
     $type = null;
 
