@@ -4,7 +4,7 @@
 
 
         if (!$_GET['edit']) {
-            header('Location: menu_list.php');
+            header('Location: index.php');
         }
 
         $item_id = $_GET['edit'];

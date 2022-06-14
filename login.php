@@ -41,7 +41,8 @@ if($_POST) {
             $_SESSION['email'] = $result[0]['email'];
             $_SESSION['user_role'] = $result[0]['user_role'];
 
-            header("Location: menu_list.php");
+            header("Location: index.php");
+            exit();
 
         }
     }

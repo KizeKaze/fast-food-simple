@@ -8,11 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                    <a class="nav-link" href="index.php">Groceries</a>
                 </li>
+                <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1) : ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="menu_list.php">Menu List</a>
+                    <a class="nav-link" href="add_item.php">Add Item</a>
                 </li>
+                <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
