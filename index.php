@@ -21,7 +21,6 @@
     if (empty($result)) {
         $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
     }
- echo $_SESSION['user_role'];
 ?>
 
     <div class="container lg">
@@ -72,7 +71,11 @@ if (isset($errors)) {
                     <th>Cost</th>
                     <th>Type</th>
                     <th>Quantity</th>
+                    <?php if ($_SESSION['user_role'] == 1) : ?>
                     <th>Options</th>
+                    <?php else : ?>
+                    <th>Cart</th>
+                    <?php endif; ?>
                 </thead>
                 <tbody>
                     <tr>

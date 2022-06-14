@@ -5,7 +5,6 @@
 
 $query = new \App\Classes\Query();
 
-
 if($_POST) {
 
     $username = sanitize($_POST['username']);
