@@ -28,3 +28,14 @@ VALUES ('Drink');
 
 INSERT INTO fast_food.type (type)
 VALUES ('Dessert');
+
+create table fast_food.users
+(
+    user_id       int(10) auto_increment
+        primary key,
+    username      varchar(255)  null,
+    email         varchar(255)  null,
+    password      varchar(255)  null,
+    user_role     int default 0 not null,
+    user_acc_date date          null
+);
