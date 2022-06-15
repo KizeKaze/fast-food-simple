@@ -29,14 +29,14 @@
                 <form action="index.php" method="post">
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <div class="input-group mb-2">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="input-group mb-1">
                                     <input class="form-control" type="text" name="search" placeholder="Search...">
                                     <input type="submit" name="submit" class="btn btn-primary btn-sm">
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="input-group mb-3">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="input-group mb-1">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Search By Type</span>
                                     <select name="type" class="form-select form-select">
                                         <option value="0">All</option>

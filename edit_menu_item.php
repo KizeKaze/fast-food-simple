@@ -38,14 +38,14 @@
             if(empty($errors)) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id);
                 header("Location: edit_menu_item.php");
-            } else {
-                include "includes/errors.php";
             }
         }
         ?>
     <div class="container">
+        <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
+                    <?php include "includes/errors.php"; ?>
                     <form action="" method="POST" class="form_index">
                         <input type="hidden" name="edit" value="<?=$item_id;?>">
                         <div>
@@ -55,7 +55,6 @@
                                 <input type="text" class="form-control" name="name" value='<?= $name ?>'>
                             </div>
                         </div>
-
                         <div>
                             <label class="input-group-addon" for="description"></label>
                             <div class="input-group">
@@ -63,7 +62,6 @@
                                 <input id="description" name="description" type="text" class="form-control" value="<?= $description ?>">
                             </div>
                         </div>
-
                         <div>
                             <label class="input-group-addon" for="cost"></label>
                             <div class="input-group">
@@ -96,4 +94,5 @@
                 </div>
             </div>
         </div>
+    </div>
 <?php include "includes/footer.php"; ?>

@@ -4,7 +4,6 @@
 <?php
 
 if($_POST) {
-
     $query = new \App\classes\Query();
 
     $email = sanitize($_POST['email']);
@@ -18,9 +17,7 @@ if($_POST) {
         $errors[] = 'Invalid password';
     }
 
-    if (isset($errors)) {
-        include "includes/errors.php";
-    } else {
+    if (!isset($errors)) {
         //grab email and hashed password to compare to user entered info
         $result = $query->CustomSQL('SELECT * FROM users WHERE email = ' . '\'' . $email . '\'');
 
@@ -31,9 +28,6 @@ if($_POST) {
 
         if ($email !== $db_email || $verified_pass != true) {
             $errors[] = 'Email or Password not found';
-            if (isset($errors)) {
-                include "includes/errors.php";
-            }
         } else if ($email == $db_email && $verified_pass) {
             $_SESSION['user_id'] = $result[0]['user_id'];
             $_SESSION['username'] = $result[0]['username'];
@@ -54,6 +48,7 @@ if($_POST) {
     <div class="row justify-content-center">
         <div class="card w-50">
             <div class="card-body">
+                <?php  include "includes/errors.php"; ?>
                 <h5 class="card-title text-center align-middle">Login</h5>
                 <hr>
                 <form action="" method="post" class="form_index">
@@ -72,6 +67,7 @@ if($_POST) {
                             <input id="password" name="password" type="password" class="form-control" />
                         </div>
                     </div>
+                    <hr>
                     <button type="submit" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-bag-check-fill" viewBox="0 0 16 16">
