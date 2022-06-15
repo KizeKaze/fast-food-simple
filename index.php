@@ -1,62 +1,123 @@
+<?php include "includes/header.php"; ?>
+<?php include "includes/nav.php" ?>
+
 <?php
-// Includes our namespaces
-require 'vendor/autoload.php';
 
-$menu = new \App\Classes\Menu();
+    $search = null;
+    $type = null;
 
-if ($_POST) {
-    $errors = [];
-    $Item = new \App\Classes\MenuItem();
-
-    if (empty(trim($_POST['name']))) {
-        $errors[] = "Name invalid";
-    }
-    if (empty(trim($_POST['description']))) {
-        $errors[] = "Description invalid";
-    }
-    $cost = floatval($_POST['cost']);
-
-    if ($cost <= 0) {
-        $errors[] = "Cost invalid";
-    }
-    if (isset($_POST['value'])) {
-        $values = $menu->checkType();
-        $verified_type = in_array($_POST['value'], $values);
-        if ($verified_type) {
-            $Item->setType($_POST['value']);
-        } else {
-            $errors[] = "Invalid Type";
-        }
+    if (isset($_POST['submit']) || isset($_POST['type'])) {
+        $type = trim(htmlspecialchars($_POST['type']));
+        $search = trim(htmlspecialchars($_POST['search']));
     }
 
+    $params = [
+        'search' => $search,
+        'type' => $type
+    ];
 
-    if (!count($errors)) {
-        $Item->setName($_POST['name']);
-        $Item->setDescription($_POST['description']);
-        $Item->setCost($cost);
+    $result = $menu->getItems($params);
 
-        $name = $Item->getName();
-        $description = $Item->getDescription();
-        $cost = $Item->getCost();
-        $type = $Item->getType();
-
-        $param = [
-            'name' => $name,
-            'description' => $description,
-            'cost' => $cost,
-            'type' => $type
-        ];
-
-        $menu->addRows($param);
-
-        $item_added = [
-            'name' => $Item->getName(),
-            'description' => $Item->getDescription(),
-            'cost' => $Item->getCost(),
-            'type' => $Item->getType()
-        ];
+    if (empty($result)) {
+        $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
     }
-}
+?>
 
-// Display simple form for user
-require 'form.php';
+    <div class="container lg">
+        <div class="card">
+            <div class="card-body">
+                <form action="index.php" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="input-group mb-1">
+                                    <input class="form-control" type="text" name="search" placeholder="Search...">
+                                    <input type="submit" name="submit" class="btn btn-primary btn-sm">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Search By Type</span>
+                                    <select name="type" class="form-select form-select">
+                                        <option value="0">All</option>
+                                        <?php $results = $menu->getType() ?>
+                                        <?php foreach ($results as $row) {
+                                            echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
+                                        } ?>
+                                    </select>
+                                    <input type="submit" name="submit" class="btn btn-primary btn-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php
+if (isset($errors)) {
+    include "includes/errors.php";
+} else { ?>
+
+    <div class='container'>
+        <div class="table-responsive">
+            <table class="table table-light table-bordered table-hover table-responsive">
+                <thead>
+                <?php if ($_SESSION['user_role'] == 1) : ?>
+                    <th>ID</th>
+                <?php endif; ?>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Cost</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <?php if ($_SESSION['user_role'] == 1) : ?>
+                    <th>Options</th>
+                    <?php else : ?>
+                    <th>Cart</th>
+                    <?php endif; ?>
+                </thead>
+                <tbody>
+                    <tr>
+<?php } ?>
+                    <?php foreach ($result as $row) {
+                        $id = $row['id'];
+                        $name = $row['name'];
+                        $description = $row['description'];
+                        $cost = $row['cost'];
+                        $type = $row['type'];
+                    ?>
+                        <?php if ($_SESSION['user_role'] == 1) : ?>
+                            <td><?= $id ?></td>
+                        <?php endif; ?>
+                        <td><?= $name ?></td>
+                        <td><textarea class="form-control" readonly><?=$description ?></textarea></td>
+                        <td><?= $cost ?></td>
+                        <td><?= $type ?></td>
+                        <td>
+                            <select class="form-select" aria-label="Quantity select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <?php if($_SESSION['user_role'] == 1) : ?>
+                        <form action="edit_menu_item.php" method="get">
+                            <td>
+                                <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
+                            </td>
+                        </form>
+                        <?php elseif ($_SESSION['user_role'] == 0) :  ?>
+                        <td>
+                            <button class="btn btn-primary">Add</button>
+                        </td>
+                        <?php endif; ?>
+                        </tr>
+                        <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php include "includes/footer.php"; ?>
