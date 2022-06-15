@@ -7,7 +7,7 @@
             $id = $_GET['delete'];
 
             $query = new \App\Classes\Query();
-            $query->CustomSQL('DELETE FROM item WHERE id =' . '\'' . $id . '\'');
+            $query->CustomSQL('DELETE FROM item WHERE id =?', $id);
         }
     }
 
