@@ -47,7 +47,7 @@ if (isset($errors)) {
             <th>Type</th>
             <th>Quantity</th>
             <?php if ($_SESSION['user_role'] == 1) : ?>
-                <th>Options</th>
+                <th colspan="2">Options</th>
             <?php else : ?>
                 <th>Cart</th>
             <?php endif; ?>
@@ -82,6 +82,11 @@ if (isset($errors)) {
                     <form action="../../edit_menu_item.php" method="get">
                         <td>
                             <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
+                        </td>
+                    </form>
+                    <form action="../../index.php" method="get">
+                        <td>
+                            <button type="submit" class="btn btn-primary" name="delete" value=<?= $id ?>>Delete</button>
                         </td>
                     </form>
                 <?php elseif ($_SESSION['user_role'] == 0) :  ?>
