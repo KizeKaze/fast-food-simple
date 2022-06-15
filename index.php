@@ -87,35 +87,35 @@ if (isset($errors)) {
                         $cost = $row['cost'];
                         $type = $row['type'];
                     ?>
-                    <?php if ($_SESSION['user_role'] == 1) : ?>
-                    <td><?= $id ?></td>
-                    <?php endif; ?>
-                    <td><?= $name ?></td>
-                    <td><textarea class="form-control" readonly><?=$description; ?></textarea></td>
-                    <td><?= $cost ?></td>
-                    <td><?= $type ?></td>
-                    <td>
-                        <select class="form-select" aria-label="Quantity select">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </td>
-                    <?php if($_SESSION['user_role'] == 1) : ?>
-                    <form action="edit_menu_item.php" method="get">
+                        <?php if ($_SESSION['user_role'] == 1) : ?>
+                            <td><?= $id ?></td>
+                        <?php endif; ?>
+                        <td><?= $name ?></td>
+                        <td><textarea class="form-control" readonly><?=$description ?></textarea></td>
+                        <td><?= $cost ?></td>
+                        <td><?= $type ?></td>
                         <td>
-                            <button type="submit" class="btn btn-primary" name="edit" value=<?= $id; ?>>Edit</button>
+                            <select class="form-select" aria-label="Quantity select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </td>
-                    </form>
-                    <?php elseif ($_SESSION['user_role'] == 0) :  ?>
-                    <td>
-                    <button class="btn btn-primary">Add</button>
-                    </td>
-                    <?php endif; ?>
-                    </tr>
-                    <?php } ?>
+                        <?php if($_SESSION['user_role'] == 1) : ?>
+                        <form action="edit_menu_item.php" method="get">
+                            <td>
+                                <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
+                            </td>
+                        </form>
+                        <?php elseif ($_SESSION['user_role'] == 0) :  ?>
+                        <td>
+                            <button class="btn btn-primary">Add</button>
+                        </td>
+                        <?php endif; ?>
+                        </tr>
+                        <?php } ?>
                 </tbody>
             </table>
         </div>
