@@ -7,7 +7,7 @@ use PDO;
 class Query
 {
 
-    public function CustomSQL($data = '', $var)
+    public function CustomSQL($data = '', $bindparam)
     {
         $db = Database::getInstance();
 
@@ -15,7 +15,7 @@ class Query
 
         try {
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(1, $var);
+            $stmt->bindParam(1, $bindparam);
 
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

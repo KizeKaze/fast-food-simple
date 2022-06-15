@@ -86,7 +86,7 @@ if (isset($errors)) {
                     </form>
                     <form action="../../index.php" method="get">
                         <td>
-                            <button type="submit" class="btn btn-primary" name="delete" value=<?= $id ?>>Delete</button>
+                            <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
                         </td>
                     </form>
                 <?php elseif ($_SESSION['user_role'] == 0) :  ?>
