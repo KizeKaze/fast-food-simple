@@ -29,7 +29,6 @@ if ($_POST) {
         }
     }
 
-
     if (!count($errors)) {
         $Item->setName($_POST['name']);
         $Item->setDescription($_POST['description']);

@@ -1,8 +1,6 @@
 <?php include "includes/header.php"; ?>
 <?php include "includes/nav.php";
 
-
-
         if (!$_GET['edit']) {
             header('Location: index.php');
         }
@@ -47,7 +45,7 @@
                 <div class="card-body">
                     <?php include "includes/errors.php"; ?>
                     <form action="" method="POST" class="form_index">
-                        <input type="hidden" name="edit" value="<?=$item_id;?>">
+                        <input type="hidden" name="edit" value="<?= $item_id ?>">
                         <div>
                             <label class="input-group-addon" for="name"></label>
                             <div class="input-group">
@@ -79,17 +77,17 @@
                                     $currentType = $type_id;
                                     $select = "selected='selected'";
                                     foreach ($types as $type) { ?>
-                                    <?php    if ($type['type_id'] == $currentType) { ?>
+                                        <?php if ($type['type_id'] == $currentType) { ?>
                                             <option <?=$select?> value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
-                                    <?php    } else { ?>
+                                        <?php } else { ?>
                                             <option value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
-                                    <?php     } ?>
+                                        <?php } ?>
                                     <?php } ?>
                                 </select>
                             </div>
                         </div>
                         <hr>
-                        <button type="submit" class="btn btn-primary" name="update" value=<?=$id ?>>Update</button>
+                        <button type="submit" class="btn btn-primary" name="update" value=<?= $id ?>>Update</button>
                     </form>
                 </div>
             </div>

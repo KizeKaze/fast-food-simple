@@ -6,7 +6,6 @@
 $query = new \App\Classes\Query();
 
 if($_POST) {
-
     $username = sanitize($_POST['username']);
     $email = sanitize($_POST['email']);
     $password = sanitize($_POST['password']);
@@ -51,7 +50,6 @@ if($_POST) {
 
         $item_added = 'Account created!';
     }
-
 }
 ?>
     <div class="container">
