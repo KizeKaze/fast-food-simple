@@ -1,10 +1,8 @@
 <?php include "includes/header.php"; ?>
 <?php include "includes/nav.php";
 
-
-
         if (!$_GET['edit']) {
-            header('Location: menu_list.php');
+            header('Location: index.php');
         }
 
         $item_id = $_GET['edit'];
@@ -38,16 +36,16 @@
             if(empty($errors)) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id);
                 header("Location: edit_menu_item.php");
-            } else {
-                include "includes/errors.php";
             }
         }
         ?>
     <div class="container">
+        <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
+                    <?php include "includes/errors.php"; ?>
                     <form action="" method="POST" class="form_index">
-                        <input type="hidden" name="edit" value="<?=$item_id;?>">
+                        <input type="hidden" name="edit" value="<?= $item_id ?>">
                         <div>
                             <label class="input-group-addon" for="name"></label>
                             <div class="input-group">
@@ -55,7 +53,6 @@
                                 <input type="text" class="form-control" name="name" value='<?= $name ?>'>
                             </div>
                         </div>
-
                         <div>
                             <label class="input-group-addon" for="description"></label>
                             <div class="input-group">
@@ -63,7 +60,6 @@
                                 <input id="description" name="description" type="text" class="form-control" value="<?= $description ?>">
                             </div>
                         </div>
-
                         <div>
                             <label class="input-group-addon" for="cost"></label>
                             <div class="input-group">
@@ -81,19 +77,20 @@
                                     $currentType = $type_id;
                                     $select = "selected='selected'";
                                     foreach ($types as $type) { ?>
-                                    <?php    if ($type['type_id'] == $currentType) { ?>
+                                        <?php if ($type['type_id'] == $currentType) { ?>
                                             <option <?=$select?> value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
-                                    <?php    } else { ?>
+                                        <?php } else { ?>
                                             <option value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
-                                    <?php     } ?>
+                                        <?php } ?>
                                     <?php } ?>
                                 </select>
                             </div>
                         </div>
                         <hr>
-                        <button type="submit" class="btn btn-primary" name="update" value=<?=$id ?>>Update</button>
+                        <button type="submit" class="btn btn-primary" name="update" value=<?= $id ?>>Update</button>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
 <?php include "includes/footer.php"; ?>
