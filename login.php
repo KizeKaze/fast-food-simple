@@ -18,8 +18,15 @@ if($_POST) {
     }
 
     if (!isset($errors)) {
+
+        $user = 'Killians';
+        $params = [
+            'username' => $user,
+            'email' => $email
+        ];
+
         //grab email and hashed password to compare to user entered info
-        $result = $query->CustomSQL('SELECT * FROM users WHERE email =?', $email );
+        $result = $query->CustomSQL('SELECT * FROM users WHERE email = :email AND username = :username', $params );
 
         $db_email = $result[0]['email'];
         $db_password = $result[0]['password'];
