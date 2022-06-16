@@ -3,8 +3,6 @@
 
 <?php
 
-$query = new \App\Classes\Query();
-
 if($_POST) {
     $username = sanitize($_POST['username']);
     $email = sanitize($_POST['email']);
@@ -46,7 +44,7 @@ if($_POST) {
             'password' => $User->getPassword()
         ];
 
-        $query->insert('users', $param);
+        $User->insert('users', $param);
 
         $item_added = 'Account created!';
     }
