@@ -2,6 +2,14 @@
 <?php include "includes/nav.php" ?>
 
 <?php
+    if(isset($_GET['delete'])){
+        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
+            $id = $_GET['delete'];
+
+            $query = new \App\Classes\Query();
+            $query->CustomSQL('DELETE FROM item WHERE id =?', $id);
+        }
+    }
 
     $search = null;
     $type = null;

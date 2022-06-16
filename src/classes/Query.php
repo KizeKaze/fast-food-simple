@@ -7,13 +7,16 @@ use PDO;
 class Query
 {
 
-    public function CustomSQL($data = '')
+    public function CustomSQL($data = '', $bindparam)
     {
         $db = Database::getInstance();
 
         $sql = ($data);
+
         try {
             $stmt = $db->prepare($sql);
+            $stmt->bindParam(1, $bindparam);
+
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {

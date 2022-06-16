@@ -19,7 +19,7 @@ if($_POST) {
 
     if (!isset($errors)) {
         //grab email and hashed password to compare to user entered info
-        $result = $query->CustomSQL('SELECT * FROM users WHERE email = ' . '\'' . $email . '\'');
+        $result = $query->CustomSQL('SELECT * FROM users WHERE email =?', $email );
 
         $db_email = $result[0]['email'];
         $db_password = $result[0]['password'];
