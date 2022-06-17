@@ -4,13 +4,13 @@
         $type = sanitize($_GET['edit']);
         $id = sanitize($_GET['id']);
     ?>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-12">
                 <form action="types.php" method="post">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="edit_type">Edit Type</span>
                         <input type="hidden" name="id" value="<?= $id ?>" >
                         <input class="form-control" type="text" name="type_edit" value="<?= $type ?>">
-                        <button class="btn btn-success">Add</button>
+                        <button class="btn btn-success">Edit</button>
                     </div>
                 </form>
             </div>

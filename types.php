@@ -2,6 +2,11 @@
 include "includes/header.php";
 include "includes/nav.php";
 
+if(!isset($_SESSION['user_role'])) {
+    header("Location: index.php");
+    exit();
+}
+
 if(isset($_GET['delete'])) {
     if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
         $id = $_GET['delete'];
@@ -37,13 +42,18 @@ if(isset($_GET['add'])) {
 if(isset($_POST['type_edit'])) {
     $query = new \App\Classes\Query();
     $id = sanitize($_POST['id']);
-    $param = [
-        'type' => sanitize($_POST['type_edit'])
-    ];
-    $query->CustomSQL('UPDATE type SET type = :type WHERE type_id = ' . $id . ' ', $param);
-}
+    $type = sanitize($_POST['type_edit']);
+
+    if(empty($type)) {
+        $errors[] = 'Edit field is blank, edit rejected';
+    }else {
+        $param = [
+            'type' => $type
+        ];
+        $query->CustomSQL('UPDATE type SET type = :type WHERE type_id = ' . $id . ' ', $param);
+        }
+    }
 
 $types = $menu->getTypes();
-
 
 include 'src/forms/types_form.php';
