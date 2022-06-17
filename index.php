@@ -6,8 +6,12 @@
         if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
             $id = $_GET['delete'];
 
+            $params = [
+            'id' => $id
+            ];
+
             $query = new \App\Classes\Query();
-            $query->CustomSQL('DELETE FROM item WHERE id =?', $id);
+            $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
         }
     }
 
