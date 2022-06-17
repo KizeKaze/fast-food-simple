@@ -7,6 +7,7 @@ class User
     private string $username = '';
     private string $email = '';
     private string $password = '';
+    private string $today = '';
     private int $user_role = 0;
 
     public function __construct() {}
@@ -20,6 +21,17 @@ class User
     {
 
         $this->username = $username;
+    }
+
+    public function getDate() : string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): void
+    {
+
+        $this->date = $date;
     }
 
     public function getEmail() : string
@@ -51,6 +63,15 @@ class User
     public function setUserrole(int $user_role): void
     {
         $this->user_role = $user_role;
+    }
+
+    public function insert($parameters)
+    {
+
+        $query = new \App\Classes\Query();
+
+        $query->insert('users', $parameters);
+
     }
 
 
