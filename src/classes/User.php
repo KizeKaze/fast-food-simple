@@ -65,7 +65,7 @@ class User
         $this->user_role = $user_role;
     }
 
-    public function insert($table, $parameters)
+    public function insert($parameters)
     {
 
         $query = new \App\Classes\Query();

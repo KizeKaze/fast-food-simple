@@ -44,7 +44,7 @@ if($_POST) {
             'password' => $User->getPassword()
         ];
 
-        $User->insert('users', $param);
+        $User->insert($param);
 
         $item_added = 'Account created!';
     }
