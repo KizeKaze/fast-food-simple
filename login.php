@@ -18,8 +18,13 @@ if($_POST) {
     }
 
     if (!isset($errors)) {
+
+        $params = [
+            'email' => $email
+        ];
+
         //grab email and hashed password to compare to user entered info
-        $result = $query->CustomSQL('SELECT * FROM users WHERE email =?', $email );
+        $result = $query->CustomSQL('SELECT * FROM users WHERE email = :email', $params );
 
         $db_email = $result[0]['email'];
         $db_password = $result[0]['password'];
@@ -28,7 +33,7 @@ if($_POST) {
 
         if ($email !== $db_email || $verified_pass != true) {
             $errors[] = 'Email or Password not found';
-        } else if ($email == $db_email && $verified_pass) {
+        } else {
             $_SESSION['user_id'] = $result[0]['user_id'];
             $_SESSION['username'] = $result[0]['username'];
             $_SESSION['email'] = $result[0]['email'];
