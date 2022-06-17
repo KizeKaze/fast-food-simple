@@ -26,7 +26,7 @@ class Menu
         $db = Database::getInstance();
 
         $sql = "SELECT * FROM item i 
-                    LEFT JOIN type t ON i.type_id = t.type_id WHERE 1 = 1";
+                    INNER JOIN type t ON i.type_id = t.type_id WHERE 1 = 1";
 
         if ($search) {
             $sql.= " AND name like :search";
