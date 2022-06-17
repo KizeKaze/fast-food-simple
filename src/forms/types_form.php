@@ -1,6 +1,6 @@
 <div class='container'>
     <div class="row justify-content-center">
-        <div class="card w-50">
+        <div class="card col-sm-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
                 <div class="row">
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="card w-50">
+        <div class="card col-sm-6">
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
                     <thead>
