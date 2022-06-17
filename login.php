@@ -19,7 +19,6 @@ if($_POST) {
 
     if (!isset($errors)) {
 
-        $user = 'Killians';
         $params = [
             'username' => $user,
             'email' => $email
