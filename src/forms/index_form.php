@@ -48,6 +48,7 @@ if (isset($errors)) {
             <th>Quantity</th>
             <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
                 <th colspan="2">Options</th>
+                <th>Cart</th>
             <?php elseif (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 0)) : ?>
                 <th>Cart</th>
             <?php endif; ?>
@@ -89,6 +90,9 @@ if (isset($errors)) {
                             <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
                         </td>
                     </form>
+                    <td>
+                        <button class="btn btn-primary">Add</button>
+                    </td>
                 <?php elseif (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 0)) :  ?>
                     <td>
                         <button class="btn btn-primary">Add</button>
