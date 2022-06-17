@@ -13,9 +13,7 @@
                             </div>
                         </form>
                     </div>
-                    <?php if(isset($_GET['edit'])) : ?>
-                        <?php include 'src/forms/type_edit_form.php' ?>
-                    <?php endif; ?>
+                    <?php include 'src/forms/type_edit_form.php' ?>
                 </div>
             </div>
         </div>

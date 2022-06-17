@@ -46,13 +46,13 @@ if(isset($_POST['type_edit'])) {
 
     if(empty($type)) {
         $errors[] = 'Edit field is blank, edit rejected';
-    }else {
+    } else {
         $param = [
             'type' => $type
         ];
         $query->CustomSQL('UPDATE type SET type = :type WHERE type_id = ' . $id . ' ', $param);
-        }
     }
+}
 
 $types = $menu->getTypes();
 
