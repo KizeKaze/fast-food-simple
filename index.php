@@ -7,7 +7,7 @@
             $id = $_GET['delete'];
 
             $params = [
-            'id' => $id
+                'id' => $id
             ];
 
             $query = new \App\Classes\Query();
