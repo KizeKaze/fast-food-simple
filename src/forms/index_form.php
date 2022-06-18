@@ -38,7 +38,7 @@ if (isset($errors)) {
     <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
-            <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
+            <?php if ($User->isAdmin()) : ?>
                 <th>ID</th>
             <?php endif; ?>
             <th>Name</th>
@@ -46,9 +46,10 @@ if (isset($errors)) {
             <th>Cost</th>
             <th>Type</th>
             <th>Quantity</th>
-            <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
+            <?php if ($User->isAdmin()) : ?>
                 <th colspan="2">Options</th>
-            <?php elseif (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 0)) : ?>
+                <th>Cart</th>
+            <?php elseif ($User->isAdmin()) : ?>
                 <th>Cart</th>
             <?php endif; ?>
             </thead>
@@ -62,7 +63,7 @@ if (isset($errors)) {
                 $cost = $row['cost'];
                 $type = $row['type'];
                 ?>
-                <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
+                <?php if ($User->isAdmin()) : ?>
                     <td><?= $id ?></td>
                 <?php endif; ?>
                 <td><?= $name ?></td>
@@ -78,7 +79,7 @@ if (isset($errors)) {
                         <option value="5">5</option>
                     </select>
                 </td>
-                <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
+                <?php if ($User->isAdmin()) : ?>
                     <form action="../../edit_menu_item.php" method="get">
                         <td>
                             <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
@@ -89,7 +90,10 @@ if (isset($errors)) {
                             <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
                         </td>
                     </form>
-                <?php elseif (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 0)) :  ?>
+                    <td>
+                        <button class="btn btn-primary">Add</button>
+                    </td>
+                <?php elseif ($User->isAdmin()) :  ?>
                     <td>
                         <button class="btn btn-primary">Add</button>
                     </td>

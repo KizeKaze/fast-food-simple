@@ -6,6 +6,18 @@ use PDO;
 
 class Menu
 {
+
+    public function getTypes(): array
+    {
+        $db = Database::getInstance();
+
+        $sql = "SELECT * FROM type";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
     public function getItems($params): array
     {
         $search = $params['search'];
