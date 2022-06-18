@@ -2,6 +2,11 @@
 <?php include "includes/nav.php" ?>
 
 <?php
+    //if cart exists or not
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'];
+    }
+
     if(isset($_GET['delete'])){
         if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
             $id = $_GET['delete'];
