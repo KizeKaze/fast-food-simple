@@ -39,3 +39,12 @@ create table fast_food.users
     user_role     int default 0 not null,
     user_acc_date date          null
 );
+
+create table cart
+(
+    user_id int not null,
+    item_id int not null,
+    qty int not null,
+    constraint cart_pk
+    primary key (user_id, item_id)
+);
