@@ -48,3 +48,16 @@ create table cart
     constraint cart_pk
     primary key (user_id, item_id)
 );
+
+create table orders
+(
+    order_id int auto_increment,
+    user_id int not null,
+    type_id int not null,
+    item_name varchar(255) not null,
+    cost int not null,
+    qty int not null,
+    purchase_date DATE not null,
+    constraint orders_pk
+        primary key (order_id)
+);

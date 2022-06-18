@@ -17,6 +17,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="types.php">Types</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.php">Shopping Cart</a>
+                    </li>
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                 <li class="nav-item">
