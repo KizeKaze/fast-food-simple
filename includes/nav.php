@@ -14,6 +14,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="add_item.php">Add Item</a>
                 </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="types.php">Types</a>
+                    </li>
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                 <li class="nav-item">

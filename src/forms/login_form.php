@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="card w-50">
+        <div class="card col-sm-6">
             <div class="card-body">
                 <?php  include "includes/errors.php"; ?>
                 <h5 class="card-title text-center align-middle">Login</h5>
