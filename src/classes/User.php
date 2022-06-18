@@ -73,6 +73,4 @@ class User
         $query->insert('users', $parameters);
 
     }
-
-
 }
