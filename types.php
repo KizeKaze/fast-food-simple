@@ -30,12 +30,16 @@ if(isset($_GET['add'])) {
     if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1){
         $type = sanitize($_GET['add']);
 
-        $param = [
-            'type' => $type
-        ];
-        $query = new \App\Classes\Query();
+        if(empty($type)) {
+            $errors[] = 'Add input is empty';
+        } else {
+            $param = [
+                'type' => $type
+            ];
+            $query = new \App\Classes\Query();
 
-        $query->insert('type', $param);
+            $query->insert('type', $param);
+        }
     }
 }
 

@@ -38,7 +38,7 @@ if (isset($errors)) {
     <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
-            <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
+            <?php if ($User->isAdmin()) : ?>
                 <th>ID</th>
             <?php endif; ?>
             <th>Name</th>
@@ -46,7 +46,7 @@ if (isset($errors)) {
             <th>Cost</th>
             <th>Type</th>
             <th>Quantity</th>
-            <?php if (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 1)) : ?>
+            <?php if ($User->isAdmin()) : ?>
                 <th colspan="2">Options</th>
                 <th>Cart</th>
             <?php elseif (isset($_SESSION['user_role']) && ($_SESSION['user_role'] == 0)) : ?>

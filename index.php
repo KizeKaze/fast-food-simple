@@ -29,6 +29,7 @@
     ];
 
     $result = $menu->getItems($params);
+    $User = new \App\Classes\User();
 
     if (empty($result)) {
         $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
