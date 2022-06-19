@@ -1,4 +1,6 @@
-<?php include "includes/header.php"; ?>
+<?php
+
+include "includes/header.php"; ?>
 <?php include "includes/nav.php" ?>
 
 <?php
@@ -53,7 +55,13 @@
             'grand_total' => $grand_total
         ];
 
-        $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
+        // need to foreach through shoppingcart and format an empty string and append to it and once shoppingcart is done
+        // hand it itno the SQL statement, make sure sql is not inside of loop.
+        //eg ('','',''.'')
+
+
+
+       $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
 
         }
 

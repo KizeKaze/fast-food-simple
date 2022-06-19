@@ -83,6 +83,9 @@ class User
     }
 
     public function loggedIn() {
-        return $_SESSION['user_id'] == true;
+        if (isset($_SESSION['user_role'])) {
+            return $_SESSION['user_role'] == true;
+        }
+        return false;
     }
 }
