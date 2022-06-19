@@ -1,8 +1,12 @@
 <div class='container'>
     <div class="row justify-content-center">
         <div class="card col-md-6">
-            <?php include "includes/success.php"; ?>
-            <div class="table-responsive">
+
+                <?php
+                include "includes/success.php";
+                ?>
+
+                <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
                     <thead>
                     <tr>
@@ -55,6 +59,9 @@
                     <?php } ?>
                     </tbody>
                 </table>
+                    <?php if (isset($errors)) : ?>
+                        <?php include "includes/errors.php"; ?>
+                    <?php else : ?>
                 <form action="" method="POST">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="purchase">Grand Total $</span>
@@ -62,9 +69,11 @@
                         <button class="btn btn-success" name="purchase">Purchase</button>
                     </div>
                 </form>
+                    <?php endif; ?>
             </div>
         </div>
     </div>
 </div>
+
 
 <?php include "includes/footer.php"; ?>
