@@ -43,7 +43,9 @@
                                 </form>
                             </td>
                         <td><?= ($qty * $cost) ?></td>
-                        <?php $total += ($qty * $cost) ?>
+                        <?php
+                            $total += ($qty * $cost);
+                        ?>
                         <form action="" method="get">
                             <td>
                                 <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
@@ -55,7 +57,7 @@
                 </table>
                 <form action="" method="POST">
                     <div class="input-group mb-1">
-                        <span class="input-group-text" id="purchase">Grand Total</span>
+                        <span class="input-group-text" id="purchase">Grand Total $</span>
                         <input class="form-control" type="text" name="grand_total" value="<?= $total ?>" readonly>
                         <button class="btn btn-success" name="purchase">Purchase</button>
                     </div>

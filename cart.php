@@ -37,17 +37,27 @@
         }
     }
 
-    if ($_POST) {
-
-    }
-
-
     $query = new \App\classes\Query();
     $params = [
         'user_id' => $_SESSION['user_id'],
     ];
 
     $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
+
+
+    if ($_POST) {
+
+        $grand_total = sanitize($_POST['grand_total']);
+        $params = [
+            'user_id' => $_SESSION['user_id'],
+            'grand_total' => $grand_total
+        ];
+
+        $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
+
+        }
+
+
 
     $total = 0;
 include 'src/forms/cart_form.php';
