@@ -8,6 +8,7 @@ include "includes/header.php"; ?>
         header('Location: index.php');
     }
 
+
     if (isset($_GET['qty'])) {
         $query = new \App\classes\Query();
         $id = sanitize($_GET['id']);
@@ -55,15 +56,37 @@ include "includes/header.php"; ?>
             'grand_total' => $grand_total
         ];
 
+    //dd($shoppingcart);
         // need to foreach through shoppingcart and format an empty string and append to it and once shoppingcart is done
         // hand it itno the SQL statement, make sure sql is not inside of loop.
         //eg ('','',''.'')
 
-
-
        $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
 
-        }
+
+       $params = [ 'user_id' => $_SESSION['user_id']];
+
+       $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
+       $order_id = $result[0]['order_id'];
+
+
+        $params = [
+            'order_id' => $order_id
+        ];
+
+       foreach ($shoppingcart as $key => $value) {
+
+            $params[] = $value['user_id'];
+            $params[] = $value['item_id'];
+            $params[] = $value['name'];
+            $params[] = $value['cost'];
+            $params[] = $value['qty'];
+       }
+
+
+        $query->CustomSQL('INSERT INTO order_item (order_id, user_id, item_id, item_name, cost, qty) VALUES (:order_id, :user_id, :item_id, :item_name, :cost, :qty)', $params);
+
+    }
 
 
 
