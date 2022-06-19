@@ -50,7 +50,7 @@ if (isset($errors)) {
                 <th colspan="2">Options</th>
                 <th>Quantity</th>
                 <th>Cart</th>
-            <?php elseif ($User->isAdmin()) : ?>
+            <?php elseif ($User->loggedIn()) : ?>
                 <th>Quantity</th>
                 <th>Cart</th>
             <?php endif; ?>
@@ -97,7 +97,18 @@ if (isset($errors)) {
                             <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
                         </td>
                     </form>
-                <?php elseif ($User->isAdmin()) :  ?>
+                <?php elseif ($User->loggedIn()) :  ?>
+                    <form action="" method="get">
+                        <td>
+                            <select class="form-select" aria-label="Quantity select" name="qty">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                    </form>
                     <form action="" method="get">
                         <td>
                             <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>

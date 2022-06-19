@@ -7,7 +7,6 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
                         <th>Cost</th>
                         <th colspan="2">Quantity</th>
                         <th>Total Cost</th>
@@ -21,11 +20,9 @@
                         $id = $cart['id'];
                         $name = $cart['name'];
                         $qty = $cart['qty'];
-                        $desc = $cart['description'];
                         $cost = $cart['cost'];
                         ?>
                         <td><?= $name ?></td>
-                        <td><?= $desc ?></td>
                         <td><?= $cost ?></td>
                         <td>
                             <form action="" method="get">
@@ -56,11 +53,11 @@
                     <?php } ?>
                     </tbody>
                 </table>
-                <form action="" method="GET">
+                <form action="" method="POST">
                     <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon-type">Grand Total</span>
-                        <input class="form-control" type="text" name="add" value="<?= $total ?>" readonly>
-                        <button class="btn btn-success">Purchase</button>
+                        <span class="input-group-text" id="purchase">Grand Total</span>
+                        <input class="form-control" type="text" name="grand_total" value="<?= $total ?>" readonly>
+                        <button class="btn btn-success" name="purchase">Purchase</button>
                     </div>
                 </form>
             </div>
