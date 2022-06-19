@@ -49,15 +49,23 @@ create table cart
     primary key (user_id, item_id)
 );
 
-create table orders
+create table order_complete
 (
-    order_id int auto_increment,
-    user_id int not null,
-    type_id int not null,
-    item_name varchar(255) not null,
-    cost int not null,
-    qty int not null,
-    purchase_date DATE not null,
-    constraint orders_pk
-        primary key (order_id)
+    order_id       int auto_increment
+        primary key,
+    user_id        int          not null,
+    date_purchased date         not null,
+    grand_total    float(11, 2) not null
 );
+
+create table order_item
+(
+    order_id  int          not null,
+    user_id   int          not null,
+    item_id   int          not null,
+    item_name varchar(255) not null,
+    cost      int          not null,
+    qty       int          not null,
+    primary key (order_id, user_id, item_id)
+);
+
