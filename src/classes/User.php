@@ -77,12 +77,12 @@ class User
     public function isAdmin()
     {
         if(isset($_SESSION['user_role'])) {
-            if($_SESSION['user_role'] == 1) {
-                return true;
-            } else {
-                return false;
-            }
+            return $_SESSION['user_role'] == 1;
         }
         return false;
+    }
+
+    public function loggedIn() {
+        return $_SESSION['user_id'] == true;
     }
 }
