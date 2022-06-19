@@ -27,6 +27,7 @@
                 </div>
             </form>
             <?php include "includes/success.php"; ?>
+            <?php include "includes/purchase.php"; ?>
         </div>
     </div>
 </div>
@@ -108,8 +109,6 @@ if (isset($errors)) {
                                 <option value="5">5</option>
                             </select>
                         </td>
-                    </form>
-                    <form action="" method="get">
                         <td>
                             <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
                         </td>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Classes\Database;
+
 include "includes/header.php"; ?>
 <?php include "includes/nav.php" ?>
 
@@ -7,7 +9,6 @@ include "includes/header.php"; ?>
     if (empty($_SESSION['user_id'])) {
         header('Location: index.php');
     }
-
 
     if (isset($_GET['qty'])) {
         $query = new \App\classes\Query();
@@ -26,7 +27,7 @@ include "includes/header.php"; ?>
 
     if (isset($_GET['delete'])) {
         $User = new  \App\classes\User();
-        if ($User->isAdmin()) {
+        if ($User->loggedIn()) {
             $id = $_GET['delete'];
 
             $params = [
@@ -47,19 +48,22 @@ include "includes/header.php"; ?>
 
     $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
 
+    $params = ['user_id' => $_SESSION['user_id']];
+    $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
+
 
     if ($_POST) {
+        if (($_POST['grand_total'] == 0)) {
+            header('Location: index.php');
+            exit;
+        }
 
+        $db = Database::getinstance();
         $grand_total = sanitize($_POST['grand_total']);
         $params = [
             'user_id' => $_SESSION['user_id'],
             'grand_total' => $grand_total
         ];
-
-    //dd($shoppingcart);
-        // need to foreach through shoppingcart and format an empty string and append to it and once shoppingcart is done
-        // hand it itno the SQL statement, make sure sql is not inside of loop.
-        //eg ('','',''.'')
 
        $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
 
@@ -68,27 +72,26 @@ include "includes/header.php"; ?>
 
        $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
        $order_id = $result[0]['order_id'];
+       $user_id = $_SESSION['user_id'];
 
+        $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
+        FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
+        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
 
-        $params = [
-            'order_id' => $order_id
-        ];
+        $stmt = $db->prepare($sql);
 
-       foreach ($shoppingcart as $key => $value) {
+        $stmt->execute();
+        $query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
 
-            $params[] = $value['user_id'];
-            $params[] = $value['item_id'];
-            $params[] = $value['name'];
-            $params[] = $value['cost'];
-            $params[] = $value['qty'];
-       }
+        $_SESSION['purchase'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
 
-
-        $query->CustomSQL('INSERT INTO order_item (order_id, user_id, item_id, item_name, cost, qty) VALUES (:order_id, :user_id, :item_id, :item_name, :cost, :qty)', $params);
-
+        header('Location: index.php');
+        exit();
     }
 
-
+if (count($result) <= 0) {
+   $errors[] = 'Your shopping cart is empty, try adding an item!';
+}
 
     $total = 0;
 include 'src/forms/cart_form.php';
