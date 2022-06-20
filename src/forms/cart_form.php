@@ -1,6 +1,6 @@
 <div class='container'>
     <div class="row justify-content-center">
-        <div class="card col-md-6">
+        <div class="card col-lg-6">
 
                 <?php
                 include "includes/success.php";
