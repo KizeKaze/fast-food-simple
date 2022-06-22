@@ -98,7 +98,7 @@ if (isset($errors)) {
                     <form action="" method="get">
                         <td>
                             <select class="form-select" aria-label="Quantity select" name="qty">
-                                <?php $menu->showQty($qty = 0); ?>
+                                <?php $menu->showQty($qty); ?>
                             </select>
                         </td>
                         <td>
