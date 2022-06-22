@@ -125,11 +125,11 @@ class Menu
 
 
     }
-    public function showQty($qty)
+    public function showQty($qty = 0)
     {
         for ($i = 1; $i <= 5; $i++) {
             echo "<option value='$i'";
-            echo ($qty == $i) ? " selected='selected'": "";
+            echo ($qty == $i) ? " selected='selected'" : "";
             echo ">" . $i . "</option>";
         }
     }
