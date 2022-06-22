@@ -40,8 +40,11 @@ include "includes/header.php"; ?>
             $item_added = 'Item deleted from shopping cart';
         }
     }
-
     $query = new \App\classes\Query();
+
+    //grab cart for compare on cart_form.php
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart');
+
     $params = [
         'user_id' => $_SESSION['user_id'],
     ];
@@ -51,12 +54,7 @@ include "includes/header.php"; ?>
     $params = ['user_id' => $_SESSION['user_id']];
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
 
-
     if ($_POST) {
-        if (($_POST['grand_total'] == 0)) {
-            header('Location: index.php');
-            exit;
-        }
 
         $db = Database::getinstance();
         $grand_total = sanitize($_POST['grand_total']);
