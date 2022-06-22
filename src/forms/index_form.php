@@ -26,6 +26,8 @@
                     </div>
                 </div>
             </form>
+            <?php include "includes/success.php"; ?>
+            <?php include "includes/purchase.php"; ?>
         </div>
     </div>
 </div>
@@ -45,11 +47,12 @@ if (isset($errors)) {
             <th>Description</th>
             <th>Cost</th>
             <th>Type</th>
-            <th>Quantity</th>
             <?php if ($User->isAdmin()) : ?>
                 <th colspan="2">Options</th>
+                <th>Quantity</th>
                 <th>Cart</th>
-            <?php elseif ($User->isAdmin()) : ?>
+            <?php elseif ($User->loggedIn()) : ?>
+                <th>Quantity</th>
                 <th>Cart</th>
             <?php endif; ?>
             </thead>
@@ -70,15 +73,6 @@ if (isset($errors)) {
                 <td><textarea class="form-control" readonly><?=$description ?></textarea></td>
                 <td><?= $cost ?></td>
                 <td><?= $type ?></td>
-                <td>
-                    <select class="form-select" aria-label="Quantity select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </td>
                 <?php if ($User->isAdmin()) : ?>
                     <form action="../../edit_menu_item.php" method="get">
                         <td>
@@ -90,13 +84,35 @@ if (isset($errors)) {
                             <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
                         </td>
                     </form>
-                    <td>
-                        <button class="btn btn-primary">Add</button>
-                    </td>
-                <?php elseif ($User->isAdmin()) :  ?>
-                    <td>
-                        <button class="btn btn-primary">Add</button>
-                    </td>
+                    <form action="" method="get">
+                        <td>
+                            <select class="form-select" aria-label="Quantity select" name="qty">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+                        </td>
+                    </form>
+                <?php elseif ($User->loggedIn()) :  ?>
+                    <form action="" method="get">
+                        <td>
+                            <select class="form-select" aria-label="Quantity select" name="qty">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+                        </td>
+                    </form>
                 <?php endif; ?>
             </tr>
             <?php } ?>

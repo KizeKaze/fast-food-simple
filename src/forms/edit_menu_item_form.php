@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="card">
+        <div class="card col-md-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
                 <form action="" method="POST" class="form_index">
