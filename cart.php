@@ -57,10 +57,6 @@ include "includes/header.php"; ?>
 
 
     if ($_POST) {
-        if (($_POST['grand_total'] == 0)) {
-            header('Location: index.php');
-            exit;
-        }
 
         $db = Database::getinstance();
         $grand_total = sanitize($_POST['grand_total']);
