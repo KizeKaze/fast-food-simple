@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="card col-lg-6">
         <?php
-            ($cart_amount >= 1) ? include "includes/success.php" : include "includes/errors.php";
+            ($cart_amount[0]['amount'] >= 1) ? include "includes/success.php" : include "includes/errors.php";
         ?>
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
@@ -54,7 +54,7 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="purchase">Grand Total $</span>
                         <input class="form-control" type="text" name="grand_total" value="<?= $total ?>" readonly>
-                        <button class="btn btn-success" name="purchase" <?php if ($cart_amount == 0) echo 'disabled'; ?>>Purchase</button>
+                        <button class="btn btn-success" name="purchase" <?php if ($cart_amount[0]['amount'] == 0) echo 'disabled'; ?>>Purchase</button>
                     </div>
                 </form>
             </div>

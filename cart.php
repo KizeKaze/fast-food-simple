@@ -43,8 +43,7 @@ include "includes/header.php"; ?>
     $query = new \App\classes\Query();
 
     //grab cart for compare on cart_form.php
-    $cart_items = $query->CustomSQL('SELECT * FROM cart');
-    $cart_amount = count($cart_items);
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart');
 
     $params = [
         'user_id' => $_SESSION['user_id'],
@@ -54,7 +53,6 @@ include "includes/header.php"; ?>
 
     $params = ['user_id' => $_SESSION['user_id']];
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
-
 
     if ($_POST) {
 
