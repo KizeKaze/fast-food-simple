@@ -31,14 +31,7 @@
                         <td>
                             <form action="" method="get">
                             <select class="form-select" aria-label="Quantity select" name="qty">
-                                <?php if (isset($qty)) : ?>
-                                    <option value="<?= $qty ?>"><?= $qty ?></option>
-                                <?php endif; ?>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                <?php $menu->showQty($qty); ?>
                             </select>
                         </td>
                             <td>

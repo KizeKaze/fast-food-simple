@@ -125,4 +125,15 @@ class Menu
 
 
     }
+    public function showQty($qty)
+    {
+    ?>
+        <option <?php if($qty == 1) echo 'selected="selected"' ?> value="1">1</option>
+        <option <?php if($qty == 2) echo 'selected="selected"' ?> value="2">2</option>
+        <option <?php if($qty == 3) echo 'selected="selected"' ?> value="3">3</option>
+        <option <?php if($qty == 4) echo 'selected="selected"' ?> value="4">4</option>
+        <option <?php if($qty == 5) echo 'selected="selected"' ?> value="5">5</option>
+
+    <?php
+    }
 }
