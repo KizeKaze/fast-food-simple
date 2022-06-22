@@ -40,8 +40,12 @@ include "includes/header.php"; ?>
             $item_added = 'Item deleted from shopping cart';
         }
     }
-
     $query = new \App\classes\Query();
+
+    //grab cart for compare on cart_form.php
+    $cart_items = $query->CustomSQL('SELECT * FROM cart');
+    $cart_amount = count($cart_items);
+
     $params = [
         'user_id' => $_SESSION['user_id'],
     ];
