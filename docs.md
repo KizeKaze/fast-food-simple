@@ -26,3 +26,8 @@ Constants should be declared using SCREAMING_SNAKE_CASE
 if / elseif / while / for / foreach etc. should have their { on the same line
 Functions / classes should have their { on the next line
 We will be using single quotes for anything php-related, and double quotes for anything HTML related
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+unit testing for Killians
+to run a test use vendor/bin/phpunit tests/examplefile.php
