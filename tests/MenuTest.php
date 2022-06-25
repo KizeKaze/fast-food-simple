@@ -106,6 +106,6 @@ class MenuTest extends TestCase
         $stmt->execute();
         $filthy_results =  $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $this->assertNotEquals($name, $filthy_results);
+        $this->assertNotEquals($pristine_name, $filthy_results);
     }
 }
