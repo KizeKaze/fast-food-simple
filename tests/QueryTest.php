@@ -52,7 +52,6 @@ class QueryTest extends TestCase
         $this->assertNotSame($pristine_result, $inserted_id);
 
         self::$id[] = $inserted_id['id'];
-
     }
 
     public function testInsert()
@@ -81,6 +80,5 @@ class QueryTest extends TestCase
         $this->assertNotSame($pristine_result, $inserted_id);
 
        self::$id[] = $inserted_id['id'];
-
     }
 }
