@@ -6,8 +6,6 @@ use PDO;
 
 class Query
 {
-
-
     public function CustomSQL($data = '', $bindparams = [])
     {
         $db = Database::getInstance();

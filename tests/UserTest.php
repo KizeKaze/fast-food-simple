@@ -17,7 +17,6 @@ class UserTest extends TestCase
 
     public function tearDown(): void
     {
-
         $delete_sql = 'DELETE FROM users WHERE email =' . '\'' . $this->email . '\'';
         $delete_stmt = $this->db->prepare($delete_sql);
         $delete_stmt->execute();
