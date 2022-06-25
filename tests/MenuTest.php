@@ -72,8 +72,6 @@ class MenuTest extends TestCase
 
     public function testUpdateItem()
     {
-        // add a row into db, use PDO last id or something like that to grab the id of the row we made,
-        // push that ID into our array id property for our teardown and use IN keyword to delete it later!
 
         $sql = 'SELECT MAX(id) AS item_id FROM item';
         $stmt = self::$db->prepare($sql);
