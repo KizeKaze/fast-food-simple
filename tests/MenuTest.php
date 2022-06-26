@@ -48,7 +48,7 @@ class MenuTest extends TestCase
         $this->assertArrayHasKey('name', $item[0]);
 
         $search = null;
-        $type = 11;
+        $type = 9;
 
         $params = [
             'search' => $search,
@@ -63,7 +63,7 @@ class MenuTest extends TestCase
     public function testGetItem()
     {
 
-        $item_id = 206;
+        $item_id = 1;
 
         $item = self::$Menu->getItem($item_id);
         $this->assertNotEmpty($item);
@@ -81,7 +81,7 @@ class MenuTest extends TestCase
         $name = 'TestLad';
         $description = 'Sometimes it do what it be';
         $cost = '1.99';
-        $type_id = '11';
+        $type_id = '9';
         $pristine_name = $name;
 
         $sql = "INSERT INTO item (name, description, cost, type_id) VALUES ('$name', '$description', '$cost', '$type_id')";
