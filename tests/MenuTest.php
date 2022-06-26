@@ -35,7 +35,7 @@ class MenuTest extends TestCase
     public function testGetItemsWithSearch()
     {
 
-        $search = 'Apple';
+        $search = 'carrot';
         $type = null;
 
         $params = [
@@ -48,7 +48,7 @@ class MenuTest extends TestCase
         $this->assertArrayHasKey('name', $item[0]);
 
         $search = null;
-        $type = 9;
+        $type = 2;
 
         $params = [
             'search' => $search,
