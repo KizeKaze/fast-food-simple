@@ -21,7 +21,7 @@ INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Eggs', 'a
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Chicken Breast', '4 juicy chicken breast', 7.99, 3);
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('ground beef', '1 pound of ground beef', 4.99, 4);
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Crab legs', 'Crab legs of the sea', 3.99, 5);
-INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Coffee', '942 MG of caffine', 0.69, 9);
+INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Coffee', '942 MG of caffeine', 0.70, 9);
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Creamer', 'tasty sauce for the coffee', 2.99, 9);
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('dr pepper', '23 flavors in one can', 2.99, 8);
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('choc milk', 'the richest', 150.34, 6);
