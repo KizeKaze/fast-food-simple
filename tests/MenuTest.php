@@ -151,6 +151,23 @@ class MenuTest extends TestCase
         self::$id[] = $inserted_id;
     }
 
+    public function testGetType()
+    {
+        $result = self::$Menu->getType();
+
+        $this->assertNotEmpty($result);
+        $this->assertIsArray($result);
+    }
+
+    public function testCheckType()
+    {
+        $result = self::$Menu->checkType();
+
+        $this->assertNotEmpty($result);
+        $this->assertIsArray($result);
+
+    }
+
     public function testShowQty()
     {
         ob_start();
