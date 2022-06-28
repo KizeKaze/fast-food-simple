@@ -98,7 +98,6 @@ class Menu
         $stmt->bindParam(':type', $type);
         $stmt->execute();
 
-
     }
 
     public function getType(): array
