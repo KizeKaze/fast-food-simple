@@ -31,7 +31,6 @@
         let btns = document.getElementsByClassName('index_delete');
         for (let i = 0; i < btns.length; i++) {
             btns[i].addEventListener('click', function (e) {
-                console.log(btns[i].value);
                 makeRequest(e, btns[i].value);
             });
         }

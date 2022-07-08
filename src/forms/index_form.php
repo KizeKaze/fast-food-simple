@@ -7,7 +7,7 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="input-group mb-1">
                                 <input class="form-control" type="text" name="search" placeholder="Search...">
-                                <input type="submit" id="first_submit" name="submit" class="btn btn-primary btn-sm">
+                                <input type="submit" name="submit" class="btn btn-primary btn-sm">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
@@ -20,7 +20,7 @@
                                         echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
                                     } ?>
                                 </select>
-                                <input type="submit" id="second_submit" name="submit" class="btn btn-primary btn-sm">
+                                <input type="submit" name="submit" class="btn btn-primary btn-sm">
                             </div>
                         </div>
                     </div>
