@@ -1,40 +1,81 @@
-<div class="container lg">
-    <div class="card">
-        <div class="card-body">
-            <form action="../../index.php" method="post">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="input-group mb-1">
-                                <input class="form-control" type="text" name="search" placeholder="Search...">
-                                <input type="submit" id="first_submit" name="submit" class="btn btn-primary btn-sm">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="input-group mb-1">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Search By Type</span>
-                                <select name="type" class="form-select form-select">
-                                    <option value="0">All</option>
-                                    <?php $results = $menu->getType() ?>
-                                    <?php foreach ($results as $row) {
-                                        echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
-                                    } ?>
-                                </select>
-                                <input type="submit" id="second_submit" name="submit" class="btn btn-primary btn-sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <?php include "includes/success.php"; ?>
-            <?php include "includes/purchase.php"; ?>
-        </div>
-    </div>
-</div>
 <?php
-if (isset($errors)) {
-    include "includes/errors.php";
-} else { ?>
+//  I know this is not a good idea to copy/paste and shoe horn this to manipulate the dom
+//  but for this small project it is just an example that I know the basics to dom manipulation
+session_start();
+require '../../vendor/autoload.php'; ?>
+<?php
+$menu = new \App\Classes\Menu();
+$User = new \App\Classes\User();
+
+
+if (isset($_GET['add'])) {
+    if (isset($_SESSION['user_role'])) {
+        $query = new \App\classes\Query();
+
+        $item_id = sanitize($_GET['add']);
+        $qty = sanitize($_GET['qty']);
+
+        $params = [
+            'item_id' => $item_id,
+        ];
+        //check db for any items already in cart
+        $result = $query->CustomSQL('SELECT * FROM cart WHERE item_id = :item_id', $params);
+        if (count($result) >= 1) {
+            //update instead of insert
+            $params = [
+                'user_id' => $_SESSION['user_id'],
+                'item_id' => $item_id,
+                'qty' => $qty
+            ];
+
+            $query->CustomSQL('UPDATE cart SET qty = :qty WHERE user_id = :user_id AND item_id = :item_id', $params);
+            $item_added = 'Item updated in shopping cart';
+        } else {
+            $params = [
+                'user_id' => $_SESSION['user_id'],
+                'item_id' => $item_id,
+                'qty' => $qty
+            ];
+
+            $query->insert('cart', $params);
+            $item_added = 'Item added to shopping cart';
+        }
+    }
+}
+
+if (isset($_GET['id'])) {
+    if ($User->isAdmin()) {
+
+        $id = $_GET['id'];
+
+        $params = [
+            'id' => $id
+        ];
+
+        $query = new \App\Classes\Query();
+        $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
+    }
+}
+
+$search = null;
+$type = null;
+
+if (isset($_POST['submit']) || isset($_POST['type'])) {
+    $type = trim(htmlspecialchars($_POST['type']));
+    $search = trim(htmlspecialchars($_POST['search']));
+}
+
+$params = [
+    'search' => $search,
+    'type' => $type
+];
+$result = $menu->getItems($params);
+
+if (empty($result)) {
+    $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
+}
+
+?>
 
 <div class='container' id="main_card">
     <div class="table-responsive">
@@ -58,7 +99,6 @@ if (isset($errors)) {
             </thead>
             <tbody>
             <tr>
-                <?php } ?>
                 <?php foreach ($result as $row) {
                 $id = $row['id'];
                 $name = $row['name'];
@@ -70,7 +110,7 @@ if (isset($errors)) {
                     <td><?= $id ?></td>
                 <?php endif; ?>
                 <td><?= $name ?></td>
-                <td><textarea class="form-control" readonly><?=$description ?></textarea></td>
+                <td><textarea class="form-control" readonly><?= $description ?></textarea></td>
                 <td><?= $cost ?></td>
                 <td><?= $type ?></td>
                 <?php if ($User->isAdmin()) : ?>
@@ -81,7 +121,9 @@ if (isset($errors)) {
                     </form>
                     <form action="../../index.php" method="get">
                         <td>
-                            <button type="submit" class="index_delete btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
+                            <button type="submit" class="btn btn-danger index_delete" name="delete" value=<?= $id ?>>
+                                Delete
+                            </button>
                         </td>
                     </form>
                     <form action="" method="get">
@@ -94,7 +136,7 @@ if (isset($errors)) {
                             <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
                         </td>
                     </form>
-                <?php elseif ($User->loggedIn()) :  ?>
+                <?php elseif ($User->loggedIn()) : ?>
                     <form action="" method="get">
                         <td>
                             <select class="form-select" aria-label="Quantity select" name="qty">
@@ -112,5 +154,3 @@ if (isset($errors)) {
         </table>
     </div>
 </div>
-<script src="src/js/index.js"></script>
-<?php include "includes/footer.php"; ?>
