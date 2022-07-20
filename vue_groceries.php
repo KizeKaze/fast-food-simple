@@ -1,33 +1,18 @@
-<?php include "includes/header.php"; ?>
-<?php include "includes/nav.php" ?>
+<?php
+require 'vendor/autoload.php';
 
-    <!-- Including the Vue source code -->
-    <script src="https://unpkg.com/vue@3"></script>
 
-    <!-- Our Vue application -->
-    <div id="app" class="vue-container">
 
-    </div>
 
-    <!-- Vue JS setup / mounting -->
-    <script>
-        const { createApp } = Vue;
 
-        createApp({
-            data() {
-                // Where the instance data is bound
-                return {
 
-                    ],
-                }
-            },
-            // Where you put your methods; follow the convention from this test one to make a new function
-            methods: {
-                testMethod() {
+header('Content-Type: application/json');
 
-                }
-            }
-        }).mount('#app'); // .mount is mounting Vue to the selector so we can view it
-    </script>
+$query = new \App\classes\Query();
 
-<?php include "includes/footer.php" ?>
+// INNER JOIN THIS BITCH TO GET TYPES RAY, EZ
+$lists = $query->CustomSQL('SELECT * FROM item i 
+                    INNER JOIN type t ON i.type_id = t.type_id');
+
+echo json_encode($lists);
+
