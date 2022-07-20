@@ -8,12 +8,6 @@ body {
     padding-right: 0;
 }
 
-.vue-container {
-    background-color: gainsboro;
-    padding: 30px;
-    margin: 15px;
-}
-
 .form_index > div {
     padding-top: 5px;
     padding-bottom: 5px;
