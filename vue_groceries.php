@@ -10,9 +10,15 @@ header('Content-Type: application/json');
 
 $query = new \App\classes\Query();
 
-// INNER JOIN THIS BITCH TO GET TYPES RAY, EZ
 $lists = $query->CustomSQL('SELECT * FROM item i 
                     INNER JOIN type t ON i.type_id = t.type_id');
 
-echo json_encode($lists);
+$types = $query->CustomSQL('SELECT type_id, type FROM type');
+
+$array = [
+    'list' => $lists,
+    'type' => $types
+];
+
+echo json_encode($array);
 
