@@ -142,7 +142,7 @@
                 if (itemDescription == null || itemDescription === "") {
                     this.errors.push("Description Field is invalid");
                 }
-                if (itemCost === "" || typeof itemCost !== 'number') {
+                if (itemCost === "" || typeof itemCost !== 'number' || itemCost <= 0) {
                     this.errors.push("Cost Field is not a number");
                 }
                 if (typeSelected === 0 || typeof typeSelected !== 'number') {
