@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attribute Binding and Basic Events</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        .text-red {
+            color: red;
+        }
+
+        .text-green {
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- the : is short for v-bind and putting it in front of class is called attribite binding. without it, it would be a literal string -->
+        <button  :class="active ? 'text-red' : 'text-green'" @click="toggle">Click Me</button>
+    </div>
+
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    active: false
+                };
+            },
+
+            methods: {
+              toggle() {
+                  this.active = ! this.active;
+              }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
