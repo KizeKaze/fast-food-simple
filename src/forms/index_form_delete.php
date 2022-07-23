@@ -114,11 +114,9 @@ if (empty($result)) {
                 <td><?= $cost ?></td>
                 <td><?= $type ?></td>
                 <?php if ($User->isAdmin()) : ?>
-                    <form action="../../edit_menu_item.php" method="get">
-                        <td>
-                            <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
-                        </td>
-                    </form>
+                    <td>
+                        <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $id ?>">Edit</a>
+                    </td>
                     <form action="../../index.php" method="get">
                         <td>
                             <button type="submit" class="btn btn-danger index_delete" name="delete" value=<?= $id ?>>

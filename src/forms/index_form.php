@@ -74,16 +74,13 @@ if (isset($errors)) {
                 <td><?= $cost ?></td>
                 <td><?= $type ?></td>
                 <?php if ($User->isAdmin()) : ?>
-                    <form action="../../edit_menu_item.php" method="get">
                         <td>
-                            <button type="submit" class="btn btn-primary" name="edit" value=<?= $id ?>>Edit</button>
+                            <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $id ?>">Edit</a>
                         </td>
-                    </form>
                     <form action="../../index.php" method="get">
                         <td>
                             <button type="submit" class="index_delete btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
                         </td>
-                    </form>
                     <form action="" method="get">
                         <td>
                             <select class="form-select" aria-label="Quantity select" name="qty">
