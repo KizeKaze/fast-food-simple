@@ -14,9 +14,6 @@
             <h5 class="card-title">The Big Vue</h5>
             <p class="card-text">Hey, this Vue Groceries is powered by Vue and this is just a
             super simple example of my knowledge in it. Feel free to add items to demonstrate!</p>
-            <div>
-
-            </div>
         </div>
     </div>
     <div class="card">
@@ -142,7 +139,7 @@
                 if (itemDescription == null || itemDescription === "") {
                     this.errors.push("Description Field is invalid");
                 }
-                if (itemCost === "" || typeof itemCost !== 'number') {
+                if (itemCost === "" || typeof itemCost !== 'number' || itemCost <= 0) {
                     this.errors.push("Cost Field is not a number");
                 }
                 if (typeSelected === 0 || typeof typeSelected !== 'number') {

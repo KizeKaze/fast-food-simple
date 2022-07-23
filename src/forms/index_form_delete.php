@@ -46,14 +46,21 @@ if (isset($_GET['add'])) {
 if (isset($_GET['id'])) {
     if ($User->isAdmin()) {
 
+        $query = new \App\Classes\Query();
         $id = $_GET['id'];
 
         $params = [
             'id' => $id
         ];
 
-        $query = new \App\Classes\Query();
-        $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
+        //check if any users have the item to be deleted in their shopping cart
+
+        $result[0] = $query->CustomSQL('SELECT COUNT(*) from cart WHERE item_id = :id', $params);
+        if ($result[0] >= 1) {
+            $errors[] = "Users have this item in their shopping card, access denied. ID: " . $id;
+        } else {
+            $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
+        }
     }
 }
 
@@ -76,8 +83,10 @@ if (empty($result)) {
 }
 
 ?>
-
 <div class='container' id="main_card">
+    <?php
+        include "../../includes/errors.php";
+    ?>
     <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
@@ -119,30 +128,30 @@ if (empty($result)) {
                     </td>
                     <form action="../../index.php" method="get">
                         <td>
-                            <button type="submit" class="btn btn-danger index_delete" name="delete" value=<?= $id ?>>
+                            <button type="submit" class="btn btn-danger index_delete" name="delete" value="<?= $id ?>">
                                 Delete
                             </button>
                         </td>
                     </form>
                     <form action="" method="get">
                         <td>
-                            <select class="form-select" aria-label="Quantity select" name="qty">
+                            <select class="add_qty form-select" aria-label="Quantity select" name="qty">
                                 <?php $menu->showQty(); ?>
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+                            <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit">Add</button>
                         </td>
                     </form>
                 <?php elseif ($User->loggedIn()) : ?>
                     <form action="" method="get">
                         <td>
-                            <select class="form-select" aria-label="Quantity select" name="qty">
+                            <select class="add_qty form-select" aria-label="Quantity select" name="qty">
                                 <?php $menu->showQty(); ?>
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+                            <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit">Add</button>
                         </td>
                     </form>
                 <?php endif; ?>
