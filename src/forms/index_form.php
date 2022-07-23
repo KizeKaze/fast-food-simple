@@ -79,7 +79,7 @@ if (isset($errors)) {
                         </td>
                     <form action="../../index.php" method="get">
                         <td>
-                            <button type="submit" class="index_delete btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
+                            <button type="submit" class="index_delete btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
                         </td>
                     <form action="" method="get">
                         <td>

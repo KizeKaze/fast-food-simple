@@ -40,12 +40,12 @@
                         <form action="" method="get">
                             <td>
                                 <input type="hidden" name="id" value="<?= $id ?>">
-                                <button type="submit" class="btn btn-primary" name="edit" value=<?= $type ?>>Edit</button>
+                                <button type="submit" class="btn btn-primary" name="edit" value="<?= $type ?>">Edit</button>
                             </td>
                         </form>
                         <form action="" method="get">
                             <td>
-                                <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
+                                <button type="submit" class="btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
                             </td>
                         </form>
                     </tr>

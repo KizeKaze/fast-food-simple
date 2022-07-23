@@ -119,7 +119,7 @@ if (empty($result)) {
                     </td>
                     <form action="../../index.php" method="get">
                         <td>
-                            <button type="submit" class="btn btn-danger index_delete" name="delete" value=<?= $id ?>>
+                            <button type="submit" class="btn btn-danger index_delete" name="delete" value="<?= $id ?>">
                                 Delete
                             </button>
                         </td>
