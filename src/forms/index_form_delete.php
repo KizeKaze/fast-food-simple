@@ -57,7 +57,7 @@ if (isset($_GET['id'])) {
 
         $result = $query->CustomSQL('SELECT COUNT(*) as amount from cart WHERE item_id = :id', $params);
         if ($result[0]['amount'] >= 1) {
-            $errors[] = "Users have this item in their shopping card, access denied. ID: " . $id;
+            $errors[] = "Users have this item in their shopping cart, access denied. ID: " . $id;
         } else {
             $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
         }
