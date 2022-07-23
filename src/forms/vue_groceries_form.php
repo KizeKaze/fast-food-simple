@@ -25,19 +25,21 @@
         </div>
         <div class="card-body text-center">
             <form @submit.prevent="addGroceries">
-                <input v-model="itemName" placeholder="Item Name...">
-                <input v-model="itemDescription" placeholder="Add A Description...">
-                <input v-model.number="itemCost" placeholder="Add Cost...">
-                <select v-model.number="selected">
+                <input class="input-group mb-3" v-model="itemName" placeholder="Item Name...">
+                <input class="input-group mb-3" v-model="itemDescription" placeholder="Add A Description...">
+                <input class="input-group mb-3" v-model.number="itemCost" placeholder="Add Cost...">
+                <select class="form-select" v-model.number="typeSelected">
                     <option disabled value="">Please select one</option>
-                    we have the type_id, on submit loop thourh master.type and find a match with the type_id and grab the name with it
+                    <option value="0">Please select one</option>
                     <option v-for="t in master.type" v-bind:value="t.type_id"> {{ t.type}} </option>
                 </select>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
-            <div>
-
-            </div>
+                <div v-if="errors">
+                    <div class='error' v-for="error in errors">
+                        {{ error }}
+                    </div>
+                </div>
         </div>
     </div>
     <div class="table-responsive">
@@ -73,7 +75,7 @@
                 itemName: '',
                 itemDescription: '',
                 itemCost: '',
-                selected: '',
+                typeSelected: '',
                 errors: []
             }
         },
@@ -89,35 +91,49 @@
             addGroceries() {
 
                 this.errors = [];
-                let answer = this.validate(this.itemName, this.itemDescription, this.itemCost);
-                console.log(answer);
+                let answer = this.validate(this.itemName, this.itemDescription, this.itemCost, this.typeSelected);
                 if (answer === false) {
-                    alert('One of the fields is incorrect');
                     return;
                 }
-                alert('pretend I pushed this into the db ahaha!');
 
+                const data = { name: this.itemName, description: this.itemDescription, cost: this.itemCost, type: this.typeSelected }
 
-                let needle = this.selected;
+                fetch('/vue_groceries_add.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content_type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
 
-                console.log(this.master.type);
+                let master = this.master.type;
+                let currentID = this.typeSelected;
 
-                console.log(this.selected);
+                let i = master.length
+                let newData = '';
+
+                while (i--) {
+                    if(currentID == master[i].type_id) {
+                        newData = master[i].type;
+                        break;
+                    }
+                }
+
                 this.master.list.push({
                     name: this.itemName,
                     description: this.itemDescription,
                     cost: this.itemCost,
-                    type: this.selected
+                    type: newData
                 });
 
-                this.name = '';
-                this.description = '';
-                this.cost = '';
-                this.type = '';
+                this.itemName = '';
+                this.itemDescription = '';
+                this.itemCost = '';
+                this.typeSelected = 0;
 
             },
 
-            validate(itemName, itemDescription, itemCost) {
+            validate(itemName, itemDescription, itemCost, typeSelected) {
 
                 if (itemName == null || itemName === "") {
                     this.errors.push("Name Field is invalid");
@@ -126,8 +142,10 @@
                     this.errors.push("Description Field is invalid");
                 }
                 if (itemCost === "" || typeof itemCost !== 'number') {
-                    console.log(typeof itemCost);
                     this.errors.push("Cost Field is not a number");
+                }
+                if (typeSelected === 0 || typeof typeSelected !== 'number') {
+                    this.errors.push("Select Field is empty");
                 }
 
                 return this.errors.length === 0;
