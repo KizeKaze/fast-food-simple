@@ -1,6 +1,7 @@
     let httpRequest;
 
     deleteEventListener();
+    addQty();
 
     function makeRequest(e, value) {
         e.preventDefault();
@@ -34,4 +35,19 @@
                 makeRequest(e, btns[i].value);
             });
         }
+    }
+
+    function addQty() {
+        let add = document.getElementsByClassName('index_qty');
+        let qty = document.getElementsByClassName('add_qty');
+        for (let i = 0; i < add.length; i++) {
+            add[i].addEventListener('click', function (e) {
+                attachQty(e, qty[i].value, add[i].value);
+            });
+        }
+    }
+
+    function attachQty(e, qtyValue, addValue) {
+        e.preventDefault();
+        window.location = "/index.php?add=" + addValue + "&qty=" + qtyValue;
     }
