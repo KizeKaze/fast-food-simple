@@ -54,7 +54,8 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="purchase">Grand Total $</span>
                         <input class="form-control" type="text" name="grand_total" value="<?= $total ?>" readonly>
-                        <button class="btn btn-success" name="purchase" <?php if ($cart_amount[0]['amount'] == 0) echo 'disabled'; ?>>Purchase</button>
+                        <button type="button" class="btn btn-success" name="purchase" <?php if ($cart_amount[0]['amount'] == 0) echo 'disabled'; ?>>Purchase</button>
+                        <?php dd($cart_amount[0]) ?>
                     </div>
                 </form>
             </div>

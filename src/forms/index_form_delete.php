@@ -46,14 +46,21 @@ if (isset($_GET['add'])) {
 if (isset($_GET['id'])) {
     if ($User->isAdmin()) {
 
+        $query = new \App\Classes\Query();
         $id = $_GET['id'];
 
         $params = [
             'id' => $id
         ];
 
-        $query = new \App\Classes\Query();
-        $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
+        //check if any users have the item to be deleted in their shopping cart
+
+        $result[0] = $query->CustomSQL('SELECT COUNT(*) from cart WHERE item_id = :id', $params);
+        if ($result[0] >= 1) {
+            $errors[] = "Users have this item in their shopping card, access denied. ID: " . $id;
+        } else {
+            $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
+        }
     }
 }
 
@@ -76,8 +83,10 @@ if (empty($result)) {
 }
 
 ?>
-
 <div class='container' id="main_card">
+    <?php
+        include "../../includes/errors.php";
+    ?>
     <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
