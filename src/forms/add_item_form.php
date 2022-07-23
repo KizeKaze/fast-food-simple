@@ -62,6 +62,7 @@ if (isset($item_added)) {
                         </svg>
                         Submit
                     </button>
+                    <a href="/index.php" class="btn btn-danger">Cancel</a>
                 </form>
             </div>
         </div>

@@ -84,11 +84,12 @@ if (isset($errors)) {
                     <form action="" method="get">
                         <td>
                             <select class="form-select" aria-label="Quantity select" name="qty">
-                                <?php $menu->showQty(); ?>
+                                <?php  $menu->showQty(); ?>
                             </select>
                         </td>
                         <td>
                             <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+                            <a href='/index.php?add=<?= $id ?>&qty='></a>
                         </td>
                     </form>
                 <?php elseif ($User->loggedIn()) :  ?>
