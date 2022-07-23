@@ -44,7 +44,6 @@ include "includes/header.php"; ?>
 
     //grab cart for compare on cart_form.php
     $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart');
-
     $params = [
         'user_id' => $_SESSION['user_id'],
     ];
