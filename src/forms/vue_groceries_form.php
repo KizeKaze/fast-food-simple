@@ -90,6 +90,8 @@
 
             addGroceries() {
 
+                // if this were live production I would have variables checking if anyone is logged in and an admin before letting this run
+
                 this.errors = [];
                 let answer = this.validate(this.itemName, this.itemDescription, this.itemCost, this.typeSelected);
                 if (answer === false) {
