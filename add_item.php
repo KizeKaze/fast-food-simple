@@ -11,7 +11,7 @@ if ($_POST) {
     if (empty(sanitize($_POST['name']))) {
         $errors[] = "Name invalid";
     }
-    if (empty(sanitize($_POST['description']))) {s
+    if (empty(sanitize($_POST['description']))) {
         $errors[] = "Description invalid";
     }
     $cost = floatval($_POST['cost']);

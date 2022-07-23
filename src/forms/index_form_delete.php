@@ -55,8 +55,8 @@ if (isset($_GET['id'])) {
 
         //check if any users have the item to be deleted in their shopping cart
 
-        $result[0] = $query->CustomSQL('SELECT COUNT(*) from cart WHERE item_id = :id', $params);
-        if ($result[0] >= 1) {
+        $result = $query->CustomSQL('SELECT COUNT(*) as amount from cart WHERE item_id = :id', $params);
+        if ($result[0]['amount'] >= 1) {
             $errors[] = "Users have this item in their shopping card, access denied. ID: " . $id;
         } else {
             $query->CustomSQL('DELETE FROM item WHERE id = :id', $params);
@@ -80,7 +80,8 @@ $result = $menu->getItems($params);
 
 if (empty($result)) {
     $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
-}
+    include "../../includes/errors.php";
+} else {
 
 ?>
 <div class='container' id="main_card">
@@ -161,3 +162,4 @@ if (empty($result)) {
         </table>
     </div>
 </div>
+<?php } ?>
