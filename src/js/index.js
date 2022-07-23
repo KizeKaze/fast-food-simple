@@ -22,6 +22,7 @@
                 let node = document.querySelector('#main_card');
                 node.innerHTML = httpRequest.responseText;
                 deleteEventListener();
+                addQty();
             } else {
                 alert('An error has occured');
             }
