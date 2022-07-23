@@ -8,10 +8,10 @@ if ($_POST) {
     $errors = [];
     $Item = new \App\Classes\MenuItem();
 
-    if (empty(trim($_POST['name']))) {
+    if (empty(sanitize($_POST['name']))) {
         $errors[] = "Name invalid";
     }
-    if (empty(trim($_POST['description']))) {
+    if (empty(sanitize($_POST['description']))) {s
         $errors[] = "Description invalid";
     }
     $cost = floatval($_POST['cost']);

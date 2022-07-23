@@ -4,6 +4,9 @@
 <!-- Including the Vue source code -->
 <script src="https://unpkg.com/vue@3"></script>
 
+    <!-- If this were live production there would be checks to make sure you are logged in
+     and an admin since this touches the db, for this demo I have skipped them.-->
+
 <!-- Our Vue application -->
 <div id="app" class="container">
     <div class="card">
