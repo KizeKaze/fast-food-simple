@@ -24,33 +24,33 @@
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th >Type</th>
-                        <th colspan="2">Options</th>
-                    </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th >Type</th>
+                            <th colspan="2">Options</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                    <?php foreach ($types as $type) {
-                        $id = $type['type_id'];
-                        $type = $type['type'];
-                        ?>
-                        <td><?= $id ?></td>
-                        <td><?= $type ?></td>
-                        <form action="" method="get">
-                            <td>
-                                <input type="hidden" name="id" value="<?= $id ?>">
-                                <button type="submit" class="btn btn-primary" name="edit" value="<?= $type ?>">Edit</button>
-                            </td>
-                        </form>
-                        <form action="" method="get">
-                            <td>
-                                <button type="submit" class="btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
-                            </td>
-                        </form>
-                    </tr>
-                    <?php } ?>
+                        <tr>
+                        <?php foreach ($types as $type) {
+                            $id = $type['type_id'];
+                            $type = $type['type'];
+                            ?>
+                            <td><?= $id ?></td>
+                            <td><?= $type ?></td>
+                            <form action="" method="get">
+                                <td>
+                                    <input type="hidden" name="id" value="<?= $id ?>">
+                                    <button type="submit" class="btn btn-primary" name="edit" value="<?= $type ?>">Edit</button>
+                                </td>
+                            </form>
+                            <form action="" method="get">
+                                <td>
+                                    <button type="submit" class="btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
+                                </td>
+                            </form>
+                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
