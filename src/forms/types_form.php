@@ -3,6 +3,7 @@
         <div class="card col-sm-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
+                <?php include "includes/success.php"; ?>
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
                         <form action="" method="GET">
