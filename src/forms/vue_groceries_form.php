@@ -30,7 +30,6 @@
                 <input class="input-group mb-3" v-model.number="itemCost" placeholder="Add Cost...">
                 <select class="form-select" v-model.number="typeSelected">
                     <option disabled value="">Please select one</option>
-                    <option value="0">Please select one</option>
                     <option v-for="t in master.type" v-bind:value="t.type_id"> {{ t.type}} </option>
                 </select>
                 <button type="submit" class="btn btn-primary">Add</button>
@@ -75,7 +74,7 @@
                 itemName: '',
                 itemDescription: '',
                 itemCost: '',
-                typeSelected: '',
+                typeSelected: 0,
                 errors: []
             }
         },
