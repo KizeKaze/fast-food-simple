@@ -47,6 +47,7 @@
                     </div>
                     <hr>
                     <button type="submit" class="btn btn-primary" name="update" value=<?= $id ?>>Update</button>
+                    <a href="/index.php" class="btn btn-danger">Cancel</a>
                 </form>
             </div>
         </div>
