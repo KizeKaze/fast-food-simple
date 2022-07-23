@@ -82,7 +82,6 @@ if (empty($result)) {
     $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
     include "../../includes/errors.php";
 } else {
-
 ?>
 <div class='container' id="main_card">
     <?php
