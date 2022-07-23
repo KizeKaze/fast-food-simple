@@ -43,7 +43,7 @@
                         ?>
                         <form action="" method="get">
                             <td>
-                                <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
+                                <button type="submit" class="btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
                             </td>
                         </form>
                     </tr>

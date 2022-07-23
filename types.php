@@ -55,6 +55,7 @@ if(isset($_POST['type_edit'])) {
             'type' => $type
         ];
         $query->CustomSQL('UPDATE type SET type = :type WHERE type_id = ' . $id . ' ', $param);
+        $item_added = 'Type edit accepted';
     }
 }
 

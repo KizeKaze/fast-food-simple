@@ -79,27 +79,29 @@ if (isset($errors)) {
                         </td>
                     <form action="../../index.php" method="get">
                         <td>
-                            <button type="submit" class="index_delete btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
+                            <button type="submit" class="index_delete btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
                         </td>
+                    </form>
                     <form action="" method="get">
                         <td>
-                            <select class="form-select" aria-label="Quantity select" name="qty">
-                                <?php $menu->showQty(); ?>
+                            <select class="add_qty form-select" aria-label="Quantity select" name="qty">
+                                <?php  $menu->showQty(); ?>
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+
+                            <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit">Add</button>
                         </td>
                     </form>
                 <?php elseif ($User->loggedIn()) :  ?>
                     <form action="" method="get">
                         <td>
-                            <select class="form-select" aria-label="Quantity select" name="qty">
+                            <select class="add_qty form-select" aria-label="Quantity select" name="qty">
                                 <?php $menu->showQty(); ?>
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary" name="add" value="<?= $id ?>">Add</button>
+                            <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit">Add</button>
                         </td>
                     </form>
                 <?php endif; ?>

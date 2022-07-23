@@ -3,6 +3,7 @@
         <div class="card col-sm-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
+                <?php include "includes/success.php"; ?>
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
                         <form action="" method="GET">
@@ -40,12 +41,12 @@
                         <form action="" method="get">
                             <td>
                                 <input type="hidden" name="id" value="<?= $id ?>">
-                                <button type="submit" class="btn btn-primary" name="edit" value=<?= $type ?>>Edit</button>
+                                <button type="submit" class="btn btn-primary" name="edit" value="<?= $type ?>">Edit</button>
                             </td>
                         </form>
                         <form action="" method="get">
                             <td>
-                                <button type="submit" class="btn btn-danger" name="delete" value=<?= $id ?>>Delete</button>
+                                <button type="submit" class="btn btn-danger" name="delete" value="<?= $id ?>">Delete</button>
                             </td>
                         </form>
                     </tr>
