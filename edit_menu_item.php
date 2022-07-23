@@ -15,23 +15,23 @@
 
         if(isset($_POST['update']) && $_POST['update']) {
 
-                $id = $_POST['update'];
-                $name = trim($_POST['name']);
-                $description = $_POST['description'];
-                $cost = floatval($_POST['cost']);
-                $type_id = $_POST['type'];
+            $id = $_POST['update'];
+            $name = trim($_POST['name']);
+            $description = $_POST['description'];
+            $cost = floatval($_POST['cost']);
+            $type_id = $_POST['type'];
 
-                if (empty($name)) {
-                    $errors[] = "Invalid Name";
-                }
+            if (empty($name)) {
+                $errors[] = "Invalid Name";
+            }
 
-                if (empty($description)) {
-                    $errors[] = "Invalid Description";
-                }
+            if (empty($description)) {
+                $errors[] = "Invalid Description";
+            }
 
-                if ($cost <= 0) {
-                    $errors[] = "Invalid Cost";
-                }
+            if ($cost <= 0) {
+                $errors[] = "Invalid Cost";
+            }
 
             if(empty($errors)) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id);

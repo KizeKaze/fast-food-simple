@@ -1,9 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 
-
-
-
 header('Content-Type: application/json');
 
 $query = new \App\classes\Query();
@@ -18,6 +15,4 @@ $array = [
     'type' => $types
 ];
 
-
 echo json_encode($array);
-

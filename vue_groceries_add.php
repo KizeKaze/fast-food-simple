@@ -19,4 +19,3 @@ require 'vendor/autoload.php';
     ];
 
     $query->insert('item', $parameters);
-
