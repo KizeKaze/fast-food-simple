@@ -25,9 +25,9 @@
         </div>
         <div class="card-body text-center">
             <form @submit.prevent="addGroceries">
-                <input class="input-group mb-3" v-model="itemName" placeholder="Item Name...">
-                <input class="input-group mb-3" v-model="itemDescription" placeholder="Add A Description...">
-                <input class="input-group mb-3" v-model.number="itemCost" placeholder="Add Cost...">
+                <input class="form-control mb-3" v-model="itemName" placeholder="Item Name...">
+                <input class="form-control mb-3" v-model="itemDescription" placeholder="Add A Description...">
+                <input class="form-control mb-3" v-model.number="itemCost" placeholder="Add Cost...">
                 <select class="form-select" v-model.number="typeSelected">
                     <option disabled value="0">Please select one</option>
                     <option v-for="t in master.type" v-bind:value="t.type_id"> {{ t.type}} </option>
