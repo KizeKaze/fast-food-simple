@@ -1,6 +1,6 @@
     let httpRequest;
 
-    deleteEventListener();
+    attachDeleteEventListener();
     addQty();
 
     function makeRequest(e, value) {
@@ -14,6 +14,7 @@
         httpRequest.onreadystatechange = alertContents;
         httpRequest.open('GET', 'src/forms/index_form_delete.php?id=' + value)
         httpRequest.send();
+        
     }
 
     function alertContents() {
@@ -21,7 +22,7 @@
             if (httpRequest.status === 200) {
                 let node = document.querySelector('#main_card');
                 node.innerHTML = httpRequest.responseText;
-                deleteEventListener();
+                attachDeleteEventListener();
                 addQty();
             } else {
                 alert('An error has occured');
@@ -29,11 +30,19 @@
         }
     }
 
-    function deleteEventListener() {
+    function attachDeleteEventListener() {
+
+
         let btns = document.getElementsByClassName('index_delete');
         for (let i = 0; i < btns.length; i++) {
             btns[i].addEventListener('click', function (e) {
                 makeRequest(e, btns[i].value);
+
+                let item_added = document.getElementsByClassName('success-container');
+                let count = item_added.length;
+                if (count >= 1) {
+                    item_added[0].innerHTML = '';
+                }
             });
         }
     }
