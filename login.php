@@ -4,7 +4,7 @@
 <?php
 
 if($_POST) {
-    $query = new \App\classes\Query();
+    $query = new \App\Classes\Query();
 
     $email = sanitize($_POST['email']);
     $password = sanitize($_POST['password']);

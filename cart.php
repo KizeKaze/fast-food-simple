@@ -11,7 +11,7 @@ include "includes/header.php"; ?>
     }
 
     if (isset($_GET['qty'])) {
-        $query = new \App\classes\Query();
+        $query = new \App\Classes\Query();
         $id = sanitize($_GET['id']);
         $qty = sanitize($_GET['qty']);
 
@@ -26,7 +26,7 @@ include "includes/header.php"; ?>
     }
 
     if (isset($_GET['delete'])) {
-        $User = new  \App\classes\User();
+        $User = new  \App\Classes\User();
         if ($User->loggedIn()) {
             $id = $_GET['delete'];
 
@@ -40,7 +40,7 @@ include "includes/header.php"; ?>
             $item_added = 'Item deleted from shopping cart';
         }
     }
-    $query = new \App\classes\Query();
+    $query = new \App\Classes\Query();
 
     //grab cart for compare on cart_form.php
     $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart');

@@ -4,7 +4,7 @@
 <?php
 if (isset($_GET['add'])) {
     if (isset($_SESSION['user_role'])) {
-        $query = new \App\classes\Query();
+        $query = new \App\Classes\Query();
 
         $item_id = sanitize($_GET['add']);
         $qty = sanitize($_GET['qty']);
