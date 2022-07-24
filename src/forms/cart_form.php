@@ -25,7 +25,7 @@
                         $cost = $cart['cost'];
                         ?>
                         <td><?= $name ?></td>
-                        <td><?= $cost ?></td>
+                        <td><?= '$' . number_format($cost, 2) ?></td>
                         <td>
                             <form action="" method="get">
                             <select class="form-select" aria-label="Quantity select" name="qty">
