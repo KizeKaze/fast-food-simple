@@ -26,21 +26,25 @@ if($_POST) {
         //grab email and hashed password to compare to user entered info
         $result = $query->CustomSQL('SELECT * FROM users WHERE email = :email', $params );
 
-        $db_email = $result[0]['email'];
-        $db_password = $result[0]['password'];
+        if ($result) {
+            $db_email = $result[0]['email'];
+            $db_password = $result[0]['password'];
 
-        $verified_pass = password_verify($password, $db_password);
+            $verified_pass = password_verify($password, $db_password);
 
-        if ($email !== $db_email || $verified_pass != true) {
-            $errors[] = 'Email or Password not found';
+            if ($email !== $db_email || $verified_pass != true) {
+                $errors[] = 'Email or Password not found';
+            } else {
+                $_SESSION['user_id'] = $result[0]['user_id'];
+                $_SESSION['username'] = $result[0]['username'];
+                $_SESSION['email'] = $result[0]['email'];
+                $_SESSION['user_role'] = $result[0]['user_role'];
+
+                header("Location: index.php");
+                exit();
+            }
         } else {
-            $_SESSION['user_id'] = $result[0]['user_id'];
-            $_SESSION['username'] = $result[0]['username'];
-            $_SESSION['email'] = $result[0]['email'];
-            $_SESSION['user_role'] = $result[0]['user_role'];
-
-            header("Location: index.php");
-            exit();
+            $errors[] = 'Email or Password not found';
         }
     }
 }

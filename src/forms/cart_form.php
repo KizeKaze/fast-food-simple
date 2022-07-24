@@ -25,7 +25,7 @@
                         $cost = $cart['cost'];
                         ?>
                         <td><?= $name ?></td>
-                        <td><?= $cost ?></td>
+                        <td><?= '$' . number_format($cost, 2) ?></td>
                         <td>
                             <form action="" method="get">
                             <select class="form-select" aria-label="Quantity select" name="qty">
@@ -37,7 +37,7 @@
                                 <button type="submit" class="btn btn-primary" name="update" value="<?= $item_id ?>">Update</button>
                                 </form>
                             </td>
-                        <td><?= ($qty * $cost) ?></td>
+                        <td><?= '$' . number_format(($qty * $cost), 2) ?></td>
                         <?php
                             $total += ($qty * $cost);
                         ?>
@@ -53,7 +53,7 @@
                 <form action="" method="POST">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="purchase">Grand Total $</span>
-                        <input class="form-control" type="text" name="grand_total" value="<?= $total ?>" readonly>
+                        <input class="form-control" type="text" name="grand_total" value="<?= '$' . number_format($total, 2) ?>" readonly>
                         <button class="btn btn-success" name="purchase" <?php if ($cart_amount[0]['amount'] == 0) echo 'disabled'; ?>>Purchase</button>
                     </div>
                 </form>
