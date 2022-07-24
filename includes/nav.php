@@ -1,4 +1,4 @@
-<?php $User = new  \App\classes\User(); ?>
+<?php $User = new  \App\Classes\User(); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="/index.php">Food United</a>
