@@ -39,7 +39,8 @@
                 makeRequest(e, btns[i].value);
 
                 let item_added = document.getElementsByClassName('success-container');
-                if (item_added) {
+                let count = item_added.length;
+                if (count >= 1) {
                     item_added[0].innerHTML = '';
                 }
             });
