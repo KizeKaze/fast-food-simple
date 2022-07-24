@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 
     $data = json_decode($request_body);
 
-    $query = new \App\classes\Query();
+    $query = new \App\Classes\Query();
 
     $parameters = [
         'name' => sanitize($data->name),

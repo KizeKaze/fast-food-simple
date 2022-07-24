@@ -10,7 +10,7 @@ $User = new \App\Classes\User();
 
 if (isset($_GET['add'])) {
     if (isset($_SESSION['user_role'])) {
-        $query = new \App\classes\Query();
+        $query = new \App\Classes\Query();
 
         $item_id = sanitize($_GET['add']);
         $qty = sanitize($_GET['qty']);
@@ -83,6 +83,7 @@ if (empty($result)) {
     include "../../includes/errors.php";
 } else {
 ?>
+
 <div class='container' id="main_card">
     <?php
         include "../../includes/errors.php";
