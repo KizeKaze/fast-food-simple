@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 header('Content-Type: application/json');
 
-$query = new \App\classes\Query();
+$query = new \App\Classes\Query();
 
 $lists = $query->CustomSQL('SELECT * FROM item i 
                                 INNER JOIN type t ON i.type_id = t.type_id');
