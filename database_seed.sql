@@ -37,7 +37,7 @@ CREATE TABLE type
 
 INSERT INTO fast_food.type (type) VALUES ('Fruits');
 INSERT INTO fast_food.type (type) VALUES ('Vegetable');
-INSERT INTO fast_food.type (type) VALUES ('Poulty');
+INSERT INTO fast_food.type (type) VALUES ('Poultry');
 INSERT INTO fast_food.type (type) VALUES ('Meat');
 INSERT INTO fast_food.type (type) VALUES ('Fish');
 INSERT INTO fast_food.type (type) VALUES ('Dairy');
