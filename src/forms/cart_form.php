@@ -53,7 +53,7 @@
                 <form action="" method="POST">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="purchase">Grand Total $</span>
-                        <input class="form-control" type="text" name="grand_total" value="<?= '$' . number_format($total, 2) ?>" readonly>
+                        <input class="form-control" type="text" name="grand_total" value="<?= number_format($total, 2) ?>" readonly>
                         <button class="btn btn-success" name="purchase" <?php if ($cart_amount[0]['amount'] == 0) echo 'disabled'; ?>>Purchase</button>
                     </div>
                 </form>
