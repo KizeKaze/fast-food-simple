@@ -13,10 +13,16 @@
             </div>
             <?php if (isset($meal)) : ?>
             <div class="card">
-                <div class="card-header">
-                </div>
+                <h5 class="card-title text-center"><?= $meal['strMeal']; ?></h5>
+                <img class="card-img-top" src="<?= $meal['strMealThumb']; ?>" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title"><?= $meal['strMeal']; ?></h5>
+                    <h5 class="card-title">Ingredients You Will Need</h5>
+                    <ul>
+                       <?php foreach ($combined as $key => $value) {
+                            echo "<li>$key" . " - " . "$value</li>";
+                       } ?>
+                    </ul>
+                    <h5 class="card-title">Cooking Instructions</h5>
                     <ul>
                         <?php $chunks = explode('.', $meal['strInstructions']); ?>
                         <?php foreach ($chunks as $element) : ?>
@@ -25,6 +31,15 @@
                         <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
+                </div>
+            </div>
+            <div class="card">
+                <h5 class="card-title">Want to follow a YouTube how to?</h5>
+                <div class="card-body">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" target="@" href="<?= $meal['strYoutube']; ?>"><?= $meal['strMeal']; ?></a>
+                        <a class="btn btn-primary" href="#top">Back To Top</a>
+                    </div>
                 </div>
             </div>
             <?php endif; ?>
