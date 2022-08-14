@@ -5,17 +5,13 @@ namespace App\Classes;
 class RandomMeal
 {
 
-
-
     public function randomMeal(): array
     {
         $ch = curl_init();
-
         $url = "https://www.themealdb.com/api/json/v1/1/random.php";
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
         $response = curl_exec($ch);
 
         if($e = curl_error($ch)) {
@@ -26,6 +22,18 @@ class RandomMeal
 
         curl_close($ch);
 
-         return $decoded = $decoded['meals'][0];
+        return $decoded['meals'][0];
+    }
+
+    public function filterResult($array, $string)
+    {
+        $filtered_array = [];
+
+        foreach ($array as $key => $value) {
+            if (str_contains($key, $string)) {
+                $filtered_array[] = $value;
+            }
+        }
+        return $filtered_array;
     }
 }
