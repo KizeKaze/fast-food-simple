@@ -25,7 +25,7 @@ class RandomMeal
         return $decoded['meals'][0];
     }
 
-    public function filterResult($array, $string)
+    public function filterResult($array, $string): array
     {
         $filtered_array = [];
 
@@ -35,5 +35,12 @@ class RandomMeal
             }
         }
         return $filtered_array;
+    }
+
+    public function cleanArray($data): array
+    {
+        return array_filter($data, function ($element){
+            return is_string($element) && '' !== trim($element);
+        });
     }
 }

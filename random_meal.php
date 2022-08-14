@@ -10,15 +10,16 @@ if (isset($_GET['showMeal'])) {
     $ingredients = $meal_array->filterResult($meal, 'strIngredient');
     $measures = $meal_array->filterResult($meal, 'strMeasure');
 
-    $filtered_i = array_filter($ingredients, function ($element){
-        return is_string($element) && '' !== trim($element);
-    });
+    $filtered_i = $meal_array->cleanArray($ingredients);
+    $filtered_m = $meal_array->cleanArray($measures);
 
-    $filtered_m = array_filter($measures, function ($element){
-        return is_string($element) && '' !== trim($element);
-    });
+    //api inconsistency. if the measure count is not the same as ingredient count, re-grab a different random meal.
+    if (count($filtered_i) != count($filtered_m)) {
+        header("Location: /random_meal.php?showMeal=1");
+    }
 
     $combined = array_combine($filtered_m, $filtered_i);
 }
 
 include 'src/forms/random_meal_form.php';
+
