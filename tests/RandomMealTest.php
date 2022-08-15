@@ -20,6 +20,8 @@ class RandomMealTest extends TestCase
 
         $this->assertNotEmpty($random_meal);
         $this->assertIsArray($random_meal);
+        $this->assertArrayHasKey('strMeal', $random_meal);
+
     }
 
     public function testFilterResult()
@@ -35,7 +37,12 @@ class RandomMealTest extends TestCase
         $random_meal = self::$meal->filterResult($array, '123');
 
         $this->assertNotEmpty($random_meal);
-        $this->assertIsArray($random_meal);
+
+        $expected_array = [
+            '0' => 'wowow22',
+            '1' => 'wwweeeeww33'
+        ];
+        $this->assertSame($expected_array, $random_meal);
     }
 
     public function testCleanArray()
@@ -46,10 +53,17 @@ class RandomMealTest extends TestCase
           '2' => 'test',
           '3' => 'woah',
           '4' => 'yes',
+          '5' => '    '
+        ];
+
+        $expected_array = [
+            '2' => 'test',
+            '3' => 'woah',
+            '4' => 'yes'
         ];
 
         $random_meal = self::$meal->cleanArray($array);
         $this->assertIsArray($random_meal);
-        $this->assertNotSame($array, $random_meal);
+        $this->assertSame($expected_array, $random_meal);
     }
 }
