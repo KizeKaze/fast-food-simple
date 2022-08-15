@@ -1,5 +1,5 @@
 <?php $User = new  \App\Classes\User(); ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/index.php">Food United</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,11 +22,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/cart.php">Shopping Cart</a>
                     </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout.php">Logout</a>
-                </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/src/forms/vue_groceries_form.php">Vue Groceries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/random_meal.php">Hungry?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout.php">Logout</a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">

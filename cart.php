@@ -55,8 +55,10 @@ include "includes/header.php"; ?>
 
     if ($_POST) {
 
+
         $db = Database::getinstance();
         $grand_total = sanitize($_POST['grand_total']);
+
         $params = [
             'user_id' => $_SESSION['user_id'],
             'grand_total' => $grand_total
