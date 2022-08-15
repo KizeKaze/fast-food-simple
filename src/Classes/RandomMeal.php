@@ -15,14 +15,14 @@ class RandomMeal
         $response = curl_exec($ch);
 
         if($e = curl_error($ch)) {
-            echo $e;
+            return [];
         } else {
             $decoded = json_decode($response, true);
         }
 
         curl_close($ch);
 
-        return $decoded['meals'][0];
+        return $decoded['meals'][0] ?? [];
     }
 
     public function filterResult($array, $string): array
