@@ -1,4 +1,9 @@
 <div class="container lg">
+    <div class="card mb-3 mt-3">
+        <div class="well">
+            <h3>Hey, I have recently integrated an API into the project, interested? <a href="/random_meal.php">Click Here</a></h3>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <form action="../../index.php" method="post">
