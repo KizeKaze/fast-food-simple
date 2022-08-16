@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container lg">
     <div class="row justify-content-center">
-        <div class="card col-sm-6">
+        <div class="card col-sm-12 col-md-6">
             <div class="card">
                 <div class="card-header">
                     Hungry?
