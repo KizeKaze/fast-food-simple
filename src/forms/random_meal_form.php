@@ -19,7 +19,7 @@
                     <h5 class="card-title">Ingredients You Will Need</h5>
                     <ul>
                        <?php foreach ($combined as $key => $value) : ?>
-                            <li><?="$key; " . " - " . "$value"; ?></li>
+                            <li><?="$key" . " - " . "$value"; ?></li>
                        <?php endforeach; ?>
                     </ul>
                     <h5 class="card-title">Cooking Instructions</h5>
