@@ -46,12 +46,12 @@ if (isset($errors)) {
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
             <?php if ($User->isAdmin()) : ?>
-                <th>ID</th>
+                <th class="hide_mobile_large">ID</th>
             <?php endif; ?>
             <th>Name</th>
-            <th>Description</th>
+            <th class="hide_mobile_large">Description</th>
             <th>Cost</th>
-            <th>Type</th>
+            <th class="hide_mobile_large">Type</th>
             <?php if ($User->isAdmin()) : ?>
                 <th colspan="2">Options</th>
                 <th>Quantity</th>
@@ -72,12 +72,12 @@ if (isset($errors)) {
                 $type = $row['type'];
                 ?>
                 <?php if ($User->isAdmin()) : ?>
-                    <td><?= $id ?></td>
+                    <td class="hide_mobile_large"><?= $id ?></td>
                 <?php endif; ?>
                 <td><?= $name ?></td>
-                <td><textarea class="form-control" readonly><?=$description ?></textarea></td>
+                <td class="hide_mobile_large"><textarea class="form-control" readonly><?=$description ?></textarea></td>
                 <td><?= $cost ?></td>
-                <td><?= $type ?></td>
+                <td class="hide_mobile_large"><?= $type ?></td>
                 <?php if ($User->isAdmin()) : ?>
                         <td>
                             <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $id ?>">Edit</a>
