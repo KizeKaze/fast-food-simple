@@ -1,5 +1,5 @@
 body {
-    background-color: darkslategrey;
+    background-color: #d9d9d9;
 }
 
 .container {
@@ -39,7 +39,7 @@ body {
 }
 
 @media screen and (max-width: 425px) {
-    .screen_size {
+    .hide_mobile_large {
         display: none !important;
     }
 }
