@@ -1,5 +1,5 @@
 body {
-    background-color: darkslategrey;
+    background-color: #d9d9d9;
 }
 
 .container {
@@ -36,4 +36,10 @@ body {
     margin-bottom: 5px;
     font-weight: bold;
     text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+    .hide_mobile_large {
+        display: none !important;
+    }
 }
