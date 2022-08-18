@@ -49,7 +49,7 @@ if (isset($errors)) {
                 <th>ID</th>
             <?php endif; ?>
             <th>Name</th>
-            <th>Description</th>
+            <th class="screen_size">Description</th>
             <th>Cost</th>
             <th>Type</th>
             <?php if ($User->isAdmin()) : ?>
@@ -75,7 +75,7 @@ if (isset($errors)) {
                     <td><?= $id ?></td>
                 <?php endif; ?>
                 <td><?= $name ?></td>
-                <td><textarea class="form-control" readonly><?=$description ?></textarea></td>
+                <td class="screen_size"><textarea class="form-control" readonly><?=$description ?></textarea></td>
                 <td><?= $cost ?></td>
                 <td><?= $type ?></td>
                 <?php if ($User->isAdmin()) : ?>
