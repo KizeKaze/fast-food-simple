@@ -43,3 +43,7 @@ body {
         display: none !important;
     }
 }
+
+.row {
+    margin: 0;
+}
