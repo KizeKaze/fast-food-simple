@@ -1,5 +1,5 @@
 <div class='container'>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center gx-0">
         <div class="card col-lg-6">
         <?php
             ($cart_amount[0]['amount'] >= 1) ? include "includes/success.php" : include "includes/errors.php";
