@@ -1,25 +1,23 @@
 <div class='container'>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center gx-0">
         <div class="card col-sm-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
                 <?php include "includes/success.php"; ?>
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <form action="" method="GET">
-                            <div class="input-group mb-1">
-                                <span class="input-group-text" id="basic-addon-type">Add Type</span>
-                                <input class="form-control" type="text" name="add">
-                                <button class="btn btn-success">Add</button>
-                            </div>
-                        </form>
-                    </div>
-                    <?php include 'src/forms/type_edit_form.php' ?>
+                <div class="col-sm-12 col-md-12">
+                    <form action="" method="GET">
+                        <div class="input-group mb-1">
+                            <span class="input-group-text" id="basic-addon-type">Add Type</span>
+                            <input class="form-control" type="text" name="add">
+                            <button class="btn btn-success">Add</button>
+                        </div>
+                    </form>
                 </div>
+                <?php include 'src/forms/type_edit_form.php' ?>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center gx-0">
         <div class="card col-sm-6">
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
