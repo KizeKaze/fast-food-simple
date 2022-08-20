@@ -1,7 +1,40 @@
 <div class="container lg">
     <div class="card mb-3 mt-3">
-        <div class="well">
-            <h3>Hey, I have recently integrated an API into the project, interested? <a href="/random_meal.php">Click Here</a></h3>
+        <div class="card-body">
+            <h5 class="card-title">Project Summary</h5>
+            <p class="card-text">Hey thanks for checking my project out. This project allows Users to grocery shop and Admins to manage the items and grocery shop.</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>User Features</strong>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Add items to your personal cart</li>
+                                <li class="list-group-item">Two different ways to search for items</li>
+                                <li class="list-group-item">Update quantities in personal cart</li>
+                                <li class="list-group-item">Remove items from personal cart</li>
+                                <li class="list-group-item">Purchase items in your personal cart*<br>("Purchased" items are logged into the database along with the user purchasing the items, price and date.)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Admin Features</strong>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">All User Features</li>
+                                <li class="list-group-item">Add/Edit/Delete Items</li>
+                                <li class="list-group-item">Add/Edit/Delete Types</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p>I have also integrated an API <a href="/random_meal.php">here</a> and use Vue to add new items for Users and Admins <a href="/src/forms/vue_groceries_form.php">here</a></p>
         </div>
     </div>
     <div class="card">
