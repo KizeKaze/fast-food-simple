@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="card col-sm-6">
+        <div class="card col-sm-6 gx-0">
             <div class="card-body">
                 <?php
                 include "includes/errors.php";
