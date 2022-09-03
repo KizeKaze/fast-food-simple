@@ -1,5 +1,5 @@
 composer.lock
 /vendor
 /.idea
-/images
-!/images/coming-soon.jpg
+/src/images
+!/src/images/coming-soon.jpg
