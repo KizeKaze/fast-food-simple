@@ -15,7 +15,7 @@ if (isset($item_added)) {
                 ?>
                 <h5 class="card-title text-center align-middle">Add an item to the menu</h5>
                 <hr>
-                <form action="" method="post" class="form_index">
+                <form action="" method="post" class="form_index" enctype="multipart/form-data">
                     <div>
                         <label class="input-group-addon" for="name"></label>
                         <div class="input-group">
@@ -50,6 +50,11 @@ if (isset($item_added)) {
                                     <option value="<?= $type['type_id'] ?>"><?= $type['type'] ?></option>
                                 <?php } ?>
                             </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="content" class="input-group">
+                            <input class="form-control" type="file" name="uploadfile" value="">
                         </div>
                     </div>
                     <br>
