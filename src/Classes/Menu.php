@@ -90,12 +90,14 @@ class Menu
         $description = $param['description'];
         $cost = $param['cost'];
         $type = $param['type'];
+        $image = $param['image'];
 
-        $stmt = $db->prepare("INSERT INTO item (name, description, cost, type_id) VALUES (:name, :description, :money, :type)");
+        $stmt = $db->prepare("INSERT INTO item (name, description, cost, type_id, image) VALUES (:name, :description, :money, :type, :image)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':money', $cost);
         $stmt->bindParam(':type', $type);
+        $stmt->bindParam(':image', $image);
         $stmt->execute();
 
     }
