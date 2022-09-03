@@ -15,11 +15,13 @@ $params = [
     'id' => $id
 ];
 
-$result = $query->CustomSQL('SELECT * FROM item WHERE id = :id', $params);
-if (!$result) {
+$results = $query->CustomSQL('SELECT * FROM item WHERE id = :id', $params);
+$chunk = $results[0];
+if (!$chunk) {
     $_SESSION['failure'] = 'Sorry, we could not find that item';
     header('Location: index.php');
     exit();
 }
-echo "This item exists!";
+
+require 'src/forms/show_item_details_form.php';
 

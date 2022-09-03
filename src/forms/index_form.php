@@ -108,7 +108,7 @@ if (isset($errors)) {
                 <?php if ($User->isAdmin()) : ?>
                     <td class="hide_mobile_large"><?= $id ?></td>
                 <?php endif; ?>
-                <td><a href="../../show_item_details.php?item=<?= $id ?>" class="text-decoration-none link-dark"><?= $name ?></a></td>
+                <td><a href="../../show_item_details.php?item=<?= $id ?>" class="text-decoration-none"><?= $name ?></a></td>
                 <td class="hide_mobile_large"><textarea class="form-control" readonly><?=$description ?></textarea></td>
                 <td><?= $cost ?></td>
                 <td class="hide_mobile_large"><?= $type ?></td>
