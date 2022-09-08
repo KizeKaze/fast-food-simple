@@ -52,12 +52,9 @@ if (isset($item_added)) {
                             </select>
                         </div>
                     </div>
-                    <div>
-                        <div id="content" class="input-group">
-                            <input class="form-control" type="file" name="uploadfile" value="">
-                        </div>
+                    <div id="content" class="input-group">
+                        <input class="form-control" type="file" name="uploadfile" value="">
                     </div>
-                    <br>
                     <hr>
                     <button type="submit" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

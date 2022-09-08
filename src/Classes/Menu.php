@@ -64,11 +64,11 @@ class Menu
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateItem($id, $name, $description, $cost, $type): void
+    public function updateItem($id, $name, $description, $cost, $type, $image): void
     {
     $db = Database::getInstance();
 
-    $sql = "UPDATE item SET name = :name, description = :description, cost = :cost, type_id = :type_id WHERE id = :id";
+    $sql = "UPDATE item SET name = :name, description = :description, cost = :cost, type_id = :type_id, image = :image WHERE id = :id";
 
     $stmt = $db->prepare($sql);
 
@@ -76,6 +76,7 @@ class Menu
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':cost', $cost);
     $stmt->bindParam(':type_id', $type);
+    $stmt->bindParam(':image', $image);
     $stmt->bindParam(':id', $id);
 
     $stmt->execute();
