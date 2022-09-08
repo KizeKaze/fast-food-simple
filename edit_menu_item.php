@@ -39,6 +39,10 @@
                 $errors[] = "Invalid Cost";
             }
 
+            if (empty($image)) {
+                $image = "coming-soon.jpg";
+            }
+
             if(empty($errors)) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id, $image);
                 header("Location: edit_menu_item.php?edit=$id");
