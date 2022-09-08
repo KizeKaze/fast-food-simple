@@ -43,6 +43,10 @@ if ($_POST) {
         $cost = $Item->getCost();
         $type = $Item->getType();
 
+        if (empty($filename)) {
+            $filename = "coming-soon.jpg";
+        }
+
         $param = [
             'name' => $name,
             'description' => $description,
