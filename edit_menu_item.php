@@ -13,6 +13,7 @@
         $cost = $result[0]['cost'];
         $type_id = $result[0]['type_id'];
         $image = $result[0]['image'];
+        $previous_image = $result[0]['image'];
 
         if(isset($_POST['update']) && $_POST['update']) {
 
@@ -40,7 +41,7 @@
             }
 
             if (empty($image)) {
-                $image = "coming-soon.jpg";
+                $image = $previous_image;
             }
 
             if(empty($errors)) {
