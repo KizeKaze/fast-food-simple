@@ -12,9 +12,9 @@
                 <li class="list-group-item">$<?= $chunk['cost'] ?> each</li>
                 <?php if ($User->loggedIn()) : ?>
                 <form action="" method="get">
-                    <select class="add_qty form-select form-control" aria-label="Quantity select" name="qty">
-                        <?php $menu->showQty(); ?>
-                    </select>
+                <select class="add_qty list-group-item form-select form-control" aria-label="Quantity select" name="qty">
+                    <?php $menu->showQty(); ?>
+                </select>
             </ul>
             <div class="card-body">
                 <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit" name="add">Add Item</button>
