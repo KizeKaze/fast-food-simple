@@ -15,7 +15,7 @@ if (isset($item_added)) {
                 ?>
                 <h5 class="card-title text-center align-middle">Add an item to the menu</h5>
                 <hr>
-                <form action="" method="post" class="form_index">
+                <form action="" method="post" class="form_index" enctype="multipart/form-data">
                     <div>
                         <label class="input-group-addon" for="name"></label>
                         <div class="input-group">
@@ -52,7 +52,9 @@ if (isset($item_added)) {
                             </select>
                         </div>
                     </div>
-                    <br>
+                    <div id="content" class="input-group">
+                        <input class="form-control" type="file" name="uploadfile" value="">
+                    </div>
                     <hr>
                     <button type="submit" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

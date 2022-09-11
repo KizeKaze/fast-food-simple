@@ -82,7 +82,7 @@ include "includes/header.php"; ?>
         $stmt->execute();
         $query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
 
-        $_SESSION['purchase'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
+        $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
 
         header('Location: index.php');
         exit();

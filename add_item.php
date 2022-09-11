@@ -30,6 +30,10 @@ if ($_POST) {
     }
 
     if (!count($errors)) {
+        $filename = $_FILES['uploadfile']['name'];
+        $temp_name = $_FILES['uploadfile']['tmp_name'];
+        $folder = 'src/images/' . $filename;
+
         $Item->setName($_POST['name']);
         $Item->setDescription($_POST['description']);
         $Item->setCost($cost);
@@ -39,20 +43,28 @@ if ($_POST) {
         $cost = $Item->getCost();
         $type = $Item->getType();
 
+        if (empty($filename)) {
+            $filename = "coming-soon.jpg";
+        }
+
         $param = [
             'name' => $name,
             'description' => $description,
             'cost' => $cost,
-            'type' => $type
+            'type' => $type,
+            'image' => $filename
         ];
 
         $menu->addRows($param);
+
+        move_uploaded_file($temp_name, $folder);
 
         $item_added = [
             'name' => $Item->getName(),
             'description' => $Item->getDescription(),
             'cost' => $Item->getCost(),
-            'type' => $Item->getType()
+            'type' => $Item->getType(),
+            'image' => $filename
         ];
     }
 }

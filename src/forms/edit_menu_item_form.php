@@ -3,7 +3,7 @@
         <div class="card col-md-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
-                <form action="" method="POST" class="form_index">
+                <form action="" method="POST" class="form_index" enctype="multipart/form-data">
                     <input type="hidden" name="edit" value="<?= $item_id ?>">
                     <div>
                         <label class="input-group-addon" for="name"></label>
@@ -45,9 +45,18 @@
                             </select>
                         </div>
                     </div>
+                    <div id="content" class="input-group">
+                        <input class="form-control" type="file" name="uploadfile" value="">
+                    </div>
+                    <div class="text-center">
+                        <h4 id="image">Current database image</h4>
+                    </div>
+                    <div>
+                        <img class="mx-auto d-block" src="src/images/<?= $image ?>" width="75%" height="300px" alt="item image">
+                    </div>
                     <hr>
                     <button type="submit" class="btn btn-primary" name="update" value=<?= $id ?>>Update</button>
-                    <a href="/index.php" class="btn btn-danger">Cancel</a>
+                    <a href="/index.php" class="btn btn-danger">Go Back</a>
                 </form>
             </div>
         </div>

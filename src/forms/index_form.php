@@ -65,7 +65,8 @@
                 </div>
             </form>
             <?php include "includes/success.php"; ?>
-            <?php include "includes/purchase.php"; ?>
+            <?php include "includes/message.php"; ?>
+            <?php include "includes/failure.php"; ?>
         </div>
     </div>
 </div>
@@ -107,7 +108,7 @@ if (isset($errors)) {
                 <?php if ($User->isAdmin()) : ?>
                     <td class="hide_mobile_large"><?= $id ?></td>
                 <?php endif; ?>
-                <td><?= $name ?></td>
+                <td><a href="../../show_item_details.php?item=<?= $id ?>" class="text-decoration-none"><?= $name ?></a></td>
                 <td class="hide_mobile_large"><textarea class="form-control" readonly><?=$description ?></textarea></td>
                 <td><?= $cost ?></td>
                 <td class="hide_mobile_large"><?= $type ?></td>

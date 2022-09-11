@@ -1,9 +1,9 @@
 <?php
-if (isset($_SESSION['purchase'])) {
+if (isset($_SESSION['message'])) {
     echo "<div class='success-container container'>";
     echo "<div class='item_added'>";
-    echo $_SESSION['purchase'];
+    echo $_SESSION['message'];
     echo "</div>";
     echo "</div>";
-    $_SESSION['purchase'] = null;
+    $_SESSION['message'] = null;
 }
