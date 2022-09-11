@@ -65,7 +65,7 @@
                 </div>
             </form>
             <?php include "includes/success.php"; ?>
-            <?php include "includes/purchase.php"; ?>
+            <?php include "includes/message.php"; ?>
             <?php include "includes/failure.php"; ?>
         </div>
     </div>
