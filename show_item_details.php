@@ -42,7 +42,7 @@ if (isset($_GET['add'])) {
     }
 }
 
-if (!$_GET['item']) {
+if (!isset($_GET['item'])) {
     header('Location: index.php');
     exit();
 }
