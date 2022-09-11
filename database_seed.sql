@@ -1,16 +1,17 @@
 CREATE DATABASE IF NOT EXISTS fast_food;
 USE fast_food;
 
-CREATE TABLE item
+create table item
 (
-    id          int AUTO_INCREMENT,
-    name        varchar(255)   NOT NULL,
-    description text           NULL,
-    cost        decimal(11, 2) NULL,
-    type_id     int            NOT NULL,
-    CONSTRAINT item_pk
-        PRIMARY KEY (id)
+    id          int auto_increment
+        primary key,
+    name        varchar(255)                           not null,
+    description text                                   null,
+    cost        decimal(11, 2)                         null,
+    type_id     int                                    not null,
+    image       varchar(255) default 'coming-soon.jpg' null
 );
+
 
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Carrots', '1 Baby carrots in a bag', 1.99, 2);
 INSERT INTO fast_food.item (name, description, cost, type_id) VALUES ('Apple', 'An Apple', 0.50, 1);

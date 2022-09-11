@@ -62,8 +62,8 @@ if (!$chunk) {
     exit();
 }
 
-$name = $chunk['name'];
-$image = $chunk['image'];
+$name = $chunk['name'] ?? null;
+$image = $chunk['image'] ?? null;
 
 require 'src/forms/show_item_details_form.php';
 
