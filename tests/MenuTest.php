@@ -77,6 +77,7 @@ class MenuTest extends TestCase
         $description = 'Sometimes it do what it be';
         $cost = '1.99';
         $type_id = '9';
+        $image = 'coming-soon.jpg';
 
 
         $pristine_name = $name;
@@ -96,6 +97,7 @@ class MenuTest extends TestCase
         $description = 'Sometimes';
         $cost = '17.99';
         $type_id = '13';
+        $image = 'coming-soon.jpg';
 
         self::$Menu->updateItem($inserted_id, $name, $description, $cost, $type_id);
 

@@ -42,15 +42,19 @@ include "includes/header.php"; ?>
     }
     $query = new \App\Classes\Query();
 
-    //grab cart for compare on cart_form.php
-    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart');
     $params = [
         'user_id' => $_SESSION['user_id'],
     ];
 
+    //grab cart for compare on cart_form.php
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $_SESSION['user_id']);
+
+
     $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
 
-    $params = ['user_id' => $_SESSION['user_id']];
+    $params = [
+        'user_id' => $_SESSION['user_id']
+    ];
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
 
     if ($_POST) {
@@ -73,7 +77,7 @@ include "includes/header.php"; ?>
        $order_id = $result[0]['order_id'];
        $user_id = $_SESSION['user_id'];
 
-        $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
+       $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
         FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
         INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
 
@@ -88,9 +92,9 @@ include "includes/header.php"; ?>
         exit();
     }
 
-if (count($result) <= 0) {
-   $errors[] = 'Your shopping cart is empty, try adding an item!';
-}
+    if (count($result) <= 0) {
+       $errors[] = 'Your shopping cart is empty, try adding an item!';
+    }
 
     $total = 0;
 include 'src/forms/cart_form.php';
