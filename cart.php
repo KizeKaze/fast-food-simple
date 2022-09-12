@@ -42,9 +42,9 @@ include "includes/header.php"; ?>
     }
     $query = new \App\Classes\Query();
 
-$params = [
-    'user_id' => $_SESSION['user_id'],
-];
+    $params = [
+        'user_id' => $_SESSION['user_id'],
+    ];
 
     //grab cart for compare on cart_form.php
     $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $_SESSION['user_id']);
