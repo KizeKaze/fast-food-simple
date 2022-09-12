@@ -42,15 +42,19 @@ include "includes/header.php"; ?>
     }
     $query = new \App\Classes\Query();
 
+$params = [
+    'user_id' => $_SESSION['user_id'],
+];
+
     //grab cart for compare on cart_form.php
-    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart');
-    $params = [
-        'user_id' => $_SESSION['user_id'],
-    ];
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $_SESSION['user_id']);
+
 
     $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
 
-    $params = ['user_id' => $_SESSION['user_id']];
+    $params = [
+        'user_id' => $_SESSION['user_id']
+    ];
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
 
     if ($_POST) {
