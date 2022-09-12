@@ -77,7 +77,7 @@ include "includes/header.php"; ?>
        $order_id = $result[0]['order_id'];
        $user_id = $_SESSION['user_id'];
 
-        $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
+       $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
         FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
         INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
 
@@ -92,9 +92,9 @@ include "includes/header.php"; ?>
         exit();
     }
 
-if (count($result) <= 0) {
-   $errors[] = 'Your shopping cart is empty, try adding an item!';
-}
+    if (count($result) <= 0) {
+       $errors[] = 'Your shopping cart is empty, try adding an item!';
+    }
 
     $total = 0;
 include 'src/forms/cart_form.php';
