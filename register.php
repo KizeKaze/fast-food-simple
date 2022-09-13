@@ -46,7 +46,7 @@ if($_POST) {
 
         $User->insert($param);
 
-        $item_added = 'Account created, Click <a href="login.php">here</a> to login';
+        $item_added = "Account created, Click <a href='login.php'>here</a> to login";
     }
 }
 include 'src/forms/register_form.php';
