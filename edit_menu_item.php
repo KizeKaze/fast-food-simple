@@ -46,10 +46,12 @@
 
             if(empty($errors)) {
                 $menu->updateItem($id, $name, $description, $cost, $type_id, $image);
+                $_SESSION['message'] = 'Item has been updated';
+                move_uploaded_file($temp_name, $folder);
                 header("Location: edit_menu_item.php?edit=$id");
+                exit();
             }
 
-            move_uploaded_file($temp_name, $folder);
         }
         include 'src/forms/edit_menu_item_form.php';
         ?>

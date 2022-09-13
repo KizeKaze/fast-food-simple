@@ -3,6 +3,7 @@
         <div class="card col-md-6">
             <div class="card-body">
                 <?php include "includes/errors.php"; ?>
+                <?php include "includes/message.php"; ?>
                 <form action="" method="POST" class="form_index" enctype="multipart/form-data">
                     <input type="hidden" name="edit" value="<?= $item_id ?>">
                     <div>
