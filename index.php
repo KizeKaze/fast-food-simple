@@ -9,6 +9,11 @@ if (isset($_GET['add'])) {
         $item_id = sanitize($_GET['add']);
         $qty = sanitize($_GET['qty']);
 
+        if (!is_numeric($item_id)) {
+            $_SESSION['failure'] = 'What are you doing...';
+            header('Location: /index.php');
+            exit();
+        }
 
         $params = [
             'item_id' => $item_id,
