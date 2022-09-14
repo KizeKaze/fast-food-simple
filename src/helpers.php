@@ -28,5 +28,5 @@ function dd($array, $verbose = false): void
 
 function sanitize($data)
 {
- return $data = htmlspecialchars((trim($data)));
+ return htmlspecialchars((trim($data)));
 }

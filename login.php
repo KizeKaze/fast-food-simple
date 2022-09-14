@@ -39,6 +39,7 @@ if($_POST) {
                 $_SESSION['username'] = $result[0]['username'];
                 $_SESSION['email'] = $result[0]['email'];
                 $_SESSION['user_role'] = $result[0]['user_role'];
+                $_SESSION['toggle_summary'] = $result[0]['toggle_summary'];
 
                 header("Location: index.php");
                 exit();

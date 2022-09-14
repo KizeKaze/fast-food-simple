@@ -3,6 +3,7 @@
         <div class="card col-lg-6">
         <?php
             ($cart_amount[0]['amount'] >= 1) ? include "includes/success.php" : include "includes/errors.php";
+            include "includes/failure.php";
         ?>
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
@@ -34,7 +35,7 @@
                         </td>
                             <td>
                                 <input type="hidden" name="id" value="<?= $id ?>">
-                                <button type="submit" class="btn btn-primary" name="update" value="<?= $item_id ?>">Update</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                                 </form>
                             </td>
                         <td><?= '$' . number_format(($qty * $cost), 2) ?></td>

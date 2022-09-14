@@ -1,5 +1,5 @@
 <div class="container lg">
-    <div class="card mb-3 mt-3">
+    <div id="atAGlance" class="card mb-3 mt-3">
         <div class="card-body">
             <h5 class="card-title">Project Summary</h5>
             <p class="card-text">Hey thanks for checking my project out. This project allows Users to grocery shop and Admins to manage the items and grocery shop.</p>

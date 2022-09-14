@@ -4,6 +4,7 @@ set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'
 require 'vendor/autoload.php';
 
 $menu = new \App\Classes\Menu();
+$modifyCart = new \App\Classes\Cart();
 
 ?>
 
