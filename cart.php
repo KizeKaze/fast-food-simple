@@ -15,6 +15,19 @@ include "includes/header.php"; ?>
         $id = sanitize($_GET['id']);
         $qty = sanitize($_GET['qty']);
 
+        if ($qty < 0 || $qty > 5) {
+            $_SESSION['failure'] = 'Qty must be between equal to 1 or up to 5';
+            header('Location: cart.php');
+            exit();
+        }
+
+        if (!is_numeric($id)) {
+            $_SESSION['failure'] = 'What are you doing...';
+            header('Location: cart.php');
+            exit();
+        }
+
+
         $params = [
             'user_id' => $_SESSION['user_id'],
             'item_id' => $id,
@@ -58,7 +71,6 @@ include "includes/header.php"; ?>
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
 
     if ($_POST) {
-
 
         $db = Database::getinstance();
         $grand_total = sanitize($_POST['grand_total']);
