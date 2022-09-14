@@ -15,7 +15,7 @@ if (isset($_GET['add'])) {
             'user_id' => $_SESSION['user_id']
         ];
         //check db for any items already in cart
-        $result = $query->CustomSQL('SELECT * FROM cart WHERE item_id = :item_id AND user_id = :user_id', $params);
+        $result = $modifyCart->checkCart($params);
         if (count($result) >= 1) {
             //update instead of insert
             $params = [
@@ -24,7 +24,7 @@ if (isset($_GET['add'])) {
                 'qty' => $qty
             ];
 
-            $query->CustomSQL('UPDATE cart SET qty = :qty WHERE user_id = :user_id AND item_id = :item_id', $params);
+            $modifyCart->updateCart($params);
             $item_added = 'Item updated in shopping cart';
         } else {
             $params = [

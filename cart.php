@@ -21,7 +21,7 @@ include "includes/header.php"; ?>
             'qty' => $qty
         ];
 
-        $query->CustomSQL('UPDATE cart SET qty = :qty WHERE user_id = :user_id AND item_id = :item_id', $params);
+        $modifyCart->updateCart($params);
         $item_added = 'Item updated';
     }
 

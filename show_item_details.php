@@ -23,7 +23,7 @@ if (isset($_GET['add'])) {
                 'qty' => $qty
             ];
 
-            $query->CustomSQL('UPDATE cart SET qty = :qty WHERE user_id = :user_id AND item_id = :item_id', $params);
+            $modifyCart->updateCart($params);
             $_SESSION['message'] = "Item updated in shopping cart";
             header('Location: index.php');
             exit();
@@ -35,7 +35,7 @@ if (isset($_GET['add'])) {
                 'qty' => $qty
             ];
 
-            $query->insert('cart', $params);
+            $modifyCart->insertCart($params);
             $_SESSION['message'] = 'Item added to shopping cart';
             header('Location: index.php');
             exit();
