@@ -50,6 +50,10 @@ if(isset($_POST['type_edit'])) {
 
     if(empty($type)) {
         $errors[] = 'Edit field is blank, edit rejected';
+    }
+
+    if (!is_numeric($id)) {
+        $_SESSION['failure'] = 'You\'re an admin, stop that.';
     } else {
         $param = [
             'type' => $type

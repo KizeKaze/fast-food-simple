@@ -9,7 +9,14 @@ if (isset($_GET['add'])) {
         $item_id = sanitize($_GET['add']);
         $qty = sanitize($_GET['qty']);
 
-        if (!is_numeric($item_id)) {
+        $modifyCart->checkQty($qty);
+        $modifyCart->checkId($item_id);
+
+        $params = [
+            'item_id' => $item_id
+        ];
+        $result = $query->CustomSQL('SELECT * FROM item WHERE id = :item_id', $params);
+        if (!count($result)) {
             $_SESSION['failure'] = 'What are you doing...';
             header('Location: /index.php');
             exit();

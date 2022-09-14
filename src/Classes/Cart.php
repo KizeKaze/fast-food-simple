@@ -27,5 +27,23 @@ class Cart
         $this->query->insert('cart', $params);
     }
 
+    function checkQty($qty)
+    {
+        if ($qty < 0 || $qty > 5) {
+            $_SESSION['failure'] = 'Qty must be between equal to 1 or up to 5';
+            header('Location: index.php');
+            exit();
+        }
+    }
+
+    function checkId($id)
+    {
+        if (!is_numeric($id)) {
+            $_SESSION['failure'] = 'What are you doing...';
+            header('Location: /index.php');
+            exit();
+        }
+    }
+
 
 }
