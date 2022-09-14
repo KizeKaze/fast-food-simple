@@ -15,6 +15,19 @@ if (isset($_GET['add'])) {
         $item_id = sanitize($_GET['add']);
         $qty = sanitize($_GET['qty']);
 
+        $modifyCart->checkQty($qty);
+        $modifyCart->checkId($item_id);
+
+        $params = [
+            'item_id' => $item_id
+        ];
+        $result = $query->CustomSQL('SELECT * FROM item WHERE id = :item_id', $params);
+        if (!count($result)) {
+            $_SESSION['failure'] = 'What are you doing...';
+            header('Location: /index.php');
+            exit();
+        }
+
         $params = [
             'item_id' => $item_id,
         ];
@@ -119,7 +132,7 @@ if (empty($result)) {
                 <?php if ($User->isAdmin()) : ?>
                     <td><?= $id ?></td>
                 <?php endif; ?>
-                <td><?= $name ?></td>
+                <td><a href="../../show_item_details.php?item=<?= $id ?>" class="text-decoration-none"><?= $name ?></a></td>
                 <td><textarea class="form-control" readonly><?= $description ?></textarea></td>
                 <td><?= $cost ?></td>
                 <td><?= $type ?></td>
