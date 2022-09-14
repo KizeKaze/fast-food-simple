@@ -7,6 +7,13 @@
 
         $item_id = $_GET['edit'];
         $result = $menu->getItem($item_id);
+
+        if (empty($result)) {
+            $_SESSION['failure'] = 'What are you doing...';
+            header('Location: /index.php');
+            exit();
+        }
+
         $id = $result[0]['id'];
         $name = $result[0]['name'];
         $description = $result[0]['description'];
