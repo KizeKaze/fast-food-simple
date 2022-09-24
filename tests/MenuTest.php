@@ -84,8 +84,9 @@ class MenuTest extends TestCase
         $pristine_description = $description;
         $pristine_cost = $cost;
         $pristine_type_id = $type_id;
+        $pristine_image = $image;
 
-        $sql = "INSERT INTO item (name, description, cost, type_id) VALUES ('$name', '$description', '$cost', '$type_id')";
+        $sql = "INSERT INTO item (name, description, cost, type_id, image) VALUES ('$name', '$description', '$cost', '$type_id', '$image')";
         $stmt = self::$db->prepare($sql);
         $stmt->execute();
 
@@ -97,11 +98,11 @@ class MenuTest extends TestCase
         $description = 'Sometimes';
         $cost = '17.99';
         $type_id = '13';
-        $image = 'coming-soon.jpg';
+        $image = 'test.jpg';
 
-        self::$Menu->updateItem($inserted_id, $name, $description, $cost, $type_id);
+        self::$Menu->updateItem($inserted_id, $name, $description, $cost, $type_id, $image);
 
-        $sql = "SELECT name, description, cost, type_id FROM item WHERE id = $inserted_id";
+        $sql = "SELECT name, description, cost, type_id, image FROM item WHERE id = $inserted_id";
         $stmt = self::$db->prepare($sql);
         $stmt->execute();
         $filthy_results =  $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -110,6 +111,7 @@ class MenuTest extends TestCase
         $this->assertNotEquals($pristine_description, $filthy_results[0]['description']);
         $this->assertNotEquals($pristine_cost, $filthy_results[0]['cost']);
         $this->assertNotEquals($pristine_type_id, $filthy_results[0]['type_id']);
+        $this->assertNotEquals($pristine_image, $filthy_results[0]['image']);
     }
 
     public function testAddRows()
@@ -123,12 +125,14 @@ class MenuTest extends TestCase
         $pristine_description = $result['description'];
         $pristine_cost = $result['cost'];
         $pristine_type_id = $result['type_id'];
+        $pristine_image = $result['image'];
 
         $params = [
         'name' => 'addrowtest',
         'description' => 'words',
         'cost' => '170.99',
-        'type' => '5'
+        'type' => '5',
+        'image' => 'before.jpg'
         ];
 
         self::$Menu->addRows($params);
@@ -143,6 +147,7 @@ class MenuTest extends TestCase
         $dirty_description = $result['description'];
         $dirty_cost = $result['cost'];
         $dirty_type_id = $result['type_id'];
+        $dirty_image = $result['image'];
 
         $inserted_id = $id;
 
@@ -150,6 +155,7 @@ class MenuTest extends TestCase
         $this->assertNotSame($pristine_description, $dirty_description);
         $this->assertNotSame($pristine_cost, $dirty_cost);
         $this->assertNotSame($pristine_type_id, $dirty_type_id);
+        $this->assertNotSame($pristine_image, $dirty_image);
         self::$id[] = $inserted_id;
     }
 
