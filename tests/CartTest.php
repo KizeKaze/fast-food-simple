@@ -4,7 +4,7 @@
 use App\Classes\Database;
 use PHPUnit\Framework\TestCase;
 
-class Test extends TestCase
+class CartTest extends TestCase
 {
     public static PDO $db;
     public static $Cart;
@@ -118,6 +118,8 @@ class Test extends TestCase
 
         $this->assertSame($expected_result, $result[0]);
 
+        $inserted_id = -3;
+        self::$id[] = $inserted_id;
     }
 
 }
