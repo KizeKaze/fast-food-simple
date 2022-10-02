@@ -25,7 +25,6 @@ class CartTest extends TestCase
         $delete_stmt = self::$db->prepare($delete_sql);
         $delete_stmt->execute();
     }
-    //self::$id[] = $inserted_id;
 
     function testCheckCart() {
 
