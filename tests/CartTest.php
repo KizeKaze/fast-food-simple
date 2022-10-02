@@ -43,21 +43,29 @@ class CartTest extends TestCase
 
        $params = [
            'item_id' => -1,
-           'user_id' => -1
+           'user_id' => -1,
+           'qty' => 2
        ];
+
        self::$Query->insert('cart', $params);
 
        $inserted_id = -1;
 
        self::$id[] = $inserted_id;
 
+        $params = [
+            'item_id' => -1,
+            'user_id' => -1,
+        ];
+
        $second_cart = self::$Cart->checkCart($params);
 
        $expected_result = [
          'item_id' => -1,
          'user_id' => -1,
-         'qty' => 0
+         'qty' => 2
        ];
+
        $this->assertEquals($expected_result, $second_cart[0]);
 
     }
