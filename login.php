@@ -41,6 +41,8 @@ if($_POST) {
                 $_SESSION['user_role'] = $result[0]['user_role'];
                 $_SESSION['toggle_summary'] = $result[0]['toggle_summary'];
 
+                $_SESSION['login_message'] = "Welcome, " . $_SESSION['username'] . "";
+
                 header("Location: index.php");
                 exit();
             }

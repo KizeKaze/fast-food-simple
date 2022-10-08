@@ -31,12 +31,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout.php">Logout</a>
                     </li>
+                    <li>
+                        <button type="button" class="btn btn-outline-secondary"><?= $_SESSION['username'] ?></button>
+                    </li>
+                    <li>
+                        <?php include "includes/login_message.php"; ?>
+                    </li>
                 <?php else : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/login.php">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/register.php">Register</a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-outline-secondary" disabled >Guest</button>
                     </li>
                 <?php endif; ?>
             </ul>
