@@ -5,7 +5,7 @@
                 <?php include "includes/failure.php"; ?>
                 <h5 class="card-title text-center align-middle">Reset password</h5>
                 <hr>
-                <form class="login-form" action="enter_email.php" method="post">
+                <form class="login-form" action="new_pass_logic.php?token=<?= $token ?>" method="post">
                     <!-- form validation messages -->
                     <div class="input-group">
                         <span class="input-group-text" id="password">New Password</span>
