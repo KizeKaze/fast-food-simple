@@ -2,7 +2,8 @@
     <div class="row justify-content-center gx-0">
         <div class="card col-sm-12 col-md-6">
             <div class="card-body">
-                <?php include "includes/failure.php"; ?>
+                <?php include "includes/errors.php"; ?>
+                <?php include "includes/success.php"; ?>
                 <h5 class="card-title text-center align-middle">Reset password</h5>
                 <hr>
                 <form class="login-form" action="new_pass_logic.php?token=<?= $token ?>" method="post">

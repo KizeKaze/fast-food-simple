@@ -42,9 +42,10 @@ $query = new \App\Classes\Query();
     ];
     $query->insert('password_resets', $params);
 
+
     $to = $email;
     $subject = "Password Reset at rayxproject.com";
-     $msg = "Hi there, click on this <a href=\"http://localhost:9001/new_pass_logic.php?&token=" . $token . "\">link</a> to reset your password on our site";
+     $msg = "Hi there, click on this <a href=\"http://localhost:9001/new_pass_logic.php?&token=" . $token . ">link</a> to reset your password on our site";
     $msg = wordwrap($msg,70);
     $headers = "From: Admin@rayxproject.com";
     mail($to, $subject, $msg, $headers);
