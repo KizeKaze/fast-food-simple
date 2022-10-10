@@ -94,3 +94,15 @@ create table order_item
     qty       int          not null,
     primary key (order_id, user_id, item_id)
 );
+
+create table password_resets
+(
+    id    int auto_increment
+        primary key,
+    email varchar(255) null,
+    token varchar(255) null,
+    constraint password_resets_token_uindex
+        unique (token)
+);
+
+
