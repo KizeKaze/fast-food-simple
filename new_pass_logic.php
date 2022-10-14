@@ -25,23 +25,35 @@ if (isset($_POST['new_password'])) {
     }
 
 
-    if (isset($email[0]['email'])) {
-        $new_password = password_hash($password, PASSWORD_DEFAULT);
-        $params = [
-            'password' => $new_password,
-            'email' => $email[0]['email']
-        ];
-        $query->CustomSQL('UPDATE users SET password = :password WHERE email = :email', $params);
+    $exp_date = date("Y-m-d h:i:s");
+    $params = [
+        'token' => $token
+    ];
 
-        $params = [
-            'token' => $token,
-            'expired_token' => 1
-        ];
-        $query->CustomSQL('UPDATE password_resets SET expired_token = :expired_token WHERE token = :token', $params);
-        $item_added = "Password reset, you can <a href='login.php'>login</a> now";
+    $exp_token = $query->CustomSQL("SELECT timed_expired_token FROM password_resets WHERE token = :token", $params);
 
+
+    if ($exp_date > $exp_token[0]['timed_expired_token']) {
+        $errors[] = "24 has elapsed so your token has expired, please click <a href='enter_email.php'>here</a> to try again";
     } else {
-        $errors[] = "Expired Token, please click <a href='enter_email.php'>here</a> to try again";
+        if (isset($email[0]['email'])) {
+            $new_password = password_hash($password, PASSWORD_DEFAULT);
+            $params = [
+                'password' => $new_password,
+                'email' => $email[0]['email']
+            ];
+            $query->CustomSQL('UPDATE users SET password = :password WHERE email = :email', $params);
+
+            $params = [
+                'token' => $token,
+                'expired_token' => 1
+            ];
+            $query->CustomSQL('UPDATE password_resets SET expired_token = :expired_token WHERE token = :token', $params);
+            $item_added = "Password reset, you can <a href='login.php'>login</a> now";
+
+        } else {
+            $errors[] = "Expired Token, please click <a href='enter_email.php'>here</a> to try again";
+        }
     }
 }
 //assign token here if user has not yet clicked new_password

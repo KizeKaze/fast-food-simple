@@ -26,29 +26,13 @@ $query = new \App\Classes\Query();
          exit();
      }
 
-     $params = [
-         'email' => $email,
-         'expired_token' => 0
-     ];
-
-     $duplicate_email = $query->CustomSQL("SELECT email FROM password_resets WHERE email = :email AND expired_token = :expired_token", $params);
-
-     if ($duplicate_email) {
-        $_SESSION['failure'] = "Email has already been sent, please check your inbox or junk folder";
-        header('Location: enter_email.php');
-        exit();
-    }
-
     $token = bin2hex(random_bytes(50));
-
-     $date = date('m-d-Y');
-     dd($date);
-
+    $exp_date = date("Y-m-d h:i:s", strtotime("+ 1 day"));
 
     $params = [
         'email' => $email,
         'token' => $token,
-        'timed_expired_token' => date('h:i:sa')
+        'timed_expired_token' => $exp_date
     ];
     $query->insert('password_resets', $params);
 
