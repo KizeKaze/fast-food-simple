@@ -8,6 +8,13 @@ if (isset($_POST['new_password'])) {
 
     $password = sanitize($_POST['password']);
     $confirm_password = sanitize($_POST['confirm_password']);
+    $token = sanitize($_GET['token']);
+
+    $params = [
+        'token' => $token,
+        'expired_token' => 0
+    ];
+    $email = $query->CustomSQL("SELECT email FROM password_resets WHERE token = :token AND expired_token = :expired_token LIMIT 1", $params);
 
     if (empty($password)) {
         $errors[] = "Please enter a password";
@@ -17,15 +24,8 @@ if (isset($_POST['new_password'])) {
         $errors[] = "Passwords did not match";
     }
 
-    $token = sanitize($_GET['token']);
 
-    $params = [
-        'token' => $token
-    ];
-    $email = $query->CustomSQL("SELECT email FROM password_resets WHERE token = :token LIMIT 1", $params);
-
-
-    if ($email[0]['email']) {
+    if (isset($email[0]['email'])) {
         $new_password = password_hash($password, PASSWORD_DEFAULT);
         $params = [
             'password' => $new_password,
@@ -34,13 +34,14 @@ if (isset($_POST['new_password'])) {
         $query->CustomSQL('UPDATE users SET password = :password WHERE email = :email', $params);
 
         $params = [
-            'token' => $token
+            'token' => $token,
+            'expired_token' => 1
         ];
-        $query->CustomSQL('DELETE FROM password_resets WHERE token = :token', $params);
+        $query->CustomSQL('UPDATE password_resets SET expired_token = :expired_token WHERE token = :token', $params);
         $item_added = "Password reset, you can <a href='login.php'>login</a> now";
 
     } else {
-        $errors[] = "Invalid Token, please reach out to the site admin for help";
+        $errors[] = "Expired Token, please click <a href='enter_email.php'>here</a> to try again";
     }
 }
 //assign token here if user has not yet clicked new_password
