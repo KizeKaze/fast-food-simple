@@ -16,15 +16,6 @@ if (isset($_POST['new_password'])) {
     ];
     $email = $query->CustomSQL("SELECT email FROM password_resets WHERE token = :token AND expired_token = :expired_token LIMIT 1", $params);
 
-    if (empty($password)) {
-        $errors[] = "Please enter a password";
-    } else if (empty($confirm_password)) {
-        $errors[] = "Please confirm your password";
-    } else if ($password != $confirm_password) {
-        $errors[] = "Passwords did not match";
-    }
-
-
     $exp_date = date("Y-m-d h:i:s");
     $params = [
         'token' => $token
@@ -32,10 +23,25 @@ if (isset($_POST['new_password'])) {
 
     $exp_token = $query->CustomSQL("SELECT timed_expired_token FROM password_resets WHERE token = :token", $params);
 
-
-    if ($exp_date > $exp_token[0]['timed_expired_token']) {
+    if (empty($password)) {
+        $errors[] = "Please enter a password";
+    } else if (empty($confirm_password)) {
+        $errors[] = "Please confirm your password";
+    } else if ($password != $confirm_password) {
+        $errors[] = "Passwords did not match";
+    } else if (empty($exp_token)) {
         $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
-    } else {
+    } else if (empty($email[0]['email'])) {
+        $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
+    }
+
+    if (!empty($exp_token)) {
+        if ($exp_date > $exp_token[0]['timed_expired_token']) {
+            $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
+        }
+    }
+
+    if(empty($errors)) {
         if (isset($email[0]['email'])) {
             $new_password = password_hash($password, PASSWORD_DEFAULT);
             $params = [
