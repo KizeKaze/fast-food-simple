@@ -39,6 +39,4 @@ class Password
         return "Password reset, you can <a href='login.php'>login</a> now";
 
     }
-
-
 }
