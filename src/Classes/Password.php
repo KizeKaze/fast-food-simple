@@ -39,4 +39,12 @@ class Password
         return "Password reset, you can <a href='login.php'>login</a> now";
 
     }
+
+    public function pendingEmail() {
+        if (!$_GET['email']) {
+            $_SESSION['failure'] = "What are you doing..";
+            header('Location: enter_email.php');
+            exit();
+        }
+    }
 }

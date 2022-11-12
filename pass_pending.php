@@ -1,12 +1,9 @@
 <?php include "includes/header.php" ?>
-<?php include "includes/nav.php"; ?>
+<?php include "includes/nav.php";
 
-<?php
-if (!$_GET['email']) {
-    $_SESSION['failure'] = "What are you doing..";
-    header('Location: enter_email.php');
-    exit();
-}
+$pass_object = new \App\Classes\Password();
+
+$pass_object->pendingEmail();
 
 $email = sanitize($_GET['email']);
 
