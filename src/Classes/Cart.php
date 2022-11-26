@@ -49,7 +49,6 @@ class Cart
 
     function emailItems()
     {
-
         $db = Database::getinstance();
         $sql = 'SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = ' . $_SESSION['user_id'] . ' ';
         $stmt = $db->prepare($sql);
@@ -60,16 +59,7 @@ class Cart
         $sql = 'SELECT * FROM order_item WHERE order_id =' .  $order_id . ' AND user_id =' . $_SESSION['user_id'] . ' ';
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        $returned_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-        foreach ($returned_results as $element) {
-            echo $element['item_name'];
-            echo $element['cost'];
-            echo $element['qty'];
-            echo "<br>";
-        }
-        die();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
