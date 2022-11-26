@@ -100,9 +100,7 @@ include "includes/header.php"; ?>
 
         $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
 
-        $email_items = $modifyCart->emailItems();
-
-        dd($email_items);
+        $modifyCart->emailItems();
 
         header('Location: index.php');
         exit();
