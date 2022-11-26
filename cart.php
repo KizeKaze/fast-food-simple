@@ -94,11 +94,13 @@ include "includes/header.php"; ?>
         INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
 
         $stmt = $db->prepare($sql);
-
         $stmt->execute();
+
         $query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
 
         $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
+
+        $modifyCart->emailItems();
 
         header('Location: index.php');
         exit();

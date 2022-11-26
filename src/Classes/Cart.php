@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use PDO;
+
 class Cart
 {
 
@@ -43,6 +45,17 @@ class Cart
             header('Location: /index.php');
             exit();
         }
+    }
+
+    function emailItems()
+    {
+        $db = Database::getinstance();
+        $sql = 'SELECT MAX(order_id) FROM order_item WHERE user_id = ' . $_SESSION['user_id'] . ' ';
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        dd($result, 1);
+        die();
     }
 
 
