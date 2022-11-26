@@ -81,7 +81,7 @@ create table order_complete
         primary key,
     user_id        int          not null,
     date_purchased date         not null,
-    grand_total    float(11, 2) not null
+    grand_total    decimal(11,2) not null
 );
 
 create table order_item
