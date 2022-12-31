@@ -128,4 +128,9 @@ class CartTest extends TestCase
         $inserted_id = -3;
         self::$id[] = $inserted_id;
     }
+
+    function testGetMaxOrderID()
+    {
+
+    }
 }
