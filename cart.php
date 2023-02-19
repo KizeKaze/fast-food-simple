@@ -6,6 +6,8 @@ include "includes/header.php"; ?>
 <?php include "includes/nav.php" ?>
 
 <?php
+    $cart_object = new \App\Classes\Cart();
+
     if (empty($_SESSION['user_id'])) {
         header('Location: index.php');
     }
