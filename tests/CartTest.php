@@ -131,6 +131,22 @@ class CartTest extends TestCase
 
     function testGetMaxOrderID()
     {
-        //self
+
+        $db = Database::getinstance();
+
+        $params = [
+            'user_id' => -4,
+            'grand_total' => '10.99'
+        ];
+
+        self::$Query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
+        $params = ['user_id' => -4];
+
+        $result = self::$Query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
+        $order_id = $result[0]['order_id'];
+        $user_id = -4;
+
+
+
     }
 }
