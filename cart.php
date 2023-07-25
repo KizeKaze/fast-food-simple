@@ -82,8 +82,7 @@ include "includes/header.php"; ?>
             'grand_total' => $grand_total
         ];
 
-       $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
-
+       $cart_object->CartQueryInsert($params);
 
        $params = [ 'user_id' => $_SESSION['user_id']];
 

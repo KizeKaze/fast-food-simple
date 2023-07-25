@@ -32,4 +32,4 @@ We will be using single quotes for anything php-related, and double quotes for a
 unit testing for Killians
 to run a test use vendor/bin/phpunit tests/examplefile.php
 if you want to use DD to help debug
-"vendor/bin/phpunit" tests/UserTest.php --bootstrap ./vendor/autoload.php
+vendor/bin/phpunit tests/UserTest.php --bootstrap ./vendor/autoload.php
