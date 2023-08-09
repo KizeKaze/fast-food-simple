@@ -85,10 +85,20 @@ class Cart
         return $order_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function CartQueryInsert($params) {
+    public function CartQueryInsert($params)
+    {
         $query = new \App\Classes\Query();
         return $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
 
     }
 
+    public function CartQuerySelect()
+    {
+        $query = new \App\Classes\Query();
+        return $query->CustomSQL();
+    }
+
 }
+
+
+

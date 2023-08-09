@@ -10,6 +10,7 @@ class CartTest extends TestCase
     public static $Cart;
     public static $Query;
     public static array $id = [];
+    public static array $static_order_id = [];
 
     public static function setUpBeforeClass(): void
     {
@@ -23,6 +24,11 @@ class CartTest extends TestCase
         $id_array = implode('\', \'', self::$id);
         $delete_sql = 'DELETE FROM cart WHERE user_id IN(' . '\'' . $id_array . '\')';
         $delete_stmt = self::$db->prepare($delete_sql);
+        $delete_stmt->execute();
+
+        $order_id_array = implode('\', \'', self::$id);
+        $delete_order_sql = 'DELETE FROM order_complete WHERE user_id IN(' . '\'' . $order_id_array . '\')';
+        $delete_stmt = self::$db->prepare($delete_order_sql);
         $delete_stmt->execute();
     }
 
@@ -138,15 +144,33 @@ class CartTest extends TestCase
             'user_id' => -4,
             'grand_total' => '10.99'
         ];
-
+        //create a current order for fake user to compare to a new created user
         self::$Query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
         $params = ['user_id' => -4];
 
-        $result = self::$Query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
-        $order_id = $result[0]['order_id'];
+        $prestine_fake_user_order_id = self::$Query->CustomSQL('SELECT * FROM order_complete WHERE user_id = :user_id', $params);
+
+        //oh look a user just bought some more stuff!
+        $params = [
+            'user_id' => -4,
+            'grand_total' => '54.99'
+        ];
+        self::$Query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
+        $params = ['user_id' => -4];
+
+
+        $result = self::$Query->CustomSQL('SELECT MAX(order_id) as newest_order_id FROM order_complete WHERE user_id = :user_id', $params);
+        $max_order_id = $result[0]['newest_order_id'];
         $user_id = -4;
 
+        $this->assertNotSame($prestine_fake_user_order_id, $max_order_id);
 
+        $inserted_id = -4;
+        self::$id[] = $inserted_id;
+
+        self::$static_order_id[] = $max_order_id;
 
     }
+
+
 }

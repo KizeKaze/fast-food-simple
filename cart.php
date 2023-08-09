@@ -62,6 +62,7 @@ include "includes/header.php"; ?>
     ];
 
     //grab cart for compare on cart_form.php
+    // How would I handle so many variants when the table name changes for selects and inserts? make a function for each case? run this by Tony. Yes
     $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $_SESSION['user_id']);
 
 
