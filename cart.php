@@ -83,7 +83,7 @@ include "includes/header.php"; ?>
             'grand_total' => $grand_total
         ];
 
-       $cart_object->CartQueryInsert($params);
+       $cart_object->insertComplete($params);
 
        $params = [ 'user_id' => $_SESSION['user_id']];
 

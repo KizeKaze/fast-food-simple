@@ -63,6 +63,7 @@ class Cart
     public function getMaxOrderID($db)
     {
         $sql = 'SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = ' . $_SESSION['user_id'] . ' ';
+        dd($sql);
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -85,7 +86,7 @@ class Cart
         return $order_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function CartQueryInsert($params)
+    public function insertComplete($params)
     {
         $query = new \App\Classes\Query();
         return $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);

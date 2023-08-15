@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 
 use App\Classes\Database;
@@ -137,6 +138,10 @@ class CartTest extends TestCase
 
     function testGetMaxOrderID()
     {
+        $_SESSION['user_id'] = -4;
+
+        //Change order_complete
+
 
         $db = Database::getinstance();
 
@@ -150,7 +155,7 @@ class CartTest extends TestCase
 
         $prestine_fake_user_order_id = self::$Query->CustomSQL('SELECT * FROM order_complete WHERE user_id = :user_id', $params);
 
-        //oh look a user just bought some more stuff!
+        //oh look the same user just bought some more stuff!
         $params = [
             'user_id' => -4,
             'grand_total' => '54.99'
@@ -158,9 +163,9 @@ class CartTest extends TestCase
         self::$Query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
         $params = ['user_id' => -4];
 
+        $result = self::$Cart->getMaxOrderID($db);
+        dd($result,1);
 
-        $result = self::$Query->CustomSQL('SELECT MAX(order_id) as newest_order_id FROM order_complete WHERE user_id = :user_id', $params);
-        $max_order_id = $result[0]['newest_order_id'];
         $user_id = -4;
 
         $this->assertNotSame($prestine_fake_user_order_id, $max_order_id);
