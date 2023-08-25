@@ -63,7 +63,6 @@ class Cart
     public function getMaxOrderID($db)
     {
         $sql = 'SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = ' . $_SESSION['user_id'] . ' ';
-        dd($sql);
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -86,17 +85,32 @@ class Cart
         return $order_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insertComplete($params)
+    public function insertOrderComplete($params)
     {
         $query = new \App\Classes\Query();
         return $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
 
     }
 
-    public function CartQuerySelect()
+    public function cartQuerySelect()
     {
         $query = new \App\Classes\Query();
         return $query->CustomSQL();
+    }
+
+    public function cartPurchaseCompleted($user_id, $params)
+    {
+        $db = Database::getinstance();
+        $query = new \App\Classes\Query();
+
+        $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
+        FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
+        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
     }
 
 }

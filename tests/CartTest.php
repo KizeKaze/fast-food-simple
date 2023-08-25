@@ -33,7 +33,7 @@ class CartTest extends TestCase
         $delete_stmt->execute();
     }
 
-    function testCheckCart() {
+    public function testCheckCart() {
 
         $params = [
             'item_id' => -100,
@@ -77,7 +77,7 @@ class CartTest extends TestCase
 
     }
 
-    function testUpdateCart()
+    public function testUpdateCart()
     {
 
         $params = [
@@ -107,7 +107,7 @@ class CartTest extends TestCase
 
     }
 
-    function testInsertCart()
+    public function testInsertCart()
     {
         $params = [
             'item_id' => -3,
@@ -136,7 +136,9 @@ class CartTest extends TestCase
         self::$id[] = $inserted_id;
     }
 
-    function testGetMaxOrderID()
+
+
+    public function testGetMaxOrderID()
     {
         $_SESSION['user_id'] = -4;
 
@@ -149,8 +151,15 @@ class CartTest extends TestCase
             'user_id' => -4,
             'grand_total' => '10.99'
         ];
+
+        //REPLACE these inserts with insertOrderComplete to test the function in the CART CLASS, this is just hand testing.
+        //only queries I should be writing in a integration test should to validate database contents.
+
         //create a current order for fake user to compare to a new created user
-        self::$Query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
+
+
+        self::$Cart->insertOrderComplete($params);
+
         $params = ['user_id' => -4];
 
         $prestine_fake_user_order_id = self::$Query->CustomSQL('SELECT * FROM order_complete WHERE user_id = :user_id', $params);
@@ -160,11 +169,12 @@ class CartTest extends TestCase
             'user_id' => -4,
             'grand_total' => '54.99'
         ];
-        self::$Query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
+
+        self::$Cart->insertOrderComplete($params);
+
         $params = ['user_id' => -4];
 
-        $result = self::$Cart->getMaxOrderID($db);
-        dd($result,1);
+        $max_order_id = self::$Cart->getMaxOrderID($db);
 
         $user_id = -4;
 
@@ -173,8 +183,12 @@ class CartTest extends TestCase
         $inserted_id = -4;
         self::$id[] = $inserted_id;
 
-        self::$static_order_id[] = $max_order_id;
+    }
 
+    public function testUserItemOrdered()
+    {
+        $max_order_id = self::$static_order_id;
+        //dd($max_order_id, 1);
     }
 
 

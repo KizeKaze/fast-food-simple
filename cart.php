@@ -75,7 +75,6 @@ include "includes/header.php"; ?>
 
     if ($_POST) {
 
-        $db = Database::getinstance();
         $grand_total = sanitize($_POST['grand_total']);
 
         $params = [
@@ -83,22 +82,19 @@ include "includes/header.php"; ?>
             'grand_total' => $grand_total
         ];
 
-       $cart_object->insertComplete($params);
+       $cart_object->insertOrderComplete($params);
 
        $params = [ 'user_id' => $_SESSION['user_id']];
 
        $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
-       $order_id = $result[0]['order_id'];
+       //$order_id = $result[0]['order_id'];
        $user_id = $_SESSION['user_id'];
+       $params = [
+           'user_id' => $user_id,
+       ];
 
-       $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
-        FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
-        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
 
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        $query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
+       $cart_object->cartPurchaseCompleted($user_id, $params);
 
         $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
 
