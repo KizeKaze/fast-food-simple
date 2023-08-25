@@ -33,3 +33,10 @@ unit testing for Killians
 to run a test use vendor/bin/phpunit tests/examplefile.php
 if you want to use DD to help debug
 vendor/bin/phpunit tests/UserTest.php --bootstrap ./vendor/autoload.php
+
+ replace inserts with insertOrderComplete to test the function in the CART CLASS, this is just hand testing.
+ I should only write queries in a (integration test || unit test) to validate database contents.
+
+
+
+

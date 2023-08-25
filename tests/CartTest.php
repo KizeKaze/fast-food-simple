@@ -187,8 +187,7 @@ class CartTest extends TestCase
 
     public function testUserItemOrdered()
     {
-        $max_order_id = self::$static_order_id;
-        //dd($max_order_id, 1);
+
     }
 
 
