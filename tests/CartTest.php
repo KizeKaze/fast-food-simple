@@ -11,7 +11,6 @@ class CartTest extends TestCase
     public static $Cart;
     public static $Query;
     public static array $id = [];
-    public static array $static_order_id = [];
 
     public static function setUpBeforeClass(): void
     {
@@ -29,6 +28,11 @@ class CartTest extends TestCase
 
         $order_id_array = implode('\', \'', self::$id);
         $delete_order_sql = 'DELETE FROM order_complete WHERE user_id IN(' . '\'' . $order_id_array . '\')';
+        $delete_stmt = self::$db->prepare($delete_order_sql);
+        $delete_stmt->execute();
+
+        $order_id_array = implode('\', \'', self::$id);
+        $delete_order_sql = 'DELETE FROM order_item WHERE user_id IN(' . '\'' . $order_id_array . '\')';
         $delete_stmt = self::$db->prepare($delete_order_sql);
         $delete_stmt->execute();
     }
@@ -142,8 +146,6 @@ class CartTest extends TestCase
     {
         $_SESSION['user_id'] = -4;
 
-        //Change order_complete
-
 
         $db = Database::getinstance();
 
@@ -151,9 +153,6 @@ class CartTest extends TestCase
             'user_id' => -4,
             'grand_total' => '10.99'
         ];
-
-        //REPLACE these inserts with insertOrderComplete to test the function in the CART CLASS, this is just hand testing.
-        //only queries I should be writing in a integration test should to validate database contents.
 
         //create a current order for fake user to compare to a new created user
 
@@ -188,6 +187,86 @@ class CartTest extends TestCase
     public function testUserItemOrdered()
     {
 
+
+        $params = [
+            'user_id' => -5,
+            'grand_total' => '765.43'
+        ];
+
+        self::$Cart->insertOrderComplete($params);
+
+        $params = [
+            'item_id' => 6,
+            'user_id' => -5,
+            'qty' => 1
+        ];
+
+        self::$Cart->insertCart($params);
+        $params = ['user_id' => -5];
+        self::$Cart->cartPurchaseCompleted($params);
+
+        $inserted_order_items = self::$Query->CustomSQL('SELECT * FROM order_item WHERE user_id = :user_id', $params);
+
+
+        $this->assertNotEmpty($inserted_order_items);
+        $this->assertIsArray($inserted_order_items);
+
+        $inserted_id = -4;
+        self::$id[] = $inserted_id;
+    }
+
+    public function testCartPurchaseComplete()
+    {
+        //create first data row for our comparison
+
+        $params = [
+            'user_id' => -6,
+            'grand_total' => '79.22'
+        ];
+
+        self::$Cart->insertOrderComplete($params);
+
+        $params = [
+            'item_id' => 7,
+            'user_id' => -6,
+            'qty' => 2
+        ];
+
+        self::$Cart->insertCart($params);
+        $params = ['user_id' => -6];
+        self::$Cart->cartPurchaseCompleted($params);
+
+        $current_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
+
+        //create second row to prove modification
+
+        $params = [
+            'user_id' => -6,
+            'grand_total' => '253.23'
+        ];
+
+        self::$Cart->insertOrderComplete($params);
+
+        $params = [
+            'item_id' => 13,
+            'user_id' => -6,
+            'qty' => 4
+        ];
+
+        self::$Cart->insertCart($params);
+        $params = ['user_id' => -6];
+        self::$Cart->cartPurchaseCompleted($params);
+
+        $new_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
+
+
+        self::$Cart->cartPurchaseCompleted($params);
+
+        $this->assertnotsame($current_order_id, $new_order_id);
+        $this->assertIsArray($new_order_id);
+
+        $inserted_id = -6;
+        self::$id[] = $inserted_id;
     }
 
 

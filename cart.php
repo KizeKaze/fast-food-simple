@@ -87,15 +87,11 @@ include "includes/header.php"; ?>
        $params = [ 'user_id' => $_SESSION['user_id']];
 
        $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
-       //$order_id = $result[0]['order_id'];  seemingly dont need this
        $user_id = $_SESSION['user_id'];
        $params = [
            'user_id' => $user_id,
        ];
 
-        // attempting to use params['user_id'] with this function causes it to blow up with giving it an int, not an array, ect on the SQL.
-        // already have a query class in my construct  but its undefined unless I call a new object in the function itsself.
-        // ...automatic er what?!
        $cart_object->cartPurchaseCompleted($user_id, $params);
 
         $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';

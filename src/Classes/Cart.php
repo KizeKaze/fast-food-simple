@@ -98,19 +98,18 @@ class Cart
         return $query->CustomSQL();
     }
 
-    public function cartPurchaseCompleted($user_id, $params)
+    public function cartPurchaseCompleted($params)
     {
         $db = Database::getinstance();
-        $query = new \App\Classes\Query();
 
         $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
         FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
-        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
+        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $params['user_id'] . ' ';
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-        $query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
+        $this->query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
     }
 
 }
