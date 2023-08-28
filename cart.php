@@ -92,7 +92,7 @@ include "includes/header.php"; ?>
            'user_id' => $user_id,
        ];
 
-       $cart_object->cartPurchaseCompleted($user_id, $params);
+       $cart_object->cartPurchaseCompleted($params, $user_id);
 
         $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
 

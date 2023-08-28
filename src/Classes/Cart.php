@@ -69,6 +69,20 @@ class Cart
         return $order_id = $result['order_id'];
     }
 
+    public function cartPurchaseCompleted($params, $user_id)
+    {
+        $db = Database::getinstance();
+
+        $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
+        FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
+        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $user_id . ' ';
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $this->query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
+    }
+
     public function getUserItemsOrdered($db, $order_id)
     {
         $sql = 'SELECT * FROM order_item WHERE order_id =' .  $order_id . ' AND user_id =' . $_SESSION['user_id'] . ' ';
@@ -91,27 +105,6 @@ class Cart
         return $query->CustomSQL('INSERT INTO order_complete (user_id, date_purchased, grand_total) VALUES (:user_id, now(), :grand_total)', $params);
 
     }
-
-    public function cartQuerySelect()
-    {
-        $query = new \App\Classes\Query();
-        return $query->CustomSQL();
-    }
-
-    public function cartPurchaseCompleted($params)
-    {
-        $db = Database::getinstance();
-
-        $sql = 'INSERT INTO order_item SELECT (SELECT MAX(order_id)
-        FROM order_complete WHERE user_id = c.user_id) AS order_id, c.user_id, i.id AS item_id, i.name AS item_name, i.cost, c.qty FROM cart c
-        INNER JOIN item i on c.item_id = i.id WHERE user_id =' . $params['user_id'] . ' ';
-
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        $this->query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
-    }
-
 }
 
 

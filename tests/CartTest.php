@@ -161,7 +161,7 @@ class CartTest extends TestCase
 
         $params = ['user_id' => -4];
 
-        $prestine_fake_user_order_id = self::$Query->CustomSQL('SELECT * FROM order_complete WHERE user_id = :user_id', $params);
+        $prestine_fake_user_order_id = self::$Query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
 
         //oh look the same user just bought some more stuff!
         $params = [
@@ -184,37 +184,6 @@ class CartTest extends TestCase
 
     }
 
-    public function testUserItemOrdered()
-    {
-
-
-        $params = [
-            'user_id' => -5,
-            'grand_total' => '765.43'
-        ];
-
-        self::$Cart->insertOrderComplete($params);
-
-        $params = [
-            'item_id' => 6,
-            'user_id' => -5,
-            'qty' => 1
-        ];
-
-        self::$Cart->insertCart($params);
-        $params = ['user_id' => -5];
-        self::$Cart->cartPurchaseCompleted($params);
-
-        $inserted_order_items = self::$Query->CustomSQL('SELECT * FROM order_item WHERE user_id = :user_id', $params);
-
-
-        $this->assertNotEmpty($inserted_order_items);
-        $this->assertIsArray($inserted_order_items);
-
-        $inserted_id = -4;
-        self::$id[] = $inserted_id;
-    }
-
     public function testCartPurchaseComplete()
     {
         //create first data row for our comparison
@@ -233,8 +202,9 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
+        $user_id = -6;
         $params = ['user_id' => -6];
-        self::$Cart->cartPurchaseCompleted($params);
+        self::$Cart->cartPurchaseCompleted($params, $user_id);
 
         $current_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
 
@@ -254,19 +224,78 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
+        $user_id = -6;
         $params = ['user_id' => -6];
-        self::$Cart->cartPurchaseCompleted($params);
+        self::$Cart->cartPurchaseCompleted($params, $user_id);
 
         $new_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
 
 
-        self::$Cart->cartPurchaseCompleted($params);
+        self::$Cart->cartPurchaseCompleted($params, $user_id);
 
         $this->assertnotsame($current_order_id, $new_order_id);
         $this->assertIsArray($new_order_id);
 
         $inserted_id = -6;
         self::$id[] = $inserted_id;
+    }
+
+    public function testGetUserItemOrdered()
+    {
+
+
+        $params = [
+            'user_id' => -5,
+            'grand_total' => '765.43'
+        ];
+
+        self::$Cart->insertOrderComplete($params);
+
+        $params = [
+            'item_id' => 6,
+            'user_id' => -5,
+            'qty' => 1
+        ];
+
+        self::$Cart->insertCart($params);
+        $user_id = -5;
+        $params = ['user_id' => -5];
+        self::$Cart->cartPurchaseCompleted($params, $user_id);
+        $order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
+
+        $params = [
+            'order_id' => $order_id[0]['order_id'],
+            'user_id' => -5
+        ];
+        $inserted_order_items = self::$Query->CustomSQL('SELECT * FROM order_item WHERE order_id = :order_id' . ' AND user_id = :user_id', $params);
+
+
+        $expected_array = [
+            'order_id' => $order_id[0]['order_id'],
+            'user_id' => -5,
+            'item_id' => 6,
+            'item_name' => 'Eggs',
+            'cost' => '0.99',
+            'qty' => 1
+        ];
+
+        $this->assertNotEmpty($inserted_order_items);
+        $this->assertIsArray($inserted_order_items);
+        $this->assertSame($expected_array, $inserted_order_items[0]);
+
+        $inserted_id = -5;
+        self::$id[] = $inserted_id;
+    }
+
+    public function testGetUsedOrderDetails()
+    {
+
+
+    }
+
+    public function testGetUserOrderDetails()
+    {
+
     }
 
 
