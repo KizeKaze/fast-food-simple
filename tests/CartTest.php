@@ -245,7 +245,7 @@ class CartTest extends TestCase
 
 
         $params = [
-            'user_id' => -5,
+            'user_id' => -7,
             'grand_total' => '765.43'
         ];
 
@@ -253,26 +253,26 @@ class CartTest extends TestCase
 
         $params = [
             'item_id' => 6,
-            'user_id' => -5,
+            'user_id' => -7,
             'qty' => 1
         ];
 
         self::$Cart->insertCart($params);
-        $user_id = -5;
-        $params = ['user_id' => -5];
+        $user_id = -7;
+        $params = ['user_id' => -7];
         self::$Cart->cartPurchaseCompleted($params, $user_id);
         $order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
 
         $params = [
             'order_id' => $order_id[0]['order_id'],
-            'user_id' => -5
+            'user_id' => -7
         ];
         $inserted_order_items = self::$Query->CustomSQL('SELECT * FROM order_item WHERE order_id = :order_id' . ' AND user_id = :user_id', $params);
 
 
         $expected_array = [
             'order_id' => $order_id[0]['order_id'],
-            'user_id' => -5,
+            'user_id' => -7,
             'item_id' => 6,
             'item_name' => 'Eggs',
             'cost' => '0.99',
@@ -283,20 +283,71 @@ class CartTest extends TestCase
         $this->assertIsArray($inserted_order_items);
         $this->assertSame($expected_array, $inserted_order_items[0]);
 
-        $inserted_id = -5;
+        $inserted_id = -7;
         self::$id[] = $inserted_id;
     }
 
     public function testGetUsedOrderDetails()
     {
+        $params = [
+            'user_id' => -8,
+            'grand_total' => '14.59'
+        ];
+        self::$Cart->insertOrderComplete($params);
 
+        $params = [ 'user_id' => -8 ];
+        $order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_complete WHERE user_id = :user_id', $params);
+
+        $params = [
+            'order_id' => $order_id[0]['order_id'],
+            'user_id' => -8
+        ];
+        $current_db_order = self::$Query->CustomSQL('SELECT * FROM order_complete WHERE order_id = :order_id' . ' AND user_id = :user_id', $params);
+
+        $expected_db_order = [
+            'order_id' => $order_id[0]['order_id'],
+            'user_id' => -8,
+            'date_purchased' => $current_db_order[0]['date_purchased'],
+            'grand_total' => '14.59'
+        ];
+
+        $this->assertNotEmpty($current_db_order);
+        $this->assertSame($expected_db_order, $current_db_order[0]);
+
+        $inserted_id = -8;
+        self::$id[] = $inserted_id;
 
     }
 
-    public function testGetUserOrderDetails()
+    public function testInsertOrderComplete()
     {
+        $params = [
+                'user_id' => -9,
+                'grand_total' => '0.50'
+            ];
+        self::$Cart->insertOrderComplete($params);
 
+        $params = [ 'user_id' => -9 ];
+        $order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_complete WHERE user_id = :user_id', $params);
+
+        $params = [
+            'order_id' => $order_id[0]['order_id'],
+            'user_id' => -9
+        ];
+        $current_db_order = self::$Query->CustomSQL('SELECT * FROM order_complete WHERE order_id = :order_id' . ' AND user_id = :user_id', $params);
+
+        $expected_result = [
+            'order_id' => $order_id[0]['order_id'],
+            'user_id' => -9,
+            'date_purchased' => $current_db_order[0]['date_purchased'],
+            'grand_total' => '0.50'
+        ];
+
+        $this->assertNotEmpty($current_db_order[0]);
+        $this->assertSame($expected_result, $current_db_order[0]);
+
+        $inserted_id = -9;
+        self::$id[] = $inserted_id;
     }
-
 
 }
