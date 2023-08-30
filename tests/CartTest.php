@@ -202,9 +202,9 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
-        $user_id = -6;
+        //$user_id = -6;
         $params = ['user_id' => -6];
-        self::$Cart->cartPurchaseCompleted($params, $user_id);
+        self::$Cart->cartPurchaseCompleted($params);
 
         $current_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
 
@@ -224,14 +224,14 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
-        $user_id = -6;
+        //$user_id = -6;
         $params = ['user_id' => -6];
-        self::$Cart->cartPurchaseCompleted($params, $user_id);
+        self::$Cart->cartPurchaseCompleted($params);
 
         $new_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
 
 
-        self::$Cart->cartPurchaseCompleted($params, $user_id);
+        self::$Cart->cartPurchaseCompleted($params);
 
         $this->assertnotsame($current_order_id, $new_order_id);
         $this->assertIsArray($new_order_id);
@@ -258,9 +258,9 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
-        $user_id = -7;
+        //$user_id = -7;
         $params = ['user_id' => -7];
-        self::$Cart->cartPurchaseCompleted($params, $user_id);
+        self::$Cart->cartPurchaseCompleted($params);
         $order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
 
         $params = [
