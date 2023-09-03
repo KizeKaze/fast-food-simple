@@ -154,16 +154,12 @@ class CartTest extends TestCase
             'grand_total' => '10.99'
         ];
 
-        //create a current order for fake user to compare to a new created user
-
-
         self::$Cart->insertOrderComplete($params);
 
         $params = ['user_id' => -4];
 
         $prestine_fake_user_order_id = self::$Query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
 
-        //oh look the same user just bought some more stuff!
         $params = [
             'user_id' => -4,
             'grand_total' => '54.99'
@@ -186,7 +182,6 @@ class CartTest extends TestCase
 
     public function testCartPurchaseComplete()
     {
-        //create first data row for our comparison
 
         $params = [
             'user_id' => -6,
@@ -202,13 +197,10 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
-        //$user_id = -6;
         $params = ['user_id' => -6];
         self::$Cart->cartPurchaseCompleted($params);
 
         $current_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
-
-        //create second row to prove modification
 
         $params = [
             'user_id' => -6,
@@ -224,12 +216,10 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
-        //$user_id = -6;
         $params = ['user_id' => -6];
         self::$Cart->cartPurchaseCompleted($params);
 
         $new_order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
-
 
         self::$Cart->cartPurchaseCompleted($params);
 
@@ -242,7 +232,6 @@ class CartTest extends TestCase
 
     public function testGetUserItemOrdered()
     {
-
 
         $params = [
             'user_id' => -7,
@@ -258,7 +247,6 @@ class CartTest extends TestCase
         ];
 
         self::$Cart->insertCart($params);
-        //$user_id = -7;
         $params = ['user_id' => -7];
         self::$Cart->cartPurchaseCompleted($params);
         $order_id = self::$Query->CustomSQL('SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = :user_id', $params);
@@ -268,7 +256,6 @@ class CartTest extends TestCase
             'user_id' => -7
         ];
         $inserted_order_items = self::$Query->CustomSQL('SELECT * FROM order_item WHERE order_id = :order_id' . ' AND user_id = :user_id', $params);
-
 
         $expected_array = [
             'order_id' => $order_id[0]['order_id'],
