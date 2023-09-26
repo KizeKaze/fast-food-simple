@@ -37,6 +37,17 @@ body {
     font-weight: bold;
     text-align: center;
 }
+.login_message {
+    background-color: #5fe926e6;
+    border: 2px solid black;
+    border-radius: 1em;
+    padding: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    font-weight: bold;
+    text-align: center;
+}
 
 @media screen and (max-width: 425px) {
     .hide_mobile_large {

@@ -20,6 +20,7 @@
                             <input id="password" name="password" type="password" class="form-control" />
                         </div>
                     </div>
+                    <p><a href="enter_email.php">Forgot your password?</a></p>
                     <hr>
                     <button type="submit" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -2,6 +2,7 @@
 session_start();
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] );
 require 'vendor/autoload.php';
+date_default_timezone_set('America/Chicago');
 
 $menu = new \App\Classes\Menu();
 $modifyCart = new \App\Classes\Cart();

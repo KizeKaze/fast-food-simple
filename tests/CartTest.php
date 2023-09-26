@@ -15,7 +15,7 @@ class CartTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::$db = Database::getInstance();
-        self::$Query = new \App\Classes\Query();
+        self::$Query = new App\Classes\Query();
         self::$Cart = new App\Classes\Cart();
     }
 
