@@ -6,14 +6,14 @@ namespace App\Classes;
 class Password
 {
 
-    public function checkEmail($params)
+    public function getEmail($params)
     {
         $query = $query = new \App\Classes\Query();
 
         return $query->CustomSQL("SELECT email FROM password_resets WHERE token = :token AND expired_token = :expired_token LIMIT 1", $params);
     }
 
-    public function checkToken($params)
+    public function isTokenExpired($params)
     {
         $query = $query = new \App\Classes\Query();
 

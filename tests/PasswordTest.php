@@ -35,7 +35,7 @@ class PasswordTest extends TestCase
 
         $expected_result = [];
 
-        $result = self::$Password_Obj->checkEmail($params);
+        $result = self::$Password_Obj->getEmail($params);
 
         $this->assertEquals($expected_result, $result);
     }
@@ -49,7 +49,7 @@ class PasswordTest extends TestCase
 
         $expected_result = [];
 
-        $result = self::$Password_Obj->checkToken($params);
+        $result = self::$Password_Obj->isTokenExpired($params);
 
         $this->assertEquals($expected_result, $result);
     }

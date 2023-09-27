@@ -15,14 +15,14 @@ if (isset($_POST['new_password'])) {
         'token' => $token,
         'expired_token' => 0
     ];
-    $email = $pass_object->checkEmail($params);
+    $email = $pass_object->getEmail($params);
 
     $exp_date = date("Y-m-d h:i:s");
     $params = [
         'token' => $token
     ];
 
-    $exp_token = $pass_object->checkToken($params);
+    $expired_token_date = $pass_object->isTokenExpired($params);
 
     if (empty($password)) {
         $errors[] = "Please enter a password";
@@ -51,6 +51,7 @@ if (isset($_POST['new_password'])) {
     }
 }
 //assign token here if user has not yet clicked new_password
+$token = $_GET['token'] ?? '';
 $token = sanitize($_GET['token']);
 
 include 'src/forms/new_pass_form.php';
