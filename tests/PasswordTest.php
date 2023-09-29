@@ -26,8 +26,10 @@ class PasswordTest extends TestCase
         $delete_stmt->execute();
     }
 
-    public function testCheckEmail()
+    public function testGetEmail()
     {
+
+        $email = 'somelongfakeemailnooneshouldeverhaveevertobehonestyouknowwhatimeanorwhatyooldemail@someemailserverthingorwhatever.com';
         $params = [
             'token' => '123123',
             'expired_token' => 0
@@ -38,9 +40,37 @@ class PasswordTest extends TestCase
         $result = self::$Password_Obj->getEmail($params);
 
         $this->assertEquals($expected_result, $result);
+
+        $params = [
+            'email' => $email,
+            'token' => '8675309',
+            'expired_token' => 0,
+            'timed_expired_token' => '2023-09-27 05:31:07'
+        ];
+
+        self::$Query->insert('password_resets', $params);
+
+        $params = [
+            'token' => '8675309',
+            'expired_token' => 0
+        ];
+
+        $second_result = self::$Password_Obj->getEmail($params);
+
+        $second_expected_result = [
+            'email' => 'somelongfakeemailnooneshouldeverhaveevertobehonestyouknowwhatimeanorwhatyooldemail@someemailserverthingorwhatever.com'
+        ];
+        $this->assertIsArray($second_result);
+        $this->assertSame($second_expected_result, $second_result[0]);
+
+        $params = [
+        'email' => $email
+        ];
+
+        self::$Query->CustomSQL('DELETE FROM password_resets WHERE email = :email', $params);
     }
 
-    public function testCheckToken()
+    public function testIsTokenInvalid()
     {
 
         $params = [
