@@ -93,7 +93,7 @@ include "includes/header.php"; ?>
 
        $cart_object->cartPurchaseCompleted($params, $user_id);
 
-        $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt';
+        $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
 
         $modifyCart->emailItems();
 
