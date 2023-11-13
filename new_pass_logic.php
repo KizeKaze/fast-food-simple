@@ -11,6 +11,7 @@ if (isset($_POST['new_password'])) {
     $confirm_password = sanitize($_POST['confirm_password']);
     $token = sanitize($_GET['token']);
 
+
     $params = [
         'token' => $token,
         'expired_token' => 0
@@ -30,15 +31,15 @@ if (isset($_POST['new_password'])) {
         $errors[] = "Please confirm your password";
     } else if ($password != $confirm_password) {
         $errors[] = "Passwords did not match";
-    } else if (empty($exp_token)) {
-        $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
+    } else if (empty($expired_token_date)) {
+        $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to resend another token to a valid email";
     } else if (empty($email[0]['email'])) {
-        $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
+        $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to resend another token to a valid email";
     }
 
-    if (!empty($exp_token)) {
-        if ($exp_date > $exp_token[0]['timed_expired_token']) {
-            $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
+    if (!empty($expired_token_date)) {
+        if ($exp_date > $expired_token_date[0]['timed_expired_token']) {
+            $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to resend another token to a valid email";
         }
     }
 
@@ -46,7 +47,7 @@ if (isset($_POST['new_password'])) {
         if (isset($email[0]['email'])) {
            $item_added = $pass_object->updatePassword($password, $email[0]['email'], $token);
         } else {
-            $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to try again";
+            $errors[] = "Invalid Token, please click <a href='enter_email.php'>here</a> to resend another token to a valid email";
         }
     }
 }
