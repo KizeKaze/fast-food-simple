@@ -3,3 +3,4 @@ composer.lock
 /.idea
 /src/images/*
 !/src/images/coming-soon.jpg
+.env
