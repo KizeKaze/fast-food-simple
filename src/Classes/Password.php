@@ -40,6 +40,19 @@ class Password
 
     }
 
+    public function sendPassword($email, $token) {
+        $to = $email;
+        $subject = "Password Reset at rayxproject.com";
+
+        $headers = "From: Admin@rayxproject.com" . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $msg = "Hi there, click on this <a href=\"http://www.rayxproject.com/new_pass_logic.php?token=" . $token . "\">link</a> to reset your password on rayxproject.com";
+        $msg = wordwrap($msg,70);
+
+        mail($to, $subject, $msg, $headers);
+    }
+
     public function pendingEmail() {
         if (!$_GET['email']) {
             $_SESSION['failure'] = "What are you doing..";

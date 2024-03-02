@@ -4,11 +4,11 @@ namespace App\Classes;
 
 class Email
 {
-    public function sendEmail($email_items, $order_details)
+    public function sendEmail($email_items, $order_details, $email)
     {
         $i = 1;
 
-        $to = $_SESSION['email'];
+        $to = $email;
         $subject = "Receipt From rayxproject.com";
 
         $headers = "From: Admin@rayxproject.com" . "\r\n";
@@ -19,6 +19,6 @@ class Email
         $msg = ob_get_contents();
         ob_end_clean();
         $msg = wordwrap($msg,70);
-        mail($to, $subject, $msg, $headers);
+        return mail($to, $subject, $msg, $headers);
     }
 }
