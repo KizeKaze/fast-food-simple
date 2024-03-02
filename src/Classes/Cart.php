@@ -90,7 +90,7 @@ class Cart
 
     public function getUserOrderDetails($db, $order_id, $user_id)
     {
-        $sql = 'SELECT * FROM order_complete WHERE order_id =' .  $order_id . ' AND user_id =' . $user_id . ' ';
+        $sql = "SELECT *, DATE_FORMAT(date_purchased, '%m-%d-%Y') AS formatted_date FROM order_complete WHERE order_id =" .  $order_id . ' AND user_id =' . $user_id . ' ';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $order_details = $stmt->fetchAll(PDO::FETCH_ASSOC);

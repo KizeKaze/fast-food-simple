@@ -34,7 +34,7 @@
             </table>
         </div>
         <div class='card-footer text-muted'>
-            Items purchased on <?=$order_details[0]['date_purchased'] ?> for a total of $<?=$order_details[0]['grand_total'] ?>
+            Items purchased on <?=$order_details[0]['formatted_date'] ?> for a total of $<?=$order_details[0]['grand_total'] ?>
         </div>
     </div>
     </body>

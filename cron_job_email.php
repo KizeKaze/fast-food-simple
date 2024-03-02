@@ -29,7 +29,6 @@ if ($email_chunks) {
         $email_items = $email_info->getUserItemsOrdered($db, $order_id, $user_id);
         $order_details = $email_info->getUserOrderDetails($db, $order_id, $user_id);
 
-
         $mail_sent = $email_object->sendEmail($email_items, $order_details, $email);
         if ($mail_sent) {
             $params = [
