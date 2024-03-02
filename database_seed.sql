@@ -79,10 +79,13 @@ create table order_complete
 (
     order_id       int auto_increment
         primary key,
-    user_id        int          not null,
-    date_purchased date         not null,
-    grand_total    decimal(11,2) not null
+    user_id        int                  not null,
+    date_purchased date                 not null,
+    grand_total    decimal(11, 2)       not null,
+    email_sent     tinyint(1) default 0 null
 );
+
+
 
 create table order_item
 (
@@ -103,8 +106,10 @@ create table password_resets
     token               varchar(255)         null,
     expired_token       tinyint(1) default 0 not null,
     timed_expired_token datetime             null,
+    password_sent       tinyint(1) default 0 null,
     constraint password_resets_token_uindex
         unique (token)
 );
+
 
 
