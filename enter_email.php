@@ -37,9 +37,6 @@ $pass_object = new \App\Classes\Password();
     ];
     $query->insert('password_resets', $params);
 
-     //this is here for local testing purpose
-     include 'cron_job_email.php';
-
     $argument = [
         'email' => $_POST['email']
     ];

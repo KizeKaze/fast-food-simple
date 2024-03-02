@@ -96,9 +96,6 @@ include "includes/nav.php";
 
         $_SESSION['message'] = 'Thanks for your purchase. An email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
 
-        //this is here for local testing purpose
-        include 'cron_job_email.php';
-
         header('Location: index.php');
         exit();
     }
