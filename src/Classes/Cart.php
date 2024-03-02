@@ -51,18 +51,15 @@ class Cart
     }
 
     public function emailItems()
-    {
-        $db = Database::getinstance();
 
-        $order_id = self::getMaxOrderID($db);
-        $email_items = self::getUserItemsOrdered($db, $order_id);
-        $order_details = self::getUserOrderDetails($db, $order_id);
-        $this->email_object->sendEmail($email_items, $order_details);
+    {
+
+        //$this->email_object->sendEmail($email_items, $order_details);
     }
 
-    public function getMaxOrderID($db)
+    public function getMaxOrderID($db, $user_id)
     {
-        $sql = 'SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = ' . $_SESSION['user_id'] . ' ';
+        $sql = 'SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = ' . $user_id . ' ';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -83,17 +80,17 @@ class Cart
         $this->query->CustomSQL('DELETE FROM cart WHERE user_id = :user_id', $params);
     }
 
-    public function getUserItemsOrdered($db, $order_id)
+    public function getUserItemsOrdered($db, $order_id, $user_id)
     {
-        $sql = 'SELECT * FROM order_item WHERE order_id =' .  $order_id . ' AND user_id =' . $_SESSION['user_id'] . ' ';
+        $sql = 'SELECT * FROM order_item WHERE order_id =' .  $order_id . ' AND user_id =' . $user_id . ' ';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $email_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getUserOrderDetails($db, $order_id)
+    public function getUserOrderDetails($db, $order_id, $user_id)
     {
-        $sql = 'SELECT * FROM order_complete WHERE order_id =' .  $order_id . ' AND user_id =' . $_SESSION['user_id'] . ' ';
+        $sql = 'SELECT * FROM order_complete WHERE order_id =' .  $order_id . ' AND user_id =' . $user_id . ' ';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $order_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
