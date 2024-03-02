@@ -3,6 +3,7 @@
 
 <?php
 $query = new \App\Classes\Query();
+$pass_object = new \App\Classes\Password();
 
 
  if (isset($_POST['reset-password'])) {
@@ -35,18 +36,6 @@ $query = new \App\Classes\Query();
         'timed_expired_token' => $exp_date
     ];
     $query->insert('password_resets', $params);
-
-     $to = $email;
-     $subject = "Password Reset at rayxproject.com";
-
-     $headers = "From: Admin@rayxproject.com" . "\r\n";
-     $headers .= "MIME-Version: 1.0\r\n";
-     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    // localhost for local sided emailing, rayxproject for live production
-     $msg = "Hi there, click on this <a href=\"http://www.rayxproject.com/new_pass_logic.php?token=" . $token . "\">link</a> to reset your password on rayxproject.com";
-     $msg = wordwrap($msg,70);
-
-    mail($to, $subject, $msg, $headers);
 
     $argument = [
         'email' => $_POST['email']

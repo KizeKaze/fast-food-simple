@@ -2,10 +2,10 @@
 
 use App\Classes\Database;
 
-include "includes/header.php"; ?>
-<?php include "includes/nav.php" ?>
+include "includes/header.php";
+include "includes/nav.php";
 
-<?php
+
     $cart_object = new \App\Classes\Cart();
 
     if (empty($_SESSION['user_id'])) {
@@ -28,7 +28,6 @@ include "includes/header.php"; ?>
             header('Location: cart.php');
             exit();
         }
-
 
         $params = [
             'user_id' => $_SESSION['user_id'],
@@ -57,18 +56,21 @@ include "includes/header.php"; ?>
     }
     $query = new \App\Classes\Query();
 
+    //setting user_id for sending emails with cron
+    $user_id = $_SESSION['user_id'];
+
     $params = [
-        'user_id' => $_SESSION['user_id'],
+        'user_id' => $user_id,
     ];
 
     //grab cart for compare on cart_form.php
-    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $_SESSION['user_id']);
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $user_id);
 
 
     $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
 
     $params = [
-        'user_id' => $_SESSION['user_id']
+        'user_id' => $user_id
     ];
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
 
@@ -77,25 +79,22 @@ include "includes/header.php"; ?>
         $grand_total = sanitize($_POST['grand_total']);
 
         $params = [
-            'user_id' => $_SESSION['user_id'],
+            'user_id' => $user_id,
             'grand_total' => $grand_total
         ];
 
        $cart_object->insertOrderComplete($params);
 
-       $params = [ 'user_id' => $_SESSION['user_id']];
+       $params = ['user_id' => $user_id];
 
        $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
-       $user_id = $_SESSION['user_id'];
        $params = [
            'user_id' => $user_id,
        ];
 
        $cart_object->cartPurchaseCompleted($params, $user_id);
 
-        $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
-
-        $modifyCart->emailItems();
+        $_SESSION['message'] = 'Thanks for your purchase. An email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
 
         header('Location: index.php');
         exit();

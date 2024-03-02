@@ -7,7 +7,7 @@
                 <form class="login-form" action="enter_email.php" method="post">
                     <div class="input-group">
                         <p>
-                            We sent an email to  <b><?php echo $_GET['email'] ?></b> to help you recover your account.
+                            An email will be shortly sent to  <b><?php echo $_GET['email'] ?></b> to help you recover your account.
                         </p>
                         <p>
                             Please login into your email account and click on the link we sent to reset your password
