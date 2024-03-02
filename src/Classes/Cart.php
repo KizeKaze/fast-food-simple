@@ -49,14 +49,6 @@ class Cart
             exit();
         }
     }
-
-    public function emailItems()
-
-    {
-
-        //$this->email_object->sendEmail($email_items, $order_details);
-    }
-
     public function getMaxOrderID($db, $user_id)
     {
         $sql = 'SELECT MAX(order_id) as order_id FROM order_item WHERE user_id = ' . $user_id . ' ';
