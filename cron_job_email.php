@@ -7,6 +7,10 @@ $email_info = new \App\Classes\Cart();
 $email_object = new \App\Classes\Email;
 $pass_object = new \App\Classes\Password();
 
+if (PHP_SAPI !== 'cli') {
+    exit("ACCESS DENIED");
+}
+
 $db = Database::getInstance();
 
 $email_chunks = $query->CustomSQL('SELECT order_id, user_id FROM order_complete WHERE email_sent = 0');
