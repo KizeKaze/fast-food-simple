@@ -2,10 +2,10 @@
 
 use App\Classes\Database;
 
-include "includes/header.php"; ?>
-<?php include "includes/nav.php" ?>
+include "includes/header.php";
+include "includes/nav.php";
 
-<?php
+
     $cart_object = new \App\Classes\Cart();
 
     if (empty($_SESSION['user_id'])) {
@@ -83,7 +83,7 @@ include "includes/header.php"; ?>
 
        $cart_object->insertOrderComplete($params);
 
-       $params = [ 'user_id' => $_SESSION['user_id']];
+       $params = ['user_id' => $_SESSION['user_id']];
 
        $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
        $user_id = $_SESSION['user_id'];
@@ -93,11 +93,21 @@ include "includes/header.php"; ?>
 
        $cart_object->cartPurchaseCompleted($params, $user_id);
 
-        $_SESSION['message'] = 'Thanks for your purchase, an email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
+        $_SESSION['message'] = 'Thanks for your purchase. An email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
 
-        $modifyCart->emailItems();
+        $modifyCart->getMaxOrderID();
+
+
+
+
+
+        //original line sitting here before tring to dissect emailitems
+       // $modifyCart->emailItems();
+
+        include 'cron_job_email.php';
 
         header('Location: index.php');
+
         exit();
     }
 
