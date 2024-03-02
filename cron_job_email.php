@@ -48,7 +48,7 @@ if ($email_chunks) {
 if ($password_chunks) {
     foreach ($password_chunks as $chunk) {
         $email = $chunk['email'];
-        $token = $chunk['$token'];
+        $token = $chunk['token'];
 
         $mail_sent = $pass_object->sendPassword($email, $token);
 
