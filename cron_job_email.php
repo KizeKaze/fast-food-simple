@@ -12,7 +12,7 @@ $db = Database::getInstance();
 
 $query = new \App\Classes\Query();
 $email_chunks = $query->CustomSQL('SELECT order_id, user_id FROM order_complete WHERE email_sent = 0');
-$password_chunks = $query->CustomSQL('SELECT email FROM password_resets WHERE password_sent = 0');
+$password_chunks = $query->CustomSQL('SELECT email, token FROM password_resets WHERE password_sent = 0');
 
 
 if (!$email_chunks && !$password_chunks) {
@@ -46,5 +46,22 @@ if ($email_chunks) {
 }
 
 if ($password_chunks) {
-    echo "You have a password to send, yay!";
+    foreach ($password_chunks as $chunk) {
+        $email = $chunk['email'];
+        $token = $chunk['$token'];
+
+        $mail_sent = $pass_object->sendPassword($email, $token);
+
+        if ($mail_sent) {
+            echo "password reset sent";
+
+            $params = [
+                'email' => $chunk['email'],
+                'token' => $chunk['token']
+            ];
+            $query->CustomSQL('UPDATE password_resets SET password_sent = 1 WHERE email = :email AND token = :token', $params);
+        } else {
+            echo "Failed to sent password reset";
+        }
+    }
 }

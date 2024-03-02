@@ -168,8 +168,9 @@ class CartTest extends TestCase
         self::$Cart->insertOrderComplete($params);
 
         $params = ['user_id' => -4];
+        $user_id = -4;
 
-        $max_order_id = self::$Cart->getMaxOrderID($db);
+        $max_order_id = self::$Cart->getMaxOrderID($db, $user_id);
 
         $user_id = -4;
 
@@ -295,7 +296,8 @@ class CartTest extends TestCase
             'order_id' => $order_id[0]['order_id'],
             'user_id' => -8,
             'date_purchased' => $current_db_order[0]['date_purchased'],
-            'grand_total' => '14.59'
+            'grand_total' => '14.59',
+            'email_sent' => 0
         ];
 
         $this->assertNotEmpty($current_db_order);
@@ -327,7 +329,8 @@ class CartTest extends TestCase
             'order_id' => $order_id[0]['order_id'],
             'user_id' => -9,
             'date_purchased' => $current_db_order[0]['date_purchased'],
-            'grand_total' => '0.50'
+            'grand_total' => '0.50',
+            'email_sent' => 0
         ];
 
         $this->assertNotEmpty($current_db_order[0]);

@@ -37,8 +37,8 @@ $pass_object = new \App\Classes\Password();
     ];
     $query->insert('password_resets', $params);
 
-    //This is when password gets fired off
-    $pass_object->sendPassword($email, $token);
+     //this is here for local testing purpose
+     include 'cron_job_email.php';
 
     $argument = [
         'email' => $_POST['email']

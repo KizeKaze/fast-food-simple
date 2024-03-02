@@ -49,8 +49,7 @@ class Password
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
         $msg = "Hi there, click on this <a href=\"http://www.rayxproject.com/new_pass_logic.php?token=" . $token . "\">link</a> to reset your password on rayxproject.com";
         $msg = wordwrap($msg,70);
-
-        mail($to, $subject, $msg, $headers);
+        return mail($to, $subject, $msg, $headers);
     }
 
     public function pendingEmail() {
