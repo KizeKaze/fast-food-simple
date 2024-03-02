@@ -29,7 +29,6 @@ include "includes/nav.php";
             exit();
         }
 
-
         $params = [
             'user_id' => $_SESSION['user_id'],
             'item_id' => $id,
@@ -57,18 +56,21 @@ include "includes/nav.php";
     }
     $query = new \App\Classes\Query();
 
+    //setting user_id for sending emails with cron
+    $user_id = $_SESSION['user_id'];
+
     $params = [
-        'user_id' => $_SESSION['user_id'],
+        'user_id' => $user_id,
     ];
 
     //grab cart for compare on cart_form.php
-    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $_SESSION['user_id']);
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $user_id);
 
 
     $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
 
     $params = [
-        'user_id' => $_SESSION['user_id']
+        'user_id' => $user_id
     ];
     $result = $query->CustomSQL('SELECT * FROM cart WHERE user_id = :user_id', $params);
 
@@ -77,16 +79,15 @@ include "includes/nav.php";
         $grand_total = sanitize($_POST['grand_total']);
 
         $params = [
-            'user_id' => $_SESSION['user_id'],
+            'user_id' => $user_id,
             'grand_total' => $grand_total
         ];
 
        $cart_object->insertOrderComplete($params);
 
-       $params = ['user_id' => $_SESSION['user_id']];
+       $params = ['user_id' => $user_id];
 
        $result = $query->CustomSQL('SELECT order_id FROM order_complete WHERE user_id = :user_id', $params);
-       $user_id = $_SESSION['user_id'];
        $params = [
            'user_id' => $user_id,
        ];
@@ -95,19 +96,10 @@ include "includes/nav.php";
 
         $_SESSION['message'] = 'Thanks for your purchase. An email will be sent to you shortly with your order receipt in your Inbox or Spam folder';
 
-        $modifyCart->getMaxOrderID();
-
-
-
-
-
-        //original line sitting here before tring to dissect emailitems
-       // $modifyCart->emailItems();
-
+        //this is here for local testing purpose
         include 'cron_job_email.php';
 
         header('Location: index.php');
-
         exit();
     }
 
