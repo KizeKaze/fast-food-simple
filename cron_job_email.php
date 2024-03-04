@@ -1,5 +1,7 @@
 <?php
 require 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "/..");
+$dotenv->load();
 use App\Classes\Database;
 
 $query = new \App\Classes\Query();
