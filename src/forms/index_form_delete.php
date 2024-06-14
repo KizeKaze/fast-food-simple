@@ -4,6 +4,8 @@
 session_start();
 require '../../vendor/autoload.php'; ?>
 <?php
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "\..\..");
+$dotenv->load();
 $menu = new \App\Classes\Menu();
 $User = new \App\Classes\User();
 

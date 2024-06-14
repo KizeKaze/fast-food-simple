@@ -2,9 +2,13 @@
 // Includes our namespaces
 require 'vendor/autoload.php';
 
+
 $menu = new \App\Classes\Menu();
 
 if ($_POST) {
+    //including .env here since header is not called until the form is included.
+    $dotenv = Dotenv\Dotenv::createImmutable( __DIR__);
+    $dotenv->load();
     $errors = [];
     $Item = new \App\Classes\MenuItem();
 
