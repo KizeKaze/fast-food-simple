@@ -21,6 +21,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i = 1; ?>
                 <?php foreach ($email_items as $element) : ?>
                     <tr>
                         <th scope='row'><?= $i ?></th>
