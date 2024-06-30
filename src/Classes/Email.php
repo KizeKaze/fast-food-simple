@@ -2,26 +2,32 @@
 
 namespace App\Classes;
 
-use PHPMailer\PHPMailer\PHPMailer;
+use Exception;
 
 class Email
 {
     public function sendEmail($email_items, $order_details, $email)
     {
-        $i = 1;
-
-        $to = $email;
-        $subject = "Receipt From Raywebdev.com";
-
-        $headers = "From: Admin@raywebdev.com" . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $user_email = $email;
+        $email = new \SendGrid\Mail\Mail();
+        $email->setFrom("raywebdev@outlook.com");
+        $email->setSubject("Receipt From Raywebdev.com");
+        $email->addTo($user_email);
         ob_start();
 
         include 'src/forms/email_items_form.php';
         $msg = ob_get_contents();
         ob_end_clean();
         $msg = wordwrap($msg,70);
-        return mail($to, $subject, $msg, $headers);
+        $email->addContent("text/html", $msg);
+
+        $send_grid = new \SendGrid($_ENV['SENDGRID_API_KEY']);
+        try {
+            $response = $send_grid->send($email);
+            echo $response->statusCode();
+            return $response->statusCode() == 202;
+        } catch (Exception $e) {
+            echo 'Caught exception: '. $e->getMessage() ."\n";
+        }
     }
 }
