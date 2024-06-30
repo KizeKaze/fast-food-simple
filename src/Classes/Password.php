@@ -3,6 +3,8 @@
 namespace App\Classes;
 
 
+use Exception;
+
 class Password
 {
 
@@ -40,19 +42,30 @@ class Password
 
     }
 
-    public function sendPassword($email, $token) {
-        $to = $email;
-        $subject = "Password Reset at Raywebdev.com";
-
-        $headers = "From: Admin@raywebdev.com" . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    public function sendPassword($email, $token)
+    {
+        $user_email = $email;
+        $email = new \SendGrid\Mail\Mail();
+        $email->setFrom("raywebdev@outlook.com");
+        $email->setSubject("Password Reset at Raywebdev.com");
+        $email->addTo($user_email);
         $msg = "Hi there, click on this <a href=\"https://www.raywebdev.com/new_pass_logic.php?token=" . $token . "\">link</a> to reset your password on raywebdev.com";
         $msg = wordwrap($msg,70);
-        return mail($to, $subject, $msg, $headers);
+        $email->addContent("text/html", $msg);
+
+        $send_grid = new \SendGrid($_ENV['SENDGRID_API_KEY']);
+        try {
+            $response = $send_grid->send($email);
+            return $response->statusCode() == 202;
+        } catch (Exception $e) {
+            echo 'Caught exception: '. $e->getMessage() ."\n";
+            return false;
+        }
+
     }
 
-    public function pendingEmail() {
+    public function pendingEmail()
+    {
         if (!$_GET['email']) {
             $_SESSION['failure'] = "What are you doing..";
             header('Location: enter_email.php');
