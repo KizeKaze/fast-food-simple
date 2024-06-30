@@ -17,6 +17,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/types.php">Types</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/summary.php">Project Summary</a>
+                    </li>
                 <?php endif; ?>
                 <?php if ($User->loggedIn()) : ?>
                     <div class="dropdown">
@@ -41,6 +44,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/summary.php">Project Summary</a>
                     </li>
                     <li>
                         <button type="button" class="btn btn-outline-secondary" disabled >Guest</button>

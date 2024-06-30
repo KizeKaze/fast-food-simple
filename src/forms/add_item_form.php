@@ -1,6 +1,10 @@
 <?php include "includes/header.php" ?>
 <?php include "includes/nav.php" ?>
 <?php
+if(!isset($_SESSION['user_role'])) {
+    header("Location: index.php");
+    exit();
+}
 if (isset($item_added)) {
     $item_added = 'Item added!';
 }
