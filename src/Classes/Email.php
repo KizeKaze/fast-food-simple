@@ -14,8 +14,8 @@ class Email
         $email->setSubject("Receipt From Raywebdev.com");
         $email->addTo($user_email);
         ob_start();
-
-        include 'src/forms/email_items_form.php';
+        // Hard path to this file for raywebdev.com
+        include '/var/www/html/src/forms/email_items_form.php';
         $msg = ob_get_contents();
         ob_end_clean();
         $msg = wordwrap($msg,70);
@@ -27,6 +27,7 @@ class Email
             return $response->statusCode() == 202;
         } catch (Exception $e) {
             echo 'Caught exception: '. $e->getMessage() ."\n";
+            return false;
         }
     }
 }
