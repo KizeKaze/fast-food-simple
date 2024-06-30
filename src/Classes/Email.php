@@ -24,7 +24,6 @@ class Email
         $send_grid = new \SendGrid($_ENV['SENDGRID_API_KEY']);
         try {
             $response = $send_grid->send($email);
-            echo $response->statusCode();
             return $response->statusCode() == 202;
         } catch (Exception $e) {
             echo 'Caught exception: '. $e->getMessage() ."\n";
