@@ -45,23 +45,22 @@ class Password
     public function sendPassword($email, $token)
     {
         $user_email = $email;
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom("raywebdev@outlook.com");
-        $email->setSubject("Password Reset at Raywebdev.com");
-        $email->addTo($user_email);
-        $msg = "Hi there, click on this <a href=\"https://www.raywebdev.com/new_pass_logic.php?token=" . $token . "\">link</a> to reset your password on raywebdev.com";
-        $msg = wordwrap($msg,70);
-        $email->addContent("text/html", $msg);
 
-        $send_grid = new \SendGrid($_ENV['SENDGRID_API_KEY']);
-        try {
-            $response = $send_grid->send($email);
-            return $response->statusCode() == 202;
-        } catch (Exception $e) {
-            echo 'Caught exception: '. $e->getMessage() ."\n";
-            return false;
-        }
+        $reset_link = "https://www.raywebdev.com/new_pass_logic.php?token=" . $token;
 
+        $msg = "Hi there,<br><br>";
+        $msg .= "Click on this <a href=\"$reset_link\">link</a> to reset your password on raywebdev.com.<br><br>";
+        $msg .= "If you did not request this, you can safely ignore this email.";
+
+        $msg = wordwrap($msg, 70);
+
+        $subject = "Password Reset at Raywebdev.com";
+
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: raywebdev@outlook.com\r\n";
+
+        return mail($user_email, $subject, $msg, $headers);
     }
 
     public function pendingEmail()
