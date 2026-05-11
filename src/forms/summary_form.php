@@ -55,7 +55,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">This project does get breaks from being worked on from time to time, I'm human and also have a full time job</li>
-                        <li class="list-group-item">I have 2 API's in use, emailing with <a href="https://sendgrid.com/en-us" target="@">SendGrid</a> and generating meals with <a href="/random_meal.php" target="@">random meals</a></li>
+                        <li class="list-group-item">I have 1 API in use, generating meals with <a href="/random_meal.php" target="@">random meals</a></li>
                         <li class="list-group-item">Github for this project can be found <a href="https://github.com/tony1542/fast-food-simple" target="@">here</a></li>
                         <li class="list-group-item">I have lightly worked with vue to get a running example <a href="/src/forms/vue_groceries_form.php" target="@">here</a> for users and admins to add new items</li>
                     </ul>
