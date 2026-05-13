@@ -74,7 +74,7 @@ The app simulates a real ordering workflow: users can register, log in, browse i
 ├── login.php              # Login page
 ├── logout.php             # Logout handler
 ├── register.php           # Registration page
-├── summary.php            # Order summary
+├── summary.php            # Project summary
 ├── types.php              # Manage item types
 ├── vue_groceries_add.php  # Vue.js-based add form (experimental)
 ├── cron_job_email.php     # Cron job for sending emails
