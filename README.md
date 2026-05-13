@@ -78,6 +78,7 @@ The app simulates a real ordering workflow: users can register, log in, browse i
 ├── cron_job_email.php     # Cron job for sending emails
 ├── database_seed.sql      # Seed data
 └── .env_example           # Example environment config
+
 ---
 
 ## 📦 Features
