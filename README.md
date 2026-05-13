@@ -59,6 +59,8 @@ The app simulates a real ordering workflow: users can register, log in, browse i
 ---
 
 ## 📂 Project Structure
+
+```
 ├── includes/              # Shared layout + message partials (header, footer, nav, messages)
 ├── src/
 │   ├── Classes/           # Core backend classes (Cart, User, Menu, Database, Email, etc.)
@@ -78,6 +80,7 @@ The app simulates a real ordering workflow: users can register, log in, browse i
 ├── cron_job_email.php     # Cron job for sending emails
 ├── database_seed.sql      # Seed data
 └── .env_example           # Example environment config
+```
 
 ---
 
