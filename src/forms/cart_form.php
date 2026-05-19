@@ -18,7 +18,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <?php foreach ($shoppingcart as $cart) {
+                        <?php foreach ($shopping_cart as $cart) {
                         $item_id = $cart['item_id'];
                         $id = $cart['id'];
                         $name = $cart['name'];
