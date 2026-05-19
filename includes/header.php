@@ -2,7 +2,9 @@
 session_start();
 set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] );
 require 'vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "/..");
+
+$envFile = file_exists(__DIR__ . '/../.env.local') ? '.env.local' : '.env';
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "/..", $envFile);
 $dotenv->load();
 date_default_timezone_set('America/Chicago');
 

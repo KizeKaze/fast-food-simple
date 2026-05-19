@@ -53,6 +53,6 @@ if (isset($_POST['new_password'])) {
 }
 //assign token here if user has not yet clicked new_password
 $token = $_GET['token'] ?? '';
-$token = sanitize($_GET['token']);
+$token = sanitize($token);
 
 include 'src/forms/new_pass_form.php';

@@ -4,3 +4,4 @@ composer.lock
 /src/images/*
 !/src/images/coming-soon.jpg
 .env
+.env.local

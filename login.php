@@ -13,7 +13,7 @@ if($_POST) {
         $errors[] = 'Invalid email';
     }
 
-    if (empty($email)) {
+    if (empty($password)) {
         $errors[] = 'Invalid password';
     }
 

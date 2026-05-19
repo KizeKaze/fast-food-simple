@@ -7,7 +7,7 @@ class User
     private string $username = '';
     private string $email = '';
     private string $password = '';
-    private string $today = '';
+    private string $date = '';
     private int $user_role = 0;
 
     public function __construct() {}
