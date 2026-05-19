@@ -94,7 +94,8 @@ class Password
         ];
         $query->CustomSQL('UPDATE password_resets SET expired_token = :expired_token WHERE token = :token', $params);
 
-        return "Password reset, you can <a href='login.php'>login</a> now";
+        return "Password reset, you can <a href='{$_ENV['APP_URL']}/login.php'>login</a> now";
+
     }
 
     // Sends password reset email
