@@ -88,4 +88,11 @@ class UserTest extends TestCase
         $this->assertNotFalse($db_email);
         $this->assertEquals($email, $db_email['email']);
     }
+
+    public function testGetDate()
+    {
+        $this->User->setDate('2026-05-19');
+        $result = $this->User->getDate();
+        $this->assertEquals('2026-05-19', $result);
+    }
 }
