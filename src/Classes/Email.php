@@ -39,7 +39,7 @@ class Email
 
         ob_start();
         // Hard path to this file for raywebdev.com
-        include '/var/www/html/src/forms/email_items_form.php';
+        include __DIR__ . '/../forms/email_items_form.php';
         $msg = ob_get_contents();
         ob_end_clean();
 
