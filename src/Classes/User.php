@@ -25,7 +25,7 @@ class User
 
     public function getDate() : string
     {
-        return $this->date;
+        return $this->today;
     }
 
     public function setDate(string $date): void
