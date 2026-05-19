@@ -92,7 +92,7 @@ The app simulates a real ordering workflow: users can register, log in, browse i
 - Update quantities in the cart  
 - Remove items from the cart  
 - Purchase items (logged in the database with user, price, and date)  
-- Password recovery emails (currently being updated)  
+- Password recovery emails via Resend API
 - **Generate random meals using an external API**  
 
 ### **Admin Features**
@@ -125,12 +125,6 @@ Instead, it uses:
 
 It’s a natural evolution from simple PHP scripts into a more structured, maintainable application.
 
----
-
-## 📝 Email Note
-
-The project originally used **SendGrid** for password reset and order emails.  
-Due to SendGrid’s API changes, email functionality is currently being refactored and will be replaced with PHPMailer or SMTP.
 
 ---
 
