@@ -7,7 +7,7 @@ class User
     private string $username = '';
     private string $email = '';
     private string $password = '';
-    private string $today = '';
+    private string $date = '';
     private int $user_role = 0;
 
     public function __construct() {}
@@ -25,7 +25,7 @@ class User
 
     public function getDate() : string
     {
-        return $this->today;
+        return $this->date;
     }
 
     public function setDate(string $date): void
