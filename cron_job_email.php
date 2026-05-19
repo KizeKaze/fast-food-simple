@@ -9,6 +9,7 @@ $email_info = new \App\Classes\Cart();
 $email_object = new \App\Classes\Email;
 $pass_object = new \App\Classes\Password();
 
+
 if (PHP_SAPI !== 'cli') {
     exit("ACCESS DENIED");
 }
@@ -19,10 +20,12 @@ $email_chunks = $query->CustomSQL('SELECT order_id, user_id FROM order_complete 
 $password_chunks = $query->CustomSQL('SELECT email, token FROM password_resets WHERE password_sent = 0');
 
 
+// If no email chunks or password chunks, exit
 if (!$email_chunks && !$password_chunks) {
    exit();
 }
 
+// Email sends email and updates order_complete table indicating cron job has run
 if ($email_chunks) {
     foreach ($email_chunks as $chunk) {
         $params = [
@@ -47,11 +50,13 @@ if ($email_chunks) {
     }
 }
 
+// Password Reset sends email and updates password_resets table indicating cron job has run
 if ($password_chunks) {
     foreach ($password_chunks as $chunk) {
         $email = $chunk['email'];
         $token = $chunk['token'];
 
+        //replace with sendSMTP for localhost testing
         $mail_sent = $pass_object->sendPassword($email, $token);
 
         if ($mail_sent) {
