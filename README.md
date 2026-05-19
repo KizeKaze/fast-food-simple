@@ -128,14 +128,13 @@ It’s a natural evolution from simple PHP scripts into a more structured, maint
 
 ---
 
-## 🚀 Future Improvements
-- Replace SendGrid with PHPMailer  
+## 🚀 Future Improvements  
 - Add order history  
 - Add product categories  
 - Improve UI styling  
 - Add search + filtering  
 - Add admin dashboard  
-- Expand API usage (Random Meal API)  
+- Expand API usage (Random Meal API, Resend API)  
 
 ---
 
