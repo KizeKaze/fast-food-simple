@@ -4,9 +4,11 @@ namespace App\Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Resend;
 
 class Email
 {
+    // Sends email using SMTP for localhost testing
     private function sendSMTP($to, $subject, $html)
     {
         $mail = new PHPMailer(true);
@@ -33,7 +35,27 @@ class Email
             return false;
         }
     }
-    public function sendEmail($email_items, $order_details, $email)
+
+    // Sends email using Resend
+    private function sendResend($to, $subject, $html): bool
+    {
+        try {
+            $resend = Resend::client($_ENV['RESEND_API_KEY']);
+            
+            $result = $resend->emails->send([
+                'from' => $_ENV['RESEND_FROM_EMAIL'],
+                'to' => $to,
+                'subject' => $subject,
+                'html' => $html,
+            ]);
+
+            return isset($result['id']);
+        } catch (Exception $e) {
+            error_log("Resend Error: {$e->getMessage()}");
+            return false;
+        }
+    }
+    public function sendEmail($email_items, $order_details, $email): bool
     {
         $user_email = $email;
 
@@ -47,6 +69,7 @@ class Email
 
         $subject = "Receipt From Raywebdev.com";
 
-        return $this->sendSMTP($user_email, $subject, $msg);
+        //replace with sendSMTP for localhost testing
+        return $this->sendResend($user_email, $subject, $msg);
     }
 }
