@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__);
+$envFile = file_exists(__DIR__ . '/../.env.local') ? '.env.local' : '.env';
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "/..", $envFile);
 $dotenv->load();
 use App\Classes\Database;
 
