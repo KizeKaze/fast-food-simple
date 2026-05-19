@@ -100,7 +100,8 @@ class Password
     // Sends password reset email
     public function sendPassword($email, $token): bool
     {
-        $reset_link = "https://www.raywebdev.com/new_pass_logic.php?token=" . $token;
+        //APP_URL uses .env.local first, then .env to route URL.
+        $reset_link = $_ENV['APP_URL'] . "/new_pass_logic.php?token=" . $token;
 
         $msg  = "Hi there,<br><br>";
         $msg .= "Click on this <a href=\"$reset_link\">link</a> to reset your password on raywebdev.com.<br><br>";
