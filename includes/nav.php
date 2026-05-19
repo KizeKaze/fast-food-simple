@@ -28,10 +28,10 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" href="/cart.php">Shopping Cart</a></li>
-                            <li><hr class="dropdown-divider"></hr></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="nav-link" href="/src/forms/vue_groceries_form.php">Vue Groceries</a></li>
                             <li><a class="nav-link" href="/random_meal.php">Hungry?</a></li>
-                            <li><hr class="dropdown-divider"></hr></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="nav-link" href="/logout.php">Log Out</a></li>
                         </ul>
                     </div>
