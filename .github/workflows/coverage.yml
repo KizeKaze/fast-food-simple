@@ -6,28 +6,36 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: fast_food
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Start MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: 'fast_food'
-          mysql user: 'root'
-          mysql password: ''
-
-      - name: Import schema
-        run: mysql -h 127.0.0.1 -u root fast_food < database_seed.sql
+        uses: actions/checkout@v5
 
       - name: Set up PHP 8.1
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
           coverage: xdebug
+          extensions: pdo_mysql
 
       - name: Install dependencies
         run: composer install --no-interaction
+
+      - name: Import schema
+        run: mysql -h 127.0.0.1 -u root -proot fast_food < database_seed.sql
 
       - name: Run PHPUnit with coverage
         run: vendor/bin/phpunit --coverage-clover coverage.xml .
