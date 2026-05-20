@@ -13,18 +13,17 @@ abstract class Database
 
         $local = $root . '/.env.local';
         $prod  = $root . '/.env';
+        $example = $root . '/.env_example';
 
         if (file_exists($local)) {
             $env = parse_ini_file($local);
         } elseif (file_exists($prod)) {
             $env = parse_ini_file($prod);
-        } else {
+        } elseif (file_exists($example)) {
             // PHPUnit fallback for CI badge
-            $host = 'mysql:host=localhost;dbname=fast_food';
-            $user = 'root';
-            $pass = '';
-
-            return new PDO($host, $user, $pass);
+            $env = parse_ini_file($example);
+        } else {
+            throw new \Exception('No .env or .env.local file found');
         }
 
         return new PDO($env['MYSQL_HOST'], $env['MYSQL_USERNAME'], $env['MYSQL_PASSWORD']);
