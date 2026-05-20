@@ -37,6 +37,14 @@ jobs:
       - name: Import schema
         run: mysql -h 127.0.0.1 -u root -proot fast_food < database_seed.sql
 
+      - name: Wait for MySQL
+        run: |
+          for i in {1..15}; do
+            mysqladmin ping -h 127.0.0.1 -u root -proot && break
+            echo "Waiting for MySQL..."
+            sleep 2
+          done     
+
       - name: Run PHPUnit with coverage
         run: vendor/bin/phpunit --coverage-clover coverage.xml .
 

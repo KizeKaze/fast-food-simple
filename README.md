@@ -20,7 +20,6 @@ This is a **procedural + object‑oriented PHP application** that uses:
 The app simulates a real ordering workflow: users can register, log in, browse items, add them to a cart, and place orders. Admins can manage menu items and types.
 
 ### Continuous Integration
-- ![Tests](https://github.com/KizeKaze/fast-food-simple/actions/workflows/tests.yml/badge.svg)
 - [![Coverage](https://codecov.io/gh/KizeKaze/fast-food-simple/branch/main/graph/badge.svg)](https://codecov.io/gh/KizeKaze/fast-food-simple)
 
 
