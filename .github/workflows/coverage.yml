@@ -1,10 +1,12 @@
-name: Coverage Badge
+name: Coverage
 
 on: [push]
 
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -12,7 +14,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.1'
           coverage: xdebug
 
       - name: Install dependencies
@@ -22,4 +24,15 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover clover.xml
 
       - name: Generate coverage badge
-        uses: timkrase/phpunit-coverage-badge@v2
+        uses: cschleiden/coverage-badge-action@v1
+        with:
+          path: clover.xml
+          badge-path: coverage.svg
+
+      - name: Commit badge
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add coverage.svg
+          git commit -m "Update coverage badge" || echo "No changes"
+          git pushe-badge@v2
