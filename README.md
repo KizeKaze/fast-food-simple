@@ -21,7 +21,8 @@ The app simulates a real ordering workflow: users can register, log in, browse i
 
 ### Continuous Integration
 - ![Tests](https://github.com/KizeKaze/fast-food-simple/actions/workflows/tests.yml/badge.svg)
-- ![Coverage](./badge.svg)
+- [![Coverage](https://codecov.io/gh/KizeKaze/fast-food-simple/branch/main/graph/badge.svg)](https://codecov.io/gh/KizeKaze/fast-food-simple)
+
 
 ---
 

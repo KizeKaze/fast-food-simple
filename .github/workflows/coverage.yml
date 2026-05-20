@@ -5,8 +5,6 @@ on: [push]
 jobs:
   coverage:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -23,16 +21,7 @@ jobs:
       - name: Run PHPUnit with coverage
         run: vendor/bin/phpunit --coverage-clover clover.xml
 
-      - name: Generate coverage badge
-        uses: cschleiden/coverage-badge-action@v1
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          path: clover.xml
-          badge-path: coverage.svg
-
-      - name: Commit badge
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add coverage.svg
-          git commit -m "Update coverage badge" || echo "No changes"
-          git push
+          files: clover.xml
