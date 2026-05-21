@@ -133,6 +133,60 @@ It’s a natural evolution from simple PHP scripts into a more structured, maint
 
 ---
 
+# 🐳 Docker Development Environment
+
+This project includes a complete Dockerized PHP + Apache + MySQL environment to ensure consistent behavior across machines.
+
+Download Docker at <a href="https://www.docker.com/" target="_blank">https://www.docker.com/</a>
+
+## PHP Container
+
+The PHP container mounts a custom development configuration file:
+
+```
+php-config/dev.ini → /usr/local/etc/php/conf.d/dev.ini
+```
+
+This allows the project to override PHP settings *without* modifying the base image.
+
+## MySQL Container
+
+MySQL initializes automatically using the `database_seed.sql` file in the project root.
+
+---
+
+# 🧩 PHP Error Display (Development Mode)
+
+To provide a clean and stable development experience, the Docker environment disables PHP warnings and notices **in the browser**, while still logging them internally.
+
+This prevents non‑critical warnings from interrupting redirects or HTML output — a common issue when working with legacy PHP applications.
+
+All errors continue to be logged normally by PHP.
+
+You can modify this behavior by editing:
+
+```
+php-config/dev.ini
+```
+
+---
+
+# 🚀 Running the Project
+
+Start the full stack:
+
+```bash
+docker compose up --build
+```
+
+Then visit the application:
+
+```
+http://localhost:9001
+```
+
+---
+
 ## 🚀 Future Improvements  
 - Add order history  
 - Add product categories  
@@ -151,92 +205,6 @@ It’s a natural evolution from simple PHP scripts into a more structured, maint
 - **Portfolio:** (Rebuilding)
 <hr>
 
-## Requirements
-- PHP: 8.1+ (tested on 8.1.17)
-- Composer: required
-- Database: MySQL or MariaDB
-
-### Web server options:
-- PHP built‑in server (recommended)
-- Apache or Nginx (optional)
-
-## PHP extensions
-- pdo_mysql
-- mbstring
-- openssl
-- json
-
-## Installation
-1. Clone the repository
-
-```
-git clone https://github.com/KizeKaze/fast-food-simple.git
-cd fast-food-simple
-```
-
-2. Install dependencies
-
-```
-composer install
-
-```
-
-3. Environment Files
-
-This project supports two environment files:
-
-- **.env.local** — developer‑specific settings (highest priority)
-- **.env** — fallback environment file
-
-The repository includes **.env_example**, which serves as a template.  
-To get started, copy it to `.env.local`:
-
-```
-cp .env_example .env.local
-```
-
-If `.env.local` is missing, the project will automatically fall back to `.env`.
-
-Then open .env.local and fill in:
-- MYSQL_DATABASE
-- MYSQL_USER
-- MYSQL_PASSWORD
-
-MYSQL_HOST is already set to localhost.
-APP_URL is set to http://localhost:9001 as default
-
-4. Create and seed the database
-
-```
-mysql -u root -p fast_food < database_seed.sql
-```
-
-## Running the Project
-
-### Option A — PHP Built‑In Server (Recommended)
-Since index.php is in the project root:
-
-```
-php -S localhost:9001
-```
-
-Then in your preferred browser open:
-
-```
-http://localhost:9001
-```
-
-### Option B — Apache (Optional)
-- Point DocumentRoot to the project root
-- Ensure .htaccess is enabled:
-
-```
-AllowOverride All
-```
-
-### Option C — Nginx (Optional)
-- Point root to the project root
-- Configure PHP‑FPM normally
 
 ## Local Email Setup
 This project supports two email methods. Resend API if you happen to use them otherwise SMTP is what you need
@@ -264,6 +232,8 @@ SMTP_HOST=localhost
 SMTP_PORT=25
 ```
 
+
+
 In your email class, comment out Resend and add call to SMTP:
 
 ```
@@ -277,52 +247,34 @@ php cron_job_email.php
 ```
 This command will fire off any emails. Emails will pop up in Papercut right away.
 
-## Running Tests
+
+## 🧪 Running Tests
+
 This project includes PHPUnit tests for core backend classes.
 
 Run the full test suite:
+
 ```
 vendor/bin/phpunit
 ```
 
 Or run a specific test file:
+
 ```
 vendor/bin/phpunit tests/CartTest.php
 ```
 
-## Admin Access
+---
 
-Open up your users table and update user_role from 0 -> 1 to enable Admin privilege on your account
+## 🔐 Admin Access
 
+Open your `users` table and update `user_role` from `0` → `1` to enable admin privileges.
 
-## Troubleshooting
+---
+
 
 ### Email verification
 - order_complete.email_sent will default to 0 and update to 1 if cron_job_email.php has run successfully
 - password_reset.password_sent will default to 0 and update to 1 if cron_job_email.php has run successfully
 
-### Checking PHP Extensions
 
-Run the following to list installed extensions:
-
-```
-php -m
-```
-
-Required extensions:
-- mbstring
-- openssl
-- pdo_mysql
-- json
-
-If any are missing, enable them in your `php.ini`.
-
-
-### Database connection errors
-- Check .env.local values
-- Ensure the database exists
-- Confirm database_seed.sql imported correctly
-
-### Blank page / 500 error
-- Enable error display in development
-- Check PHP version and extensions
