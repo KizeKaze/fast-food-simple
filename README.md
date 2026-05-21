@@ -290,6 +290,10 @@ Or run a specific test file:
 vendor/bin/phpunit tests/CartTest.php
 ```
 
+## Admin Access
+
+Open up your users table and update user_role from 0 -> 1 to enable Admin privilege on your account
+
 
 ## Troubleshooting
 
