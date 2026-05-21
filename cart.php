@@ -35,7 +35,7 @@ include "includes/nav.php";
             'qty' => $qty
         ];
 
-        $modifyCart->updateCart($params);
+        $cart_object->updateCart($params);
         $item_added = 'Item updated';
     }
 
@@ -64,10 +64,10 @@ include "includes/nav.php";
     ];
 
     //grab cart for compare on cart_form.php
-    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = ' . $user_id);
+    $cart_amount = $query->CustomSQL('SELECT COUNT(*) AS amount FROM cart WHERE user_id = :user_id', $params);
 
 
-    $shoppingcart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
+    $shopping_cart = $query->CustomSQL('SELECT * FROM cart c INNER JOIN item i ON i.id = c.item_id WHERE user_id = :user_id', $params);
 
     $params = [
         'user_id' => $user_id
