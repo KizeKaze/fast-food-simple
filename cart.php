@@ -1,10 +1,6 @@
 <?php
 
-use App\Classes\Database;
-
-include "includes/header.php";
-include "includes/nav.php";
-
+require_once __DIR__ . '/php-config/init.php';
 
     $cart_object = new \App\Classes\Cart();
 
@@ -105,4 +101,7 @@ include "includes/nav.php";
     }
 
     $total = 0;
-include 'src/forms/cart_form.php';
+
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/nav.php';
+include __DIR__ . '/src/forms/cart_form.php';
