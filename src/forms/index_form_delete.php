@@ -1,14 +1,14 @@
 <?php
 //  I know this is not a good idea to copy/paste and shoe horn this to manipulate the dom
 //  but for this small project it is just an example that I know the basics to dom manipulation
-session_start();
-require '../../vendor/autoload.php'; ?>
-<?php
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "\..\..");
-$dotenv->load();
-$menu = new \App\Classes\Menu();
-$User = new \App\Classes\User();
 
+/**
+ * @var \App\Classes\Cart $modifyCart
+ * @var \App\Classes\Menu $menu
+ */
+
+require_once __DIR__ . '/../../php-config/init.php';
+$User = new \App\Classes\User();
 
 if (isset($_GET['add'])) {
     if (isset($_SESSION['user_role'])) {
@@ -31,10 +31,11 @@ if (isset($_GET['add'])) {
         }
 
         $params = [
-            'item_id' => $item_id,
+                'item_id' => $item_id,
+                'user_id' => $_SESSION['user_id']
         ];
         //check db for any items already in cart
-        $result = $query->CustomSQL('SELECT * FROM cart WHERE item_id = :item_id', $params);
+        $result = $modifyCart->checkCart($params);
         if (count($result) >= 1) {
             //update instead of insert
             $params = [
@@ -94,87 +95,107 @@ $params = [
 $result = $menu->getItems($params);
 
 if (empty($result)) {
-    $errors[] = "<h4>Hmm.. I couldn't find what you were looking for</h4>";
-    include "../../includes/errors.php";
+    $errors[] = "<h4>Hmm... I couldn't find what you were looking for</h4>";
+    include __DIR__ . "/../../includes/errors.php";
 } else {
 ?>
 
 <div class='container' id="main_card">
-    <?php
-        include "../../includes/errors.php";
-    ?>
     <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
-            <?php if ($User->isAdmin()) : ?>
-                <th>ID</th>
-            <?php endif; ?>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Type</th>
-            <?php if ($User->isAdmin()) : ?>
-                <th colspan="2">Options</th>
-                <th>Quantity</th>
-                <th>Cart</th>
-            <?php elseif ($User->loggedIn()) : ?>
-                <th>Quantity</th>
-                <th>Cart</th>
-            <?php endif; ?>
-            </thead>
-            <tbody>
             <tr>
-                <?php foreach ($result as $row) {
-                $id = $row['id'];
-                $name = $row['name'];
-                $description = $row['description'];
-                $cost = $row['cost'];
-                $type = $row['type'];
-                ?>
                 <?php if ($User->isAdmin()) : ?>
-                    <td><?= $id ?></td>
+                    <th class="hide_mobile_large">ID</th>
                 <?php endif; ?>
-                <td><a href="../../show_item_details.php?item=<?= $id ?>" class="text-decoration-none"><?= $name ?></a></td>
-                <td><textarea class="form-control" readonly><?= $description ?></textarea></td>
-                <td><?= $cost ?></td>
-                <td><?= $type ?></td>
+
+                <th>Name</th>
+                <th class="hide_mobile_large">Description</th>
+                <th>Cost</th>
+                <th class="hide_mobile_large">Type</th>
+
                 <?php if ($User->isAdmin()) : ?>
-                    <td>
-                        <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $id ?>">Edit</a>
-                    </td>
-                    <form action="../../index.php" method="get">
-                        <td>
-                            <button type="submit" class="btn btn-danger index_delete" name="delete" value="<?= $id ?>">
-                                Delete
-                            </button>
-                        </td>
-                    </form>
-                    <form action="" method="get">
-                        <td>
-                            <select class="add_qty form-select" aria-label="Quantity select" name="qty">
-                                <?php $menu->showQty(); ?>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit">Add</button>
-                        </td>
-                    </form>
+                    <th colspan="2">Options</th>
+                    <th>Quantity</th>
                 <?php elseif ($User->loggedIn()) : ?>
-                    <form action="" method="get">
-                        <td>
-                            <select class="add_qty form-select" aria-label="Quantity select" name="qty">
-                                <?php $menu->showQty(); ?>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="index_qty btn btn-primary" value="<?= $id ?>" type="submit">Add</button>
-                        </td>
-                    </form>
+                    <th>Quantity</th>
                 <?php endif; ?>
             </tr>
-            <?php } ?>
+            </thead>
+
+            <tbody>
+            <?php foreach ($result as $row) : ?>
+                <tr>
+                    <?php if ($User->isAdmin()) : ?>
+                        <td class="hide_mobile_large"><?= $row['id'] ?></td>
+                    <?php endif; ?>
+
+                    <td>
+                        <a href="../../show_item_details.php?item=<?= $row['id'] ?>" class="text-decoration-none">
+                            <?= $row['name'] ?>
+                        </a>
+                    </td>
+
+                    <td class="hide_mobile_large">
+                        <label for="description<?= $row['id'] ?>" class="visually-hidden">
+                            Description
+                        </label>
+                        <textarea id="description<?= $row['id'] ?>" class="form-control" readonly><?= $row['description'] ?></textarea>
+                    </td>
+
+                    <td><?= $row['cost'] ?></td>
+                    <td class="hide_mobile_large"><?= $row['type'] ?></td>
+
+                    <?php if ($User->isAdmin()) : ?>
+                        <td>
+                            <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $row['id'] ?>">Edit</a>
+                        </td>
+
+                        <td>
+                            <form action="../../index.php" method="get">
+                                <button type="submit" class="index_delete btn btn-danger" name="delete" value="<?= $row['id'] ?>">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+
+                        <td>
+                            <form action="" method="get">
+                                <label for="qty_<?= $row['id'] ?>" class="visually-hidden">
+                                    Quantity
+                                </label>
+                                <select id="qty_<?= $row['id'] ?>" class="add_qty form-select" name="qty">
+                                    <?php $menu->showQty(); ?>
+                                </select>
+
+                                <button class="index_qty btn btn-primary" value="<?= $row['id'] ?>" type="submit">
+                                    Add
+                                </button>
+                            </form>
+                        </td>
+
+                    <?php elseif ($User->loggedIn()) : ?>
+
+                        <td>
+                            <form action="" method="get">
+                                <label for="qty_<?= $row['id'] ?>" class="visually-hidden">
+                                    Quantity
+                                </label>
+                                <select id="qty_<?= $row['id'] ?>" class="add_qty form-select" name="qty">
+                                    <?php $menu->showQty(); ?>
+                                </select>
+
+                                <button class="index_qty btn btn-primary" value="<?= $row['id'] ?>" type="submit">
+                                    Add
+                                </button>
+                            </form>
+                        </td>
+
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
+        <?php } ?>
     </div>
 </div>
-<?php } ?>
