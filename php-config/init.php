@@ -1,4 +1,9 @@
 <?php
+//enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,6 +17,3 @@ $dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "/..", $envFile);
 $dotenv->load();
 date_default_timezone_set('America/Chicago');
 
-//instantiate core objects
-$menu = new \App\Classes\Menu();
-$modifyCart = new \App\Classes\Cart();
