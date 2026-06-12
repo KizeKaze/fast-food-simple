@@ -1,7 +1,6 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/nav.php" ?>
-
 <?php
+
+require_once __DIR__ . '/php-config/init.php';
 
 if($_POST) {
     $query = new \App\Classes\Query();
@@ -39,7 +38,6 @@ if($_POST) {
                 $_SESSION['username'] = $result[0]['username'];
                 $_SESSION['email'] = $result[0]['email'];
                 $_SESSION['user_role'] = $result[0]['user_role'];
-                $_SESSION['toggle_summary'] = $result[0]['toggle_summary'];
 
                 $_SESSION['login_message'] = "Welcome, " . $_SESSION['username'];
 
@@ -51,7 +49,9 @@ if($_POST) {
         }
     }
 }
-include 'src/forms/login_form.php';
-?>
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/nav.php';
+include __DIR__ . '/src/forms/login_form.php';
+
 
 
