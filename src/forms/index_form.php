@@ -148,5 +148,5 @@ if (isset($errors)) {
         <?php } ?>
     </div>
 </div>
-<script src="/src/js/index.js"></script>
+<script src="../../src/js/index.js"></script>
 <?php include __DIR__ . "/../../templates/layout/footer.php"; ?>
