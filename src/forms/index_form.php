@@ -26,9 +26,9 @@
                     </div>
                 </div>
             </form>
-            <?php include "includes/success.php"; ?>
-            <?php include "includes/message.php"; ?>
-            <?php include "includes/failure.php"; ?>
+            <?php include __DIR__ ."/../../includes/success.php"; ?>
+            <?php include __DIR__ ."/../../includes/message.php"; ?>
+            <?php include __DIR__ ."/../../includes/failure.php"; ?>
         </div>
     </div>
 </div>
@@ -112,5 +112,5 @@ if (isset($errors)) {
         </table>
     </div>
 </div>
-<script src="src/js/index.js"></script>
-<?php include "includes/footer.php"; ?>
+<script src="/src/js/index.js"></script>
+<?php include __DIR__ ."/../../includes/footer.php"; ?>
