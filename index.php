@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/php-config/init.php';
 
+//instantiate core objects
+$menu = new \App\Classes\Menu();
+$modifyCart = new \App\Classes\Cart();
+
 if (isset($_GET['add'])) {
     if (isset($_SESSION['user_role'])) {
         $query = new \App\Classes\Query();
@@ -84,8 +88,9 @@ $User = new \App\Classes\User();
 if (empty($result)) {
     $errors[] = "<h4>Hmm.. I couldn't find what you were looking for. <a href='/index.php' class='btn btn-primary'>Go Back</a></h4>";
 }
-include "includes/header.php";
-include "includes/nav.php";
-include 'src/forms/index_form.php';
-
+include __DIR__ . "/includes/header.php";
+include __DIR__ . "/includes/nav.php";
+include __DIR__ . "/src/forms/index_form.php";
+//My IDE doesn't like this closing tag but my index_form.php is nearly all html so it's needed.
+?>
 
