@@ -1,64 +1,69 @@
-<?php include "includes/header.php"; ?>
-<?php include "includes/nav.php";
+<?php
+/** @var \App\Classes\Menu $menu */
 
-        if (!$_GET['edit']) {
-            header('Location: index.php');
-        }
 
-        $item_id = $_GET['edit'];
-        $result = $menu->getItem($item_id);
+require_once __DIR__ . '/php-config/init.php';
 
-        if (!count($result)) {
-            $_SESSION['failure'] = 'What are you doing...';
-            header('Location: /index.php');
-            exit();
-        }
+if (!$_GET['edit']) {
+    header('Location: index.php');
+}
 
-        $id = $result[0]['id'];
-        $name = $result[0]['name'];
-        $description = $result[0]['description'];
-        $cost = $result[0]['cost'];
-        $type_id = $result[0]['type_id'];
-        $image = $result[0]['image'];
-        $previous_image = $result[0]['image'];
+$item_id = $_GET['edit'];
+$result = $menu->getItem($item_id);
 
-        if(isset($_POST['update']) && $_POST['update']) {
+if (!count($result)) {
+    $_SESSION['failure'] = 'What are you doing...';
+    header('Location: /index.php');
+    exit();
+}
 
-            $filename = $_FILES['uploadfile']['name'];
-            $temp_name = $_FILES['uploadfile']['tmp_name'];
-            $folder = 'src/images/' . $filename;
+$id = $result[0]['id'];
+$name = $result[0]['name'];
+$description = $result[0]['description'];
+$cost = $result[0]['cost'];
+$type_id = $result[0]['type_id'];
+$image = $result[0]['image'];
+$previous_image = $result[0]['image'];
 
-            $id = $_POST['update'];
-            $name = trim($_POST['name']);
-            $description = $_POST['description'];
-            $cost = floatval($_POST['cost']);
-            $type_id = $_POST['type'];
-            $image = $filename;
+if(isset($_POST['update']) && $_POST['update']) {
 
-            if (empty($name)) {
-                $errors[] = "Invalid Name";
-            }
+    $filename = $_FILES['uploadfile']['name'];
+    $temp_name = $_FILES['uploadfile']['tmp_name'];
+    $folder = 'src/images/' . $filename;
 
-            if (empty($description)) {
-                $errors[] = "Invalid Description";
-            }
+    $id = $_POST['update'];
+    $name = trim($_POST['name']);
+    $description = $_POST['description'];
+    $cost = floatval($_POST['cost']);
+    $type_id = $_POST['type'];
+    $image = $filename;
 
-            if ($cost <= 0) {
-                $errors[] = "Invalid Cost";
-            }
+    if (empty($name)) {
+        $errors[] = "Invalid Name";
+    }
 
-            if (empty($image)) {
-                $image = $previous_image;
-            }
+    if (empty($description)) {
+        $errors[] = "Invalid Description";
+    }
 
-            if(empty($errors)) {
-                $menu->updateItem($id, $name, $description, $cost, $type_id, $image);
-                $_SESSION['message'] = 'Item has been updated';
-                move_uploaded_file($temp_name, $folder);
-                header("Location: edit_menu_item.php?edit=$id");
-                exit();
-            }
+    if ($cost <= 0) {
+        $errors[] = "Invalid Cost";
+    }
 
-        }
-        include 'src/forms/edit_menu_item_form.php';
-        ?>
+    if (empty($image)) {
+        $image = $previous_image;
+    }
+
+    if(empty($errors)) {
+        $menu->updateItem($id, $name, $description, $cost, $type_id, $image);
+        $_SESSION['message'] = 'Item has been updated';
+        move_uploaded_file($temp_name, $folder);
+        header("Location: edit_menu_item.php?edit=$id");
+        exit();
+    }
+
+}
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/nav.php';
+include __DIR__ . '/src/forms/edit_menu_item_form.php';
+?>
