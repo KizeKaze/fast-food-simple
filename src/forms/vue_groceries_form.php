@@ -1,11 +1,21 @@
-<?php include "../../includes/header.php"; ?>
-<?php include "../../includes/nav.php" ?>
+<?php
+include __DIR__ ."/../../php-config/init.php";
+$User = new \App\Classes\User();
 
+if (!$User->loggedIn()) {
+    header("Location: /login.php");
+    exit();
+}
+
+include __DIR__ . "/../../includes/header.php";
+include __DIR__ . "/../../includes/nav.php";
+
+
+?>
 <!-- Including the Vue source code -->
 <script src="https://unpkg.com/vue@3"></script>
 
-    <!-- If this were live production there would be checks to make sure you are logged in
-     and an admin since this touches the db, for this demo I have skipped them.-->
+    <!-- If you're logged in, you can add items.-->
 
 <!-- Our Vue application -->
 <div id="app" class="container">
@@ -15,7 +25,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">The Big Vue</h5>
-            <p class="card-text">Hey, this Vue Groceries is powered by Vue and this is just a
+            <p class="card-text">Hey, this Vue Groceries is powered by Vue.js and this is just a
             super simple example of my knowledge in it. Feel free to add items to demonstrate!</p>
         </div>
     </div>
@@ -89,49 +99,53 @@
 
             addGroceries() {
 
-                // if this were live production I would have variables checking if anyone is logged in and an admin before letting this run
-
                 this.errors = [];
                 let answer = this.validate(this.itemName, this.itemDescription, this.itemCost, this.typeSelected);
                 if (answer === false) {
                     return;
                 }
 
-                const data = { name: this.itemName, description: this.itemDescription, cost: this.itemCost, type: this.typeSelected }
+                const data = { name: this.itemName, description: this.itemDescription, cost: this.itemCost, type: this.typeSelected };
 
                 fetch('/vue_groceries_add.php', {
                     method: 'POST',
                     headers: {
-                        'Content_type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data),
                 })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.errors) {
+                            this.errors = result.errors;
+                            return;
+                        }
+                        //success!
+                        let master = this.master.type;
+                        let currentID = this.typeSelected;
 
-                let master = this.master.type;
-                let currentID = this.typeSelected;
+                        let i = master.length
+                        let newData = '';
 
-                let i = master.length
-                let newData = '';
+                        while (i--) {
+                            if(currentID == master[i].type_id) {
+                                newData = master[i].type;
+                                break;
+                            }
+                        }
 
-                while (i--) {
-                    if(currentID == master[i].type_id) {
-                        newData = master[i].type;
-                        break;
-                    }
-                }
+                        this.master.list.push({
+                            name: this.itemName,
+                            description: this.itemDescription,
+                            cost: this.itemCost,
+                            type: newData
+                        });
 
-                this.master.list.push({
-                    name: this.itemName,
-                    description: this.itemDescription,
-                    cost: this.itemCost,
-                    type: newData
-                });
-
-                this.itemName = '';
-                this.itemDescription = '';
-                this.itemCost = '';
-                this.typeSelected = 0;
-
+                        this.itemName = '';
+                        this.itemDescription = '';
+                        this.itemCost = '';
+                        this.typeSelected = 0;
+                    });
             },
 
             validate(itemName, itemDescription, itemCost, typeSelected) {
@@ -155,4 +169,4 @@
     }).mount('#app'); // .mount is mounting Vue to the selector so we can view it
 </script>
 
-<?php include "../../includes/footer.php" ?>
+<?php include __DIR__ ."/../../includes/footer.php" ?>

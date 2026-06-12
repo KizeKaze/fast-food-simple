@@ -1,7 +1,14 @@
 <?php
-require 'vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__);
-$dotenv->load();
+require_once __DIR__ . '/php-config/init.php';
+
+$User = new \App\Classes\User();
+
+// Require login (NOT admin) so recruiters can still see it
+if (!$User->loggedIn()) {
+    http_response_code(403);
+    echo json_encode(["error" => "Unauthorized"]);
+    exit();
+}
 
 header('Content-Type: application/json');
 
