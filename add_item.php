@@ -18,9 +18,10 @@ if ($_POST) {
     }
     $cost = floatval($_POST['cost']);
 
-    if ($cost <= 0) {
+    if ($cost <= 0 || $cost > 9999 || (!is_finite($cost))) {
         $errors[] = "Cost invalid";
     }
+
     if (isset($_POST['value'])) {
         $values = $menu->checkType();
         $verified_type = in_array($_POST['value'], $values);
