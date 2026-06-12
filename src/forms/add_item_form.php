@@ -1,5 +1,5 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/nav.php" ?>
+<?php include "templates/layout/header.php" ?>
+<?php include "templates/layout/nav.php" ?>
 <?php
 if(!isset($_SESSION['user_role'])) {
     header("Location: index.php");
@@ -14,8 +14,8 @@ if (isset($item_added)) {
         <div class="card col-sm-6">
             <div class="card-body">
                 <?php
-                    include "includes/errors.php";
-                    include "includes/success.php";
+                    include __DIR__ . "/../../templates/components/errors.php";
+                    include __DIR__ . "/../../templates/components/success.php";
                 ?>
                 <h5 class="card-title text-center align-middle">Add an item to the menu</h5>
                 <hr>
@@ -68,10 +68,10 @@ if (isset($item_added)) {
                         </svg>
                         Submit
                     </button>
-                    <a href="/index.php" class="btn btn-danger">Cancel</a>
+                    <a href="/public/index.php" class="btn btn-danger">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<?php include "includes/footer.php" ?>
+<?php include "templates/layout/footer.php" ?>

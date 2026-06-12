@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../php-config/init.php';
 
 if($_POST) {
     $username = sanitize($_POST['username']);
@@ -48,7 +48,7 @@ if($_POST) {
         $item_added = "Account created, Click <a href='login.php'>here</a> to login";
     }
 }
-include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/nav.php';
-include __DIR__ . '/src/forms/login_form.php';
+include __DIR__ . '/../templates/layout/header.php';
+include __DIR__ . '/../templates/layout/nav.php';
+include __DIR__ . '/../src/forms/register_form.php';
 ?>

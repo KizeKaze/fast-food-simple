@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../../php-config/init.php';
 
 $User = new \App\Classes\User();
 

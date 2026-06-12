@@ -2,9 +2,9 @@
     <div class="row justify-content-center gx-0">
         <div class="card col-sm-6">
             <div class="card-body">
-                <?php include "includes/errors.php"; ?>
-                <?php include "includes/failure.php"; ?>
-                <?php include "includes/success.php"; ?>
+                <?php include __DIR__ . "/../../templates/components/errors.php"; ?>
+                <?php include __DIR__ . "/../../templates/components/errors.php"; ?>
+                <?php include __DIR__ . "/../../templates/components/success.php"; ?>
                 <div class="col-sm-12 col-md-12">
                     <form action="" method="GET">
                         <div class="input-group mb-1">
@@ -14,7 +14,7 @@
                         </div>
                     </form>
                 </div>
-                <?php include 'src/forms/type_edit_form.php' ?>
+                <?php include __DIR__ . '/type_edit_form.php' ?>
             </div>
         </div>
     </div>
@@ -57,4 +57,4 @@
     </div>
 </div>
 
-<?php include "includes/footer.php"; ?>
+<?php include __DIR__ . "/../../templates/layout/footer.php"; ?>

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../php-config/init.php';
 
 if($_POST) {
     $query = new \App\Classes\Query();
@@ -49,9 +49,9 @@ if($_POST) {
         }
     }
 }
-include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/nav.php';
-include __DIR__ . '/src/forms/login_form.php';
+include __DIR__ . '/../templates/layout/header.php';
+include __DIR__ . '/../templates/layout/nav.php';
+include __DIR__ . '/../src/forms/login_form.php';
 
 
 

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../php-config/init.php';
 /**
  * @var \App\Classes\Cart $modifyCart
  * @var \App\Classes\Menu $menu
@@ -88,11 +88,11 @@ $result = $menu->getItems($params);
 $User = new \App\Classes\User();
 
 if (empty($result)) {
-    $errors[] = "<h4>Hmm... I couldn't find what you were looking for. <a href='/index.php' class='btn btn-primary'>Go Back</a></h4>";
+    $errors[] = "<h4>Hmm... I couldn't find what you were looking for. <a href='/public/index.phpdex.php' class='btn btn-primary'>Go Back</a></h4>";
 }
-include __DIR__ . "/includes/header.php";
-include __DIR__ . "/includes/nav.php";
-include __DIR__ . "/src/forms/index_form.php";
+include __DIR__ . "/../templates/layout/header.php";
+include __DIR__ . "/../templates/layout/nav.php";
+include __DIR__ . "/../src/forms/index_form.php";
 //My IDE doesn't like this closing tag, but my index_form.php is nearly all HTML.
 ?>
 

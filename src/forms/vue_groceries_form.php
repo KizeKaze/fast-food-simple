@@ -7,8 +7,8 @@ if (!$User->loggedIn()) {
     exit();
 }
 
-include __DIR__ . "/../../includes/header.php";
-include __DIR__ . "/../../includes/nav.php";
+include __DIR__ . "/../../templates/layout/header.php";
+include __DIR__ . "/../../templates/layout/nav.php";
 
 
 ?>
@@ -90,7 +90,7 @@ include __DIR__ . "/../../includes/nav.php";
         },
         mounted() {
             // => in this usage it is shorthand for .then(function(response){ return response.json()})
-            fetch('/vue_groceries.php')
+            fetch('/public/vue_groceries.php')
                 .then(response => response.json())
                 .then(data => this.master = data);
         },
@@ -169,4 +169,4 @@ include __DIR__ . "/../../includes/nav.php";
     }).mount('#app'); // .mount is mounting Vue to the selector so we can view it
 </script>
 
-<?php include __DIR__ ."/../../includes/footer.php" ?>
+<?php include __DIR__ . "/../../templates/layout/footer.php" ?>

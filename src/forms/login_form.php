@@ -2,7 +2,7 @@
     <div class="row justify-content-center gx-0">
         <div class="card col-sm-12 col-md-6">
             <div class="card-body">
-                <?php  include "includes/errors.php"; ?>
+                <?php  include __DIR__ . "/../../templates/components/errors.php"; ?>
                 <h5 class="card-title text-center align-middle">Login</h5>
                 <hr>
                 <form action="" method="post" class="form_index">
@@ -36,4 +36,4 @@
     </div>
 </div>
 
-<?php include "includes/footer.php" ?>
+<?php include "templates/layout/footer.php" ?>

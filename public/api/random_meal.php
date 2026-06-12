@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../../php-config/init.php';
 
 if (isset($_GET['showMeal'])) {
     $meal_array = new \App\Classes\RandomMeal();
@@ -18,7 +18,7 @@ if (isset($_GET['showMeal'])) {
 
     $combined = array_combine($filtered_m, $filtered_i);
 }
-include __DIR__ . "/includes/header.php";
-include __DIR__ .  "/includes/nav.php";
-include __DIR__ . '/src/forms/random_meal_form.php';
+include __DIR__ . "/../../templates/layout/header.php";
+include __DIR__ . "/../../templates/layout/nav.php";
+include __DIR__ . '/../../src/forms/random_meal_form.php';
 

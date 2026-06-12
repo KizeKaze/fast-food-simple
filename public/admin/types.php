@@ -4,7 +4,7 @@
  * @var \App\Classes\Menu $menu
  */
 
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../../php-config/init.php';
 
 if(!isset($_SESSION['user_role'])) {
     header("Location: index.php");
@@ -68,6 +68,6 @@ if(isset($_POST['type_edit'])) {
 }
 
 $types = $menu->getTypes();
-include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/nav.php';
-include __DIR__ . '/src/forms/types_form.php';
+include __DIR__ . '/../../templates/layout/header.php';
+include __DIR__ . '/../../templates/layout/nav.php';
+include __DIR__ . '/../../src/forms/types_form.php';

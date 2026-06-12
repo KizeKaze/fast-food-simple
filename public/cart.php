@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../php-config/init.php';
 
     $cart_object = new \App\Classes\Cart();
 
@@ -102,6 +102,6 @@ require_once __DIR__ . '/php-config/init.php';
 
     $total = 0;
 
-include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/nav.php';
-include __DIR__ . '/src/forms/cart_form.php';
+include __DIR__ . '/../templates/layout/header.php';
+include __DIR__ . '/../templates/layout/nav.php';
+include __DIR__ . '/../src/forms/cart_form.php';

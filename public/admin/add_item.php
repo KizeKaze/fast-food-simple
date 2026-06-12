@@ -4,7 +4,7 @@
  * @var \App\Classes\Menu $menu
  */
 
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../../php-config/init.php';
 
 if ($_POST) {
     $errors = [];
@@ -76,4 +76,4 @@ if ($_POST) {
 }
 
 // Display simple form for user
-require __DIR__ . '/src/forms/add_item_form.php';
+require __DIR__ . '/../../src/forms/add_item_form.php';

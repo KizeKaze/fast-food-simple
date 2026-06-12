@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Don't know what to eat?..</h5>
                     <p class="card-text">With this sweet meal api at our fingertips, generating meal recipes has never been easier.</p>
-                    <a href="/random_meal.php?showMeal=1" class="btn btn-primary">Show me the light</a>
+                    <a href="/public/api/random_meal.php?showMeal=1" class="btn btn-primary">Show me the light</a>
                 </div>
             </div>
             <?php if (isset($meal)) : ?>
@@ -46,4 +46,4 @@
 </div>
 
 
-<?php include "includes/footer.php"; ?>
+<?php include "templates/layout/footer.php"; ?>

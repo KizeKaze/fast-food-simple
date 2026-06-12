@@ -2,7 +2,7 @@
     <div class="row justify-content-center gx-0">
         <div class="card col-sm-12 col-md-6">
             <div class="card-body">
-                <?php include "includes/failure.php"; ?>
+                <?php include __DIR__ . "/../../templates/components/errors.php"; ?>
                 <h5 class="card-title text-center align-middle">Reset password</h5>
                 <hr>
                 <form class="login-form" action="enter_email.php" method="post">
@@ -21,4 +21,4 @@
     </div>
 </div>
 
-<?php include "includes/footer.php" ?>
+<?php include __DIR__ . "templates/layout/footer.php" ?>

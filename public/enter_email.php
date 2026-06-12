@@ -1,7 +1,7 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/nav.php" ?>
-
 <?php
+
+require_once __DIR__ . '/../php-config/init.php';
+
 $query = new \App\Classes\Query();
 $pass_object = new \App\Classes\Password();
 
@@ -44,5 +44,6 @@ $pass_object = new \App\Classes\Password();
     header('location: pass_pending.php?' . http_build_query($argument));
     exit();
  }
-
-include 'src/forms/enter_email_form.php';
+include __DIR__ . "/../templates/layout/header.php";
+include __DIR__ . "/../templates/layout/nav.php";
+include __DIR__ . "/../src/forms/enter_email_form.php";

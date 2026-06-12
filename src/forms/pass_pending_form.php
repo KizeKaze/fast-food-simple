@@ -20,4 +20,4 @@
     </div>
 </div>
 
-<?php include "includes/footer.php" ?>
+<?php include __DIR__ . "/../../templates/layout/footer.php" ?>

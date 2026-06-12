@@ -2,8 +2,8 @@
     <div class="row justify-content-center gx-0">
         <div class="card col-lg-6">
         <?php
-            ($cart_amount[0]['amount'] >= 1) ? include "includes/success.php" : include "includes/errors.php";
-            include "includes/failure.php";
+            ($cart_amount[0]['amount'] >= 1) ? include __DIR__ . "/../../templates/components/success.php" : include __DIR__ . "/../../templates/components/errors.php";
+            include __DIR__ . "/../../templates/components/errors.php";
         ?>
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover table-responsive table-sm">
@@ -63,4 +63,4 @@
     </div>
 </div>
 
-<?php include "includes/footer.php"; ?>
+<?php include "templates/layout/footer.php"; ?>

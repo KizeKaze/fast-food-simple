@@ -1,6 +1,6 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/nav.php"; ?>
 <?php
+
+require_once __DIR__ . '/../php-config/init.php';
 
 if (isset($_POST['new_password'])) {
 
@@ -55,4 +55,8 @@ if (isset($_POST['new_password'])) {
 $token = $_GET['token'] ?? '';
 $token = sanitize($token);
 
-include 'src/forms/new_pass_form.php';
+
+include __DIR__ . "/../templates/layout/header.php";
+include __DIR__ . "/../templates/layout/nav.php";
+include __DIR__ . '/../src/forms/new_pass_form.php';
+?>

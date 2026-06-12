@@ -2,7 +2,7 @@
 /** @var \App\Classes\Menu $menu */
 
 
-require_once __DIR__ . '/php-config/init.php';
+require_once __DIR__ . '/../../php-config/init.php';
 
 if (!$_GET['edit']) {
     header('Location: index.php');
@@ -13,7 +13,7 @@ $result = $menu->getItem($item_id);
 
 if (!count($result)) {
     $_SESSION['failure'] = 'What are you doing...';
-    header('Location: /index.php');
+    header('Location: index.php');
     exit();
 }
 
@@ -29,7 +29,7 @@ if(isset($_POST['update']) && $_POST['update']) {
 
     $filename = $_FILES['uploadfile']['name'];
     $temp_name = $_FILES['uploadfile']['tmp_name'];
-    $folder = 'src/images/' . $filename;
+    $folder = __DIR__ . '/../..src/images/' . $filename;
 
     $id = $_POST['update'];
     $name = trim($_POST['name']);
@@ -63,7 +63,7 @@ if(isset($_POST['update']) && $_POST['update']) {
     }
 
 }
-include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/nav.php';
-include __DIR__ . '/src/forms/edit_menu_item_form.php';
+include __DIR__ . '/../../templates/layout/header.php';
+include __DIR__ . '/../../templates/layout/nav.php';
+include __DIR__ . '/../../src/forms/edit_menu_item_form.php';
 ?>

@@ -7,7 +7,7 @@
 <div class="container lg">
     <div class="card">
         <div class="card-body">
-            <form action="../../index.php" method="post">
+            <form action="../../public/index.php" method="post">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
@@ -38,15 +38,15 @@
                     </div>
                 </div>
             </form>
-            <?php include __DIR__ ."/../../includes/success.php"; ?>
-            <?php include __DIR__ ."/../../includes/message.php"; ?>
-            <?php include __DIR__ ."/../../includes/failure.php"; ?>
+            <?php include __DIR__ . "/../../templates/components/success.php"; ?>
+            <?php include __DIR__ . "/../../templates/components/message.php"; ?>
+            <?php include __DIR__ . "/../../templates/components/errors.php"; ?>
         </div>
     </div>
 </div>
 <?php
 if (isset($errors)) {
-    include __DIR__ ."/../../includes/errors.php";
+    include __DIR__ . "/../../templates/components/errors.php";
 } else { ?>
 
 <div class='container' id="main_card">
@@ -80,7 +80,7 @@ if (isset($errors)) {
                     <?php endif; ?>
 
                     <td>
-                        <a href="../../show_item_details.php?item=<?= $row['id'] ?>" class="text-decoration-none">
+                        <a href="../../public/show_item_details.php?item=<?= $row['id'] ?>" class="text-decoration-none">
                             <?= $row['name'] ?>
                         </a>
                     </td>
@@ -97,11 +97,11 @@ if (isset($errors)) {
 
                     <?php if ($User->isAdmin()) : ?>
                         <td>
-                            <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $row['id'] ?>">Edit</a>
+                            <a class="btn btn-primary" href="../../public/admin/edit_menu_item.php?edit=<?= $row['id'] ?>">Edit</a>
                         </td>
 
                         <td>
-                            <form action="../../index.php" method="get">
+                            <form action="../../public/index.php" method="get">
                                 <button type="submit" class="index_delete btn btn-danger" name="delete" value="<?= $row['id'] ?>">
                                     Delete
                                 </button>
@@ -149,4 +149,4 @@ if (isset($errors)) {
     </div>
 </div>
 <script src="/src/js/index.js"></script>
-<?php include __DIR__ ."/../../includes/footer.php"; ?>
+<?php include __DIR__ . "/../../templates/layout/footer.php"; ?>

@@ -2,8 +2,8 @@
     <div class="row justify-content-center gx-0">
         <div class="card col-md-6">
             <div class="card-body">
-                <?php include "includes/errors.php"; ?>
-                <?php include "includes/message.php"; ?>
+                <?php include __DIR__ . "/../../templates/components/errors.php"; ?>
+                <?php include __DIR__ . "/../../templates/components/message.php"; ?>
                 <form action="" method="POST" class="form_index" enctype="multipart/form-data">
                     <input type="hidden" name="edit" value="<?= $item_id ?>">
                     <div>
@@ -53,14 +53,14 @@
                         <h4 id="image">Current database image</h4>
                     </div>
                     <div>
-                        <img class="mx-auto d-block" src="src/images/<?= $image ?>" width="75%" height="300px" alt="item image">
+                        <img class="mx-auto d-block" src="/../../src/images/<?= $image ?>" width="75%" height="300px" alt="item image">
                     </div>
                     <hr>
                     <button type="submit" class="btn btn-primary" name="update" value=<?= $id ?>>Update</button>
-                    <a href="/index.php" class="btn btn-danger">Go Back</a>
+                    <a href="/public/index.php" class="btn btn-danger">Go Back</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<?php include "includes/footer.php"; ?>
+<?php include __DIR__ . "/../../templates/layout/footer.php"; ?>

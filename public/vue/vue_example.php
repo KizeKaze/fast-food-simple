@@ -1,5 +1,5 @@
-<?php include "includes/header.php"; ?>
-<?php include "includes/nav.php" ?>
+<?php include "templates/layout/header.php"; ?>
+<?php include "templates/layout/nav.php" ?>
 
     <!-- Including the Vue source code -->
     <script src="https://unpkg.com/vue@3"></script>
@@ -87,4 +87,4 @@
 		}).mount('#app'); // .mount is mounting Vue to the selector so we can view it
     </script>
 
-<?php include "includes/footer.php" ?>
+<?php include "templates/layout/footer.php" ?>

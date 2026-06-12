@@ -3,8 +3,8 @@
         <div class="card col-sm-6 gx-0">
             <div class="card-body">
                 <?php
-                include "includes/errors.php";
-                include "includes/success.php";
+                include __DIR__ . "/../../templates/components/errors.php";
+                include __DIR__ . "/../../templates/components/success.php";
                 ?>
                 <h5 class="card-title text-center align-middle">Create an account today!</h5>
                 <hr>
@@ -51,4 +51,4 @@
         </div>
     </div>
 </div>
-<?php include "includes/footer.php" ?>
+<?php include "templates/layout/footer.php" ?>

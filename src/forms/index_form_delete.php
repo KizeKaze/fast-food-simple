@@ -96,7 +96,7 @@ $result = $menu->getItems($params);
 
 if (empty($result)) {
     $errors[] = "<h4>Hmm... I couldn't find what you were looking for</h4>";
-    include __DIR__ . "/../../includes/errors.php";
+    include __DIR__ . "/../../templates/components/errors.php";
 } else {
 ?>
 
@@ -131,7 +131,7 @@ if (empty($result)) {
                     <?php endif; ?>
 
                     <td>
-                        <a href="../../show_item_details.php?item=<?= $row['id'] ?>" class="text-decoration-none">
+                        <a href="../../public/show_item_details.php?item=<?= $row['id'] ?>" class="text-decoration-none">
                             <?= $row['name'] ?>
                         </a>
                     </td>
@@ -148,11 +148,11 @@ if (empty($result)) {
 
                     <?php if ($User->isAdmin()) : ?>
                         <td>
-                            <a class="btn btn-primary" href="../../edit_menu_item.php?edit=<?= $row['id'] ?>">Edit</a>
+                            <a class="btn btn-primary" href="../../public/admin/edit_menu_item.php?edit=<?= $row['id'] ?>">Edit</a>
                         </td>
 
                         <td>
-                            <form action="../../index.php" method="get">
+                            <form action="../../public/index.php" method="get">
                                 <button type="submit" class="index_delete btn btn-danger" name="delete" value="<?= $row['id'] ?>">
                                     Delete
                                 </button>

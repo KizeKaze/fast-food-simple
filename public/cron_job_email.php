@@ -1,8 +1,5 @@
 <?php
-require 'vendor/autoload.php';
-$envFile = file_exists(__DIR__ . '/.env.local') ? '.env.local' : '.env';
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__, $envFile);
-$dotenv->load();
+require_once __DIR__ . '/../php-config/init.php';;
 use App\Classes\Database;
 
 $query = new \App\Classes\Query();
