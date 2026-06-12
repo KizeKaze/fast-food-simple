@@ -1,3 +1,9 @@
+<?php
+//Added these so my IDE stops complaining about undefined variables
+/** @var \App\Classes\Menu $menu */
+/** @var \App\Classes\User $User */
+/** @var array $result */
+?>
 <div class="container lg">
     <div class="card">
         <div class="card-body">
