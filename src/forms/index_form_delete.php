@@ -59,6 +59,7 @@ if (isset($_GET['add'])) {
     }
 }
 
+//delete function
 if (isset($_GET['id'])) {
     if ($User->isAdmin()) {
 
@@ -100,7 +101,6 @@ if (empty($result)) {
 } else {
 ?>
 
-<div class='container' id="main_card">
     <div class="table-responsive">
         <table class="table table-light table-bordered table-hover table-responsive">
             <thead>
@@ -198,4 +198,3 @@ if (empty($result)) {
         </table>
         <?php } ?>
     </div>
-</div>
