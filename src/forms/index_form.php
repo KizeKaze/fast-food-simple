@@ -66,10 +66,8 @@ if (isset($errors)) {
                 <?php if ($User->isAdmin()) : ?>
                     <th colspan="2">Options</th>
                     <th>Quantity</th>
-                    <th>Cart</th>
                 <?php elseif ($User->loggedIn()) : ?>
                     <th>Quantity</th>
-                    <th>Cart</th>
                 <?php endif; ?>
             </tr>
             </thead>
