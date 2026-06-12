@@ -10,10 +10,13 @@ if ($_POST) {
     $errors = [];
     $Item = new \App\Classes\MenuItem();
 
-    if (empty(sanitize($_POST['name']))) {
+    $name = sanitize($_POST['name'] ?? '');
+    if (empty($name) || strlen($name) > 100) {
         $errors[] = "Name invalid";
     }
-    if (empty(sanitize($_POST['description']))) {
+
+    $description = sanitize($_POST['description'] ?? '');
+    if (empty($description) || strlen($description) > 700) {
         $errors[] = "Description invalid";
     }
     $cost = floatval($_POST['cost']);
