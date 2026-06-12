@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/php-config/init.php';
 
-//instantiate core objects
-$menu = new \App\Classes\Menu();
-$modifyCart = new \App\Classes\Cart();
-
 if (isset($_GET['add'])) {
     if (isset($_SESSION['user_role'])) {
         $query = new \App\Classes\Query();

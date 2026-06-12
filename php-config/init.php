@@ -17,3 +17,6 @@ $dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . "/..", $envFile);
 $dotenv->load();
 date_default_timezone_set('America/Chicago');
 
+//instantiate core objects
+$menu = new \App\Classes\Menu();
+$modifyCart = new \App\Classes\Cart();
