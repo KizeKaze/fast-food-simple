@@ -90,8 +90,8 @@ include __DIR__ . "/../../templates/layout/nav.php";
         },
         mounted() {
             // => in this usage it is shorthand for .then(function(response){ return response.json()})
-            fetch('/public/vue_groceries.php')
-                .then(response => response.json())
+            fetch('/public/vue/vue_groceries.php')
+                    .then(response => response.json())
                 .then(data => this.master = data);
         },
         // Where you put your methods; follow the convention from this test one to make a new function
@@ -107,7 +107,7 @@ include __DIR__ . "/../../templates/layout/nav.php";
 
                 const data = { name: this.itemName, description: this.itemDescription, cost: this.itemCost, type: this.typeSelected };
 
-                fetch('/vue_groceries_add.php', {
+                fetch('/public/vue/vue_groceries_add.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
