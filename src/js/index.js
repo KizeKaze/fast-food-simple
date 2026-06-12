@@ -12,7 +12,7 @@
             return false;
         }
         httpRequest.onreadystatechange = alertContents;
-        httpRequest.open('GET', 'src/forms/index_form_delete.php?id=' + value)
+        httpRequest.open('GET', '/src/forms/index_form_delete.php?id=' + value)
         httpRequest.send();
         
     }
