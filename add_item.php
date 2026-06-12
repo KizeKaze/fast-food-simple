@@ -1,15 +1,12 @@
 <?php
-// Includes our namespaces
-require 'vendor/autoload.php';
 
+/**
+ * @var \App\Classes\Menu $menu
+ */
 
-$menu = new \App\Classes\Menu();
-
+require_once __DIR__ . '/php-config/init.php';
 
 if ($_POST) {
-    //including .env here since header is not called until the form is included.
-    $dotenv = Dotenv\Dotenv::createImmutable( __DIR__);
-    $dotenv->load();
     $errors = [];
     $Item = new \App\Classes\MenuItem();
 
@@ -75,4 +72,4 @@ if ($_POST) {
 }
 
 // Display simple form for user
-require 'src/forms/add_item_form.php';
+require __DIR__ . '/src/forms/add_item_form.php';
