@@ -1,6 +1,9 @@
 <?php
-include "includes/header.php";
-include "includes/nav.php";
+/**
+ * @var \App\Classes\Cart $modifyCart
+ */
+
+require_once __DIR__ . '/php-config/init.php';
 
 if (isset($_GET['add'])) {
     if (isset($_SESSION['user_role'])) {
@@ -80,5 +83,7 @@ if (!$chunk) {
 $name = $chunk['name'] ?? null;
 $image = $chunk['image'] ?? null;
 
-require 'src/forms/show_item_details_form.php';
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/nav.php';
+require __DIR__ .'/src/forms/show_item_details_form.php';
 
